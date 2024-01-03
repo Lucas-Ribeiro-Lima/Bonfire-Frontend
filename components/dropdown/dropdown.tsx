@@ -61,7 +61,7 @@ export const DropDownField = ({ path, description, icon }: DropDownFieldData) =>
                 flex 
                 p-4 
                 justify-center
-                align-middle 
+                align-middle
                 rounded-xl 
                 hover:bg-zinc-600 
                 hover:duration-1000 
@@ -72,28 +72,16 @@ export const DropDownField = ({ path, description, icon }: DropDownFieldData) =>
     )
 }
 
-export const SimpleField = ({path, description, icon}: DropDownFieldData) => {
+export const SimpleField = ({ path, description, icon }: DropDownFieldData) => {
     return (
-        <Link
-            href={path}
-            className="
-                w-36
-                h-10
-                rounded-xl 
-                focus:bg-red-950 
-                focus:text-red-600 
-                hover:bg-red-950 
-                hover:text-red-600 
-                hover:duration-1000 
-                hover:drop-shadow-2xl">
-            <div className="
-                flex
-                justify-center
-                align-middle
-                gap-2">
-                {icon}{description}
-            </div>
-        </Link>
+            <Link 
+            href={path} 
+            className="flex justify-center w-36 h-10 rounded-xl focus:bg-red-950 focus:text-red-600 hover:bg-red-950 hover:text-red-600 hover:duration-1000 hover:drop-shadow-2xl">
+                <div className="flex flex-row self-center justify-self-center gap-2">
+                    {icon}
+                    {description}
+                </div>
+            </Link>
     )
 }
 

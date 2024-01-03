@@ -1,13 +1,14 @@
-import { ImportFormData } from "@/components/import/importForm";
+import { ImportFormData } from "@/components/import/importFormPrimeiraInstancia copy";
 import { ApiClient } from "@/services/apiClient";
 
-export async function importAuto ({auto: {file, option}}: ImportFormData){
+
+export async function importAuto ({ auto }: ImportFormData, option: number){
     
     const data = new FormData();
     
     try {
 
-        data.append("file", file, file?.name)
+        data.append("file", auto.file, auto.file?.name)
 
         if (option === 1){
 

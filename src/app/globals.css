@@ -2,3 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        display: flex;
+        padding-top: 16px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        padding: 4px;
+        border-radius: 100vh;
+        background: #333;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: #e0cbcb;
+        height: 40px;
+        border-radius: 100vh;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background: white;
+    }
+}
