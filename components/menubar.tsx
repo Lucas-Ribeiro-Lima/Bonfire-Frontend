@@ -20,8 +20,8 @@ const MenuBar = () => {
             <DropdownFatherField description="Relatórios" icon={<FileSpreadsheetIcon />}></DropdownFatherField>
 
             <DropdownFatherField description="Importação" icon={<LucideImport />}>
-                <DropDownField path='/import' description='Primeira Instância'></DropDownField>
-                <DropDownField path='/import' description='Segunda Instância'></DropDownField>
+                <DropDownField path='/import/primeiraInstancia' description='Primeira Instância'></DropDownField>
+                <DropDownField path='/import/segundaInstancia' description='Segunda Instância'></DropDownField>
             </DropdownFatherField>
 
             <DropdownFatherField description="Configuração" icon={<Settings />}></DropdownFatherField>

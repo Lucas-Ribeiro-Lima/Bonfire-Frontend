@@ -14,9 +14,9 @@ export interface LoginFormInput {
 
 async function handleSignIn({username, password, rememberMe }: LoginFormInput){
     
-    const {signIn} = useContext(AuthContext);
+    // const {signIn} = useContext(AuthContext);
 
-    await signIn({username, password});
+    // await signIn({username, password});
 }
 
 const LoginForm = () => {

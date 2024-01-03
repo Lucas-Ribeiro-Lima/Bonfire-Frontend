@@ -9,6 +9,12 @@ export const metadata: Metadata = {
   description: 'Processamento de autos de infração',
 }
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -16,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='bg-zinc-900 text-white selection:text-white selection:bg-red-800'>{children}</body>
+      <body className='bg-zinc-900 text-white selection:text-white selection:bg-red-800 h-screen w-screen'>{children}</body>
     </html>
   )
 }

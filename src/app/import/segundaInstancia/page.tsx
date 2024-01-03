@@ -1,13 +1,12 @@
 import MainApp from "@/components/mainApp"
-import Layout from "@/components/primaryLayout"
-import ImportForm from "@/components/import/importForm"
 import PrimaryLayout from "@/components/primaryLayout"
+import ImportFormSegundaInstancia from "@/components/import/importFormSegundaInstancia"
 
 export default function Home() {
   return (
       <PrimaryLayout>
-        <MainApp title="Importação de Autos de Infração">
-          <ImportForm></ImportForm>
+        <MainApp title="Importação Segunda Instância">
+          <ImportFormSegundaInstancia></ImportFormSegundaInstancia>
         </MainApp>
       </PrimaryLayout>
     )
