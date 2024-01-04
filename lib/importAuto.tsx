@@ -4,16 +4,16 @@ import { ApiClient } from "@/services/apiClient";
 
 export async function importAuto ({ auto }: ImportFormData, option: number){
     
-    const data = new FormData();
+    const body = new FormData();
     
     try {
 
-        data.append("file", auto.file, auto.file?.name)
+        body.append("file", auto.file, auto.file?.name)
 
         if (option === 1){
 
             ApiClient
-            .post("autoInfracao/primeiraInstancia", data)
+            .post("autoInfracao/primeiraInstancia", body)
             .then(response => {
                 return (
                     console.log(response.status, response.data)
@@ -24,7 +24,7 @@ export async function importAuto ({ auto }: ImportFormData, option: number){
         if (option === 2) {
 
             ApiClient
-            .post("autoInfracao/segundaInstancia", data)
+            .post("autoInfracao/segundaInstancia", body)
             .then(response => {
                 return (
                     console.log(response.status, response.data)
