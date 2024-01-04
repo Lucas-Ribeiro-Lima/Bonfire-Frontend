@@ -1,6 +1,15 @@
 import VehicleFrame from "./vehiclesFrame";
 
-async function GetVehicles(): Promise<any> {
+type GetVehiclesData = {
+    veiculos: {
+        IDN_PLAC_VEIC: string,
+        NUM_VEIC: number,
+        VEIC_ATIV_EMPR: boolean
+    }[]
+}
+
+
+async function GetVehicles(): Promise<GetVehiclesData> {
     const request = await fetch("http://127.0.0.1:5000/veiculos")
     const response = await request.json()
     return response
@@ -37,10 +46,10 @@ export default async function VehiclesLayout() {
             {/* <VehiclesMenu></VehiclesMenu> */}
             <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
                 {veiculosData.veiculos.map(
-                    ({ num_veiculo, placa }) => {
+                    ({ NUM_VEIC, IDN_PLAC_VEIC }) => {
                         return (
-                            <div key={num_veiculo}>
-                                <VehicleFrame num_veiculo={num_veiculo} placa={placa}></VehicleFrame>
+                            <div key={NUM_VEIC}>
+                                <VehicleFrame num_veic={NUM_VEIC} idn_placa_veic={IDN_PLAC_VEIC}></VehicleFrame>
                             </div>
                         )
                     }
