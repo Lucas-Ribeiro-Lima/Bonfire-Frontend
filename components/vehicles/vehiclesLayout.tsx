@@ -1,3 +1,4 @@
+import Loading from "../UI/loading";
 import VehicleFrame from "./vehiclesFrame";
 
 type GetVehiclesData = {
@@ -40,6 +41,8 @@ function VehiclesMenu() {
 export default async function VehiclesLayout() {
 
     const veiculosData = await GetVehicles();
+
+    if (veiculosData == undefined) return <Loading></Loading>
 
     return (
         <div className="flex flex-row">

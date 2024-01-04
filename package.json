@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.3",
+    "@nextui-org/modal": "^2.0.28",
     "@types/uuid": "^9.0.7",
     "axios": "^1.6.2",
     "lucide-react": "^0.297.0",

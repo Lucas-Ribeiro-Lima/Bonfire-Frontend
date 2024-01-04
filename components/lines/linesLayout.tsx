@@ -1,4 +1,5 @@
-import LinesFrame, { LinesFrameType } from "./linesFrame";
+import { Loading } from "../UI/loading";
+import LinesFrame from "./linesFrame";
 
 type LinesFrameData = {
     linha: {
@@ -41,6 +42,8 @@ export default async function LinesLayout() {
 
     const LinesData = await GetLines();
     
+    if (LinesData == undefined) return <Loading></Loading>
+
     return (
         <div className="flex flex-row">
             {/* <LinesMenu></LinesMenu> */}
