@@ -4,6 +4,9 @@ import { importAuto } from '@/lib/importAuto';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useState } from 'react';
+
+
 
 export type ImportFormData = z.infer<typeof ImportFormSchema>
 
@@ -36,10 +39,6 @@ const ImportFormSchema = z.object(
     }
 )
 
-//Função de handling do import
-async function handleImport(auto: ImportFormData) {
-    await importAuto(auto, 1);
-}
 
 const ImportFormPrimeiraInstancia = () => {
 
@@ -52,6 +51,11 @@ const ImportFormPrimeiraInstancia = () => {
             resolver: zodResolver(ImportFormSchema)
         }
     )
+
+    //Função de handling do import
+    async function handleImport(auto: ImportFormData) {
+        await importAuto(auto, 1)
+    }
 
     return (
         <form onSubmit={handleSubmit(handleImport)} className="flex flex-col gap-4" encType="multipart/form-data">
