@@ -1,19 +1,16 @@
-import Loading from "../UI/loading";
-import VehicleFrame from "./vehiclesFrame";
+'use client'
 
-type GetVehiclesData = {
+import VehicleFrame from "./vehiclesFrame";
+import { fetchData } from "../../hooks/fetchData";
+import { Loading } from "../UI/loading";
+import { Error } from '../UI/error'
+ 
+type VehiclesData = {
     veiculos: {
         IDN_PLAC_VEIC: string,
         NUM_VEIC: number,
         VEIC_ATIV_EMPR: boolean
     }[]
-}
-
-
-async function GetVehicles(): Promise<GetVehiclesData> {
-    const request = await fetch("http://127.0.0.1:5000/veiculos")
-    const response = await request.json()
-    return response
 }
 
 function VehiclesMenu() {
@@ -38,17 +35,27 @@ function VehiclesMenu() {
     )
 }
 
-export default async function VehiclesLayout() {
+export default function VehiclesLayout() {
 
-    const veiculosData = await GetVehicles();
+    // async function GetVehicles(): Promise<GetVehiclesData> {
+    //     const request = await fetch("http://127.0.0.1:5000/veiculos")
+    //     const response = await request.json()
+    //     return response
+    // }
 
-    if (veiculosData == undefined) return <Loading></Loading>
+    // const veiculosData = await GetVehicles();
+
+    const { data, error } = fetchData<VehiclesData>('veiculos')
+
+    if (!data) return <Loading></Loading>
+
+    if (error) return <Error></Error>
 
     return (
         <div className="flex flex-row">
             {/* <VehiclesMenu></VehiclesMenu> */}
             <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                {veiculosData.veiculos.map(
+                {data.veiculos.map(
                     ({ NUM_VEIC, IDN_PLAC_VEIC }) => {
                         return (
                             <div key={NUM_VEIC}>

@@ -1,3 +1,7 @@
+'use client'
+
+import { fetchData } from "../../hooks/fetchData";
+import { Error } from "../UI/error";
 import { Loading } from "../UI/loading";
 import LinesFrame from "./linesFrame";
 
@@ -8,12 +12,6 @@ type LinesFrameData = {
         ID_OPERADORA: number;
         LINH_ATIV_EMPR: boolean;
     }[]
-}
-
-async function GetLines(): Promise<LinesFrameData> {
-    const request = await fetch("http://127.0.0.1:5000/linha")
-    const response = await request.json()
-    return response
 }
 
 function LinesMenu() {
@@ -38,17 +36,25 @@ function LinesMenu() {
     )
 }
 
-export default async function LinesLayout() {
+export default function LinesLayout() {
 
-    const LinesData = await GetLines();
-    
-    if (LinesData == undefined) return <Loading></Loading>
+    // async function GetLines(): Promise<LinesFrameData> {
+    //     const request = await fetch("http://127.0.0.1:5000/linha")
+    //     const response = await request.json()
+    //     return response
+    // }
+
+    const { data , error } = fetchData<LinesFrameData>('linha');
+
+    if (!data) return <Loading></Loading>
+
+    if (error) return <Error></Error>
 
     return (
         <div className="flex flex-row">
             {/* <LinesMenu></LinesMenu> */}
             <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                {LinesData.linha.map(
+                {data.linha.map(
                     ({ COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR }) => {
                         return (
                             <div key={COD_LINH}>

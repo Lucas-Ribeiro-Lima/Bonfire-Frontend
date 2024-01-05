@@ -1,10 +1,9 @@
 'use client';
 
-import { importAuto } from '@/lib/importAuto';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
+import { postAuto } from '../../hooks/postInfractions';
 
 
 
@@ -54,7 +53,7 @@ const ImportFormPrimeiraInstancia = () => {
 
     //Função de handling do import
     async function handleImport(auto: ImportFormData) {
-        await importAuto(auto, 1)
+        await postAuto(auto, 1)
     }
 
     return (

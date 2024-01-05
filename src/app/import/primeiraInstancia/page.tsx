@@ -1,6 +1,6 @@
 import MainApp from "@/components/UI/mainApp"
 import PrimaryLayout from "@/components/UI/primaryLayout"
-import ImportFormPrimeiraInstancia from "@/components/import/importFormPrimeiraInstancia copy"
+import ImportFormPrimeiraInstancia from "@/components/import/importFormPrimeiraInstancia"
 
 export default function Home() {
   return (

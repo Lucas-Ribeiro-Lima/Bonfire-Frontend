@@ -1,29 +1,46 @@
 'use client'
 
-import { GetInfractions } from "@/lib/getAutoPrimeiraInstancia";
 import InfractionFrame from "./infractionFrame";
 import { useEffect, useState } from "react";
+import { fetchInfractionsFirstInstance } from "../../hooks/fetchData";
+import { Loading } from "../UI/loading";
+import { Error } from "../UI/error";
 
-
+type autosData = {
+    autos: {
+        NUM_NOTF: string,
+        TIP_PENL: string,
+        NUM_AI: string,
+        NOM_CONC: string,
+        COD_LINH: number,
+        NOM_LINH: string,
+        NUM_VEIC: number,
+        IDN_PLAC_VEIC: string,
+        DAT_OCOR_INFR: Date,
+        DES_LOCA: string,
+        COD_IRRG_FISC: number,
+        ARTIGO: string,
+        DESC_OBSE: string,
+        NUM_MATR_FISC: number,
+        QTE_PONT: number,
+        DAT_EMIS_NOTF: Date,
+        DAT_LIMIT_RECU: Date,
+        VAL_INFR: number,
+        DAT_CANC: Date
+    }[]
+}
 export default function InfractionLayout() {
 
-    const [date, setDate] = useState();
-    const [infractionsData, setInfractionsData] = useState<any>();
+    const [date, setDate] = useState<string>();
+    const [error, setError] = useState(false);
+    const [infractionsData, setInfractionsData] = useState<autosData>();
 
     useEffect(() => {
-
-        async function FetchData() {
-            const data = await GetInfractions(date)
-            setInfractionsData(data)
+        const {data, error} = fetchInfractionsFirstInstance<autosData>("/autoInfracao/primeiraInstancia", date)
+        if (error) {
+            setError(error);
         }
-
-        try {
-            FetchData()
-        }
-        catch (error) {
-            console.error({ error })
-        }
-
+        setInfractionsData(data);
     }, [date])
 
     const handleDateChange = (event) => {
@@ -31,31 +48,32 @@ export default function InfractionLayout() {
         setDate(newDate)
     }
 
+    console.log(date)
+
+    if (!infractionsData) return <Loading></Loading>;
+
+    if (error) return <Error></Error>;
+
     return (
         <div className="flex flex-row">
             <div className="flex flex-col relative m-6 gap-8">
                 <div className="flex flex-row gap-4">
                     <label className="flex flex-col text-white rounded-lg font-semibold">
                         Data
-                        <input onChange={handleDateChange} type="date" defaultValue='2024-01-04' className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input>
+                        <input onChange={handleDateChange} type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input>
                     </label>
                 </div>
-                {/* <button className="flex justify-center items-center p-1 bg-white/60 hover:bg-white/90 rounded-lg text-black font-semibold"> Filtrar </button>
-            <div className="flex flex-row gap-4">
-                <button className="bg-emerald-500 hover:bg-emerald-400 rounded-lg text-black p-2 w-1/2 font-semibold"> Cadastrar </button>
-                <button className="bg-white/60 hover:bg-white/90 rounded-lg text-black p-2 w-1/2 font-semibold"> Desativar </button>
-            </div> */}
             </div>
             <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                {/* {infractionsData.map(
-                    ({ num_veiculo, placa }) => {
+                {infractionsData?.autos.map(
+                    ({ NUM_NOTF, NUM_AI }) => {
                         return (
-                            <div key={num_veiculo}>
-                                <InfractionFrame num_veiculo={num_veiculo} placa={placa}></InfractionFrame>
+                            <div key={NUM_NOTF}>
+                                <InfractionFrame NUM_NOTF={NUM_NOTF} NUM_AI={NUM_AI}></InfractionFrame>
                             </div>
                         )
                     }
-                )} */}
+                )}
             </div>
         </div>
     )

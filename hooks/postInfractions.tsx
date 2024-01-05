@@ -1,8 +1,7 @@
-import { ImportFormData } from "@/components/import/importFormPrimeiraInstancia copy";
+import { ImportFormData } from "@/components/import/importFormPrimeiraInstancia";
 import { ApiClient } from "@/services/apiClient";
 
-
-export async function importAuto ({ auto }: ImportFormData, option: number){
+export async function postAuto ({ auto }: ImportFormData, option: number){
     
     const body = new FormData();
     
