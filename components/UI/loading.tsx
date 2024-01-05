@@ -12,7 +12,7 @@ export function Loading() {
 export default function LoadingPage() {
     return (
         <SecondaryLayout>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center">
                 <Logo></Logo>
                 <Loading></Loading>
             </div>

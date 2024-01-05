@@ -12,7 +12,7 @@ export function Error() {
 export default function ErrorPage() {
     return (
         <SecondaryLayout>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center">
                 <Logo></Logo>
                 <Error></Error>
             </div>

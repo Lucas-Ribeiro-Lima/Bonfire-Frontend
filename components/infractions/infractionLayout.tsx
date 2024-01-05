@@ -1,10 +1,10 @@
 'use client'
 
 import InfractionFrame from "./infractionFrame";
-import { useEffect, useState } from "react";
 import { fetchInfractionsFirstInstance } from "../../hooks/fetchData";
 import { Loading } from "../UI/loading";
 import { Error } from "../UI/error";
+import { useState } from "react";
 
 type autosData = {
     autos: {
@@ -29,28 +29,27 @@ type autosData = {
         DAT_CANC: Date
     }[]
 }
+
 export default function InfractionLayout() {
 
-    const [date, setDate] = useState<string>();
-    const [error, setError] = useState(false);
-    const [infractionsData, setInfractionsData] = useState<autosData>();
+    // const [date, setDate] = useState<string>();
 
-    useEffect(() => {
-        const {data, error} = fetchInfractionsFirstInstance<autosData>("/autoInfracao/primeiraInstancia", date)
-        if (error) {
-            setError(error);
-        }
-        setInfractionsData(data);
-    }, [date])
+    const date = '2023-10-01'
 
-    const handleDateChange = (event) => {
-        const newDate = event.target.value;
-        setDate(newDate)
-    }
+    const {data, error} = fetchInfractionsFirstInstance<autosData>("/autoInfracao/primeiraInstancia", date)
+    // setInfractionsData(data);
+    // if (error) {
+    //     setError(error);
+    // }
 
-    console.log(date)
+    // const handleDateChange = (event) => {
+    //     const newDate = event.target.value;
+    //     setDate(newDate)
+    // }
 
-    if (!infractionsData) return <Loading></Loading>;
+    // if (!infractionsData) return <Loading></Loading>;
+
+    if (!data) return <Loading></Loading>
 
     if (error) return <Error></Error>;
 
@@ -60,12 +59,13 @@ export default function InfractionLayout() {
                 <div className="flex flex-row gap-4">
                     <label className="flex flex-col text-white rounded-lg font-semibold">
                         Data
-                        <input onChange={handleDateChange} type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input>
+                        {/* <input onChange={handleDateChange} type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input> */}
+                        <input type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input>
                     </label>
                 </div>
             </div>
             <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                {infractionsData?.autos.map(
+                {data.autos.map(
                     ({ NUM_NOTF, NUM_AI }) => {
                         return (
                             <div key={NUM_NOTF}>
