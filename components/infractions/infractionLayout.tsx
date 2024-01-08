@@ -7,6 +7,7 @@ import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, getKey
 import { useEffect, useState } from "react";
 
 export type autosData = {
+export type autosData = {
     autos: {
         NUM_NOTF: string,
         TIP_PENL: string,
