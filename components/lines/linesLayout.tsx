@@ -1,9 +1,9 @@
 'use client'
 
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from "@nextui-org/react";
 import { FetchData } from "../../hooks/fetchData";
 import { Error } from "../UI/error";
 import { Loading } from "../UI/loading";
-import LinesFrame from "./linesFrame";
 
 type LinesFrameData = {
     linha: {
@@ -13,6 +13,25 @@ type LinesFrameData = {
         LINH_ATIV_EMPR: boolean;
     }[]
 }
+
+const columns = [
+    {
+        key: "COD_LINH",
+        label: "Linha"
+    },
+    {
+        key: "COMPARTILHADA",
+        label: "Compartilhada",
+    },
+    {
+        key: "ID_OPERADORA",
+        label: "Operadora",
+    },
+    {
+        key: "LINH_ATIV_EMPR",
+        label: "Status",
+    }
+]
 
 function LinesMenu() {
     return (
@@ -29,16 +48,16 @@ function LinesMenu() {
             </div>
             <button className="flex justify-center items-center p-2 bg-white/60 hover:bg-white/90 
                 rounded-lg text-black font-semibold"> Filtrar </button>
-            <button className="bg-emerald-500 hover:bg-emerald-400 rounded-lg text-black p-2 
+            {/* <button className="bg-emerald-500 hover:bg-emerald-400 rounded-lg text-black p-2 
                 font-semibold"> Cadastrar </button>
             <button className="bg-white/60 hover:bg-white/90 rounded-lg text-black p-2 
-                font-semibold"> Desativar </button>
+                font-semibold"> Desativar </button> */}
         </div>
     )
 }
 
 export default function LinesLayout() {
-    const { data , error } = FetchData<LinesFrameData>('linha');
+    const { data, error } = FetchData<LinesFrameData>('linha');
 
     if (!data) return <Loading></Loading>
 
@@ -48,15 +67,20 @@ export default function LinesLayout() {
         <div className="flex flex-col w-full h-full gap-4 p-4">
             <LinesMenu></LinesMenu>
             <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                {data.linha.map(
-                    ({ COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR }) => {
-                        return (
-                            <div key={COD_LINH}>
-                                <LinesFrame cod_linh={COD_LINH} compartilhada={COMPARTILHADA} id_operadora={ID_OPERADORA} linh_ativ_empr={LINH_ATIV_EMPR}></LinesFrame>
-                            </div>
-                        )
-                    }
-                )}
+                <Table aria-label="First instance infractions table">
+                    <TableHeader className="w-10">
+                        {columns.map((column) =>
+                            <TableColumn key={column.key}>{column.label}</TableColumn>)
+                        }
+                    </TableHeader>
+                    <TableBody items={data?.linha}>
+                        {data.linha.map((row) => (
+                            <TableRow key={row.COD_LINH}>
+                                {(columnKey) => <TableCell>{getKeyValue(row, columnKey)}</TableCell>}
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             </div>
         </div>
     )

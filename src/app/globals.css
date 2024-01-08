@@ -6,6 +6,7 @@
     .scrollbar::-webkit-scrollbar {
         display: flex;
         padding-top: 16px;
+        width: 10px;
     }
 
     .scrollbar::-webkit-scrollbar-track {

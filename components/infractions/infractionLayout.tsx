@@ -1,11 +1,11 @@
 'use client'
 
-import InfractionFrame from "./infractionFrame";
 import { FetchInfractionsFirstInstance } from "../../hooks/fetchData";
 import { Loading } from "../UI/loading";
 import { Error } from "../UI/error";
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, getKeyValue } from "@nextui-org/react";
 
-type autosData = {
+export type autosData = {
     autos: {
         NUM_NOTF: string,
         TIP_PENL: string,
@@ -28,25 +28,97 @@ type autosData = {
         DAT_CANC: Date
     }[]
 }
+const columns = [
+    {
+        key: "NUM_NOTF",
+        label: "Num Notificação",
+    },
+    {
+        key: "TIP_PENL",
+        label: "Tipo Penal",
+    },
+    {
+        key: "NUM_AI",
+        label: "Num AI",
+    },
+    {
+        key: "NOM_CONC",
+        label: "Concessionária",
+    },
+    {
+        key: "COD_LINH",
+        label: "Linha",
+    },
+    {
+        key: "NOM_LINH",
+        label: "Nome Linha",
+    },
+    {
+        key: "NUM_VEIC",
+        label: "Veiculo",
+    },
+    {
+        key: "IDN_PLAC_VEIC",
+        label: "Placa",
+    },
+    {
+        key: "DATA_OCOR_INFR",
+        label: "Data Ocorrência",
+    },
+    {
+        key: "DES_LOCA",
+        label: "Desloca",
+    },
+    {
+        key: "COD_IRRG_FISC",
+        label: "Irregularidade",
+    },
+    {
+        key: "ARTIGO",
+        label: "Artigo",
+    },
+    {
+        key: "DESC_OBSE",
+        label: "Observação",
+    },
+    {
+        key: "NUM_MATR_FISC",
+        label: "Fisc",
+    },
+    {
+        key: "QTE_PONT",
+        label: "Pontuação",
+    },
+    {
+        key: "DAT_EMIS_NOTF",
+        label: "Data emissão notificação",
+    },
+    {
+        key: "DAT_LIMIT_RECU",
+        label: "Data limite recurso",
+    },
+    {
+        key: "VAL_INFR",
+        label: "Valor",
+    },
+    {
+        key: "DAT_CANC",
+        label: "Data Canc",
+    },
+];
 
 export default function InfractionLayout() {
 
     // const [date, setDate] = useState<string>();
 
-    const date = '2023-10-01'
+    const date = '2024-01-01'
 
-    const {data, error} = FetchInfractionsFirstInstance<autosData>("/autoInfracao/primeiraInstancia", date)
-    // setInfractionsData(data);
-    // if (error) {
-    //     setError(error);
-    // }
+    const { data, error } = FetchInfractionsFirstInstance<autosData>("/autoInfracao/primeiraInstancia", date)
 
     // const handleDateChange = (event) => {
     //     const newDate = event.target.value;
     //     setDate(newDate)
     // }
-
-    // if (!infractionsData) return <Loading></Loading>;
 
     if (!data) return <Loading></Loading>
 
@@ -65,16 +137,21 @@ export default function InfractionLayout() {
                     </label>
                 </div>
             </div>
-            <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                {data.autos.map(
-                    ({ NUM_NOTF, NUM_AI }) => {
-                        return (
-                            <div key={NUM_NOTF}>
-                                <InfractionFrame NUM_NOTF={NUM_NOTF} NUM_AI={NUM_AI}></InfractionFrame>
-                            </div>
-                        )
-                    }
-                )}
+            <div className="flex flex-col w-max h-96 bg-zinc-700 rounded-lg overflow-y-scroll overflow-x-scroll scrollbar">
+                <Table aria-label="First instance infractions table">
+                    <TableHeader >
+                        {columns.map((column) =>
+                            <TableColumn key={column.key}>{column.label}</TableColumn>)
+                        }
+                    </TableHeader>
+                    <TableBody items={data?.autos}>
+                        {data.autos.map((row) => (
+                            <TableRow key={row.NUM_NOTF}>
+                                {(columnKey) => <TableCell>{getKeyValue(row, columnKey)}</TableCell>}
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             </div>
         </div>
     )
