@@ -1,10 +1,9 @@
 'use client'
 
 import InfractionFrame from "./infractionFrame";
-import { fetchInfractionsFirstInstance } from "../../hooks/fetchData";
+import { FetchInfractionsFirstInstance } from "../../hooks/fetchData";
 import { Loading } from "../UI/loading";
 import { Error } from "../UI/error";
-import { useState } from "react";
 
 type autosData = {
     autos: {
@@ -36,7 +35,7 @@ export default function InfractionLayout() {
 
     const date = '2023-10-01'
 
-    const {data, error} = fetchInfractionsFirstInstance<autosData>("/autoInfracao/primeiraInstancia", date)
+    const {data, error} = FetchInfractionsFirstInstance<autosData>("/autoInfracao/primeiraInstancia", date)
     // setInfractionsData(data);
     // if (error) {
     //     setError(error);
@@ -54,11 +53,13 @@ export default function InfractionLayout() {
     if (error) return <Error></Error>;
 
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-col w-full h-full gap-4 p-4">
             <div className="flex flex-col relative m-6 gap-8">
                 <div className="flex flex-row gap-4">
-                    <label className="flex flex-col text-white rounded-lg font-semibold">
-                        Data
+                    <label className="flex gap-2 text-white rounded-lg font-semibold">
+                        <>
+                            Data
+                        </>
                         {/* <input onChange={handleDateChange} type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input> */}
                         <input type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input>
                     </label>

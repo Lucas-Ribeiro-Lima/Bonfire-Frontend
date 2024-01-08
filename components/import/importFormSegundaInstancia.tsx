@@ -56,7 +56,7 @@ const ImportFormSegundaInstancia = () => {
     )
 
     return (
-        <form onSubmit={handleSubmit(handleImport)} className="flex flex-col gap-4" encType="multipart/form-data">
+        <form onSubmit={handleSubmit(handleImport)} className="flex flex-col gap-4 mt-4" encType="multipart/form-data">
             <label htmlFor='file' className="flex flex-col gap-2">
                 Selecione o arquivo:
                 <input {...register('auto.file')} type='file' accept='.docx, .pdf'

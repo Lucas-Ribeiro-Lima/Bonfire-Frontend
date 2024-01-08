@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import Link from "next/link";
+import Separator from "../UI/separator";
 
 interface DropDownFieldData {
     path: string;
@@ -21,9 +22,8 @@ export const DropdownFatherField = ({ description, icon, children }: DropDownFat
             <button
                 onClick={() => setIsDropDown(!isDropDown)}
                 className="
-                        peer 
-                        w-36
-                        h-10
+                        p-2
+                        scale-75
                         rounded-xl 
                         focus:bg-red-950 
                         focus:text-red-600 
@@ -41,12 +41,10 @@ export const DropdownFatherField = ({ description, icon, children }: DropDownFat
             </button>
             {isDropDown && (
                 <div className='
-                        relative
-                        top-2 z-10 
                         rounded-xl 
                         shadow-2xl 
                         flex-col 
-                        bg-zinc-800 
+                        bg-zinc-700 
                         text-white'>
                     {children}
                 </div>
@@ -57,18 +55,21 @@ export const DropdownFatherField = ({ description, icon, children }: DropDownFat
 
 export const DropDownField = ({ path, description, icon }: DropDownFieldData) => {
     return (
-        <Link className='
-                flex 
-                p-4 
-                justify-center
-                align-middle
-                rounded-xl 
-                hover:bg-zinc-600 
-                hover:duration-1000 
-                hover:drop-shadow-2xl 
-                cursor-pointer'
-            href={path}> {icon}{description}
-        </Link>
+        <>
+            <Link className='
+                    flex 
+                    p-2
+                    scale-75
+                    justify-center
+                    align-middle
+                    rounded-xl 
+                    hover:bg-zinc-600 
+                    hover:duration-1000 
+                    hover:drop-shadow-2xl 
+                    cursor-pointer'
+                href={path}> {icon}{description}
+            </Link>
+        </>
     )
 }
 

@@ -5,8 +5,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postAuto } from '../../hooks/postInfractions';
 
-
-
 export type ImportFormData = z.infer<typeof ImportFormSchema>
 
 const ImportFormSchema = z.object(
@@ -37,8 +35,6 @@ const ImportFormSchema = z.object(
             })
     }
 )
-
-
 const ImportFormPrimeiraInstancia = () => {
 
     const {
@@ -57,7 +53,7 @@ const ImportFormPrimeiraInstancia = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(handleImport)} className="flex flex-col gap-4" encType="multipart/form-data">
+        <form onSubmit={handleSubmit(handleImport)} className="flex flex-col gap-4 mt-4" encType="multipart/form-data">
             <label htmlFor='file' className="flex flex-col gap-2">
                 Selecione o arquivo:
                 <input {...register('auto.file')} type='file' accept='.csv'

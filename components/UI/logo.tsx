@@ -1,6 +1,14 @@
 import { Flame } from "lucide-react";
 
-const Logo = () => {
+export function Logo() {
+  return (
+    <div className="w-40">
+      <h1 className="flex flex-row text-extrabold text-3xl text-red-700 items-center"><Flame></Flame>Bonfire</h1>
+    </div>
+  ); 
+}
+
+export default function LogoCompleta() {
     return (
       <div className="w-40">
         <h1 className="flex flex-row text-extrabold text-3xl text-red-700 items-center"><Flame></Flame>Bonfire</h1>
@@ -8,5 +16,3 @@ const Logo = () => {
       </div>
     ); 
 }
-
-export default Logo

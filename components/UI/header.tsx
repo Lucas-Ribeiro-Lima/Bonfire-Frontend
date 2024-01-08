@@ -1,14 +1,18 @@
-import {LucideSunMoon} from "lucide-react";
-import MenuBar from "./menubar";
-import Logo from "./logo";
+import { SidebarCloseIcon } from "lucide-react";
+import { Logo } from "./logo";
 
 const Header = () => {
     return (
-        <header className='flex flex-row bg-gradient-to-r from-zinc-900 to-zinc-700 h-20 p-2 align-center border-b border-white/25'>
-          <Logo></Logo>
-          <MenuBar></MenuBar>
-          <div className="absolute right-10 top-6 text-zinc-400 hover:text-white hover:duration-1000 cursor-pointer">
-            <LucideSunMoon></LucideSunMoon>
+        <header className='flex flex-row items-center 
+            bg-gradient-to-r from-zinc-900 to-zinc-800 h-12 pl-4 
+            align-center border-b border-white/25'>
+          <div className="flex-1 text-zinc-500">
+            <button>
+              <SidebarCloseIcon></SidebarCloseIcon>
+            </button>
+          </div>
+          <div>
+            <Logo></Logo>
           </div>
         </header>
     );
