@@ -2,7 +2,9 @@
 'use client'
 import Header from "./header";
 import React, { FC, ReactNode, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import { SideBar } from "./sidebar";
+import { SidebarCloseIcon } from "lucide-react";
 import { SidebarCloseIcon } from "lucide-react";
 
 interface Props {
@@ -10,6 +12,13 @@ interface Props {
 }
 
 const PrimaryLayout: FC<Props> = ({ children }) => {
+
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+
+  function closeSideBar() {
+    setSidebarOpen(!sidebarOpen)
+  }
+
 
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
