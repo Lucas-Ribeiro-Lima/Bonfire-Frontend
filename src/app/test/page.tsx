@@ -1,10 +1,7 @@
-import PrimaryLayout from "@/components/UI/primaryLayout";
-import { Modal } from "@/components/modal/Modal";
+import TableTest from "@/components/tables/table";
 
-export default function Test() {
+export default function Test(){
     return (
-        <PrimaryLayout>
-            <Modal></Modal>
-        </PrimaryLayout>
+        <TableTest></TableTest>
     )
 }

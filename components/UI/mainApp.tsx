@@ -8,7 +8,7 @@ interface MainAppProps {
 
 const MainApp:FC<MainAppProps> = ({children, title}) => {
     return (
-            <main className="flex flex-col flex-1 items-center">
+            <main className="flex flex-col items-center m-4">
                 <h1 className="text-red-700 text-2xl font-semibold p-2">{title}</h1>
                 {children}
             </main>
