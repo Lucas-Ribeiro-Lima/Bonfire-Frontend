@@ -3,7 +3,7 @@
 import { FetchInfractionsFirstInstance } from "../../hooks/fetchData";
 import { Error } from "../UI/error";
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, getKeyValue, Spinner, Pagination } from "@nextui-org/react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export type autosData = {
     autos: {
@@ -111,17 +111,16 @@ const columns = [
 export default function InfractionLayout() {
 
     //Data handling
-    const [date, setDate] = useState<string>('2024-01-01');
+    const [date, setDate] = useState<string>();
     const handleDateChange = (event: any) => {
         const newDate = event.target.value;
         setDate(newDate)
-    }
-    
+    }    
     // Pagination
     const [page, setPage] = useState(1)
 
     //Data fetching  
-    const { data, error, isLoading } = FetchInfractionsFirstInstance<autosData>(`/autoInfracao/primeiraInstancia`, date)
+    const { data, error, isLoading } = FetchInfractionsFirstInstance<autosData>(`/autoInfracao/primeiraInstancia/${date}`)
     const loadingState = isLoading || data?.autos.length === 0 ? "loading" : "idle"
 
 

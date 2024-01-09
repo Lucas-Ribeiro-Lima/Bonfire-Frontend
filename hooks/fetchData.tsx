@@ -3,10 +3,10 @@
 import { ApiClient } from "@/services/apiClient";
 import useSWR from "swr";
 
-export function FetchInfractionsFirstInstance<Data = any, Error = any>(url: string, date: string) {
+export function FetchInfractionsFirstInstance<Data = any, Error = any>(url: string) {
 
     const { data, error, isLoading } = useSWR<Data>(url, async () => {
-        const response = await ApiClient.get(`${url}?data=${date}`);
+        const response = await ApiClient.get(`${url}`);
 
         return response.data;
     })
