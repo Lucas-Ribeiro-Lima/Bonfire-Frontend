@@ -1,10 +1,9 @@
 'use client'
 
 import { FetchInfractionsFirstInstance } from "../../hooks/fetchData";
-import { Loading } from "../UI/loading";
 import { Error } from "../UI/error";
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, getKeyValue } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, getKeyValue, Spinner, Pagination } from "@nextui-org/react";
+import { useEffect, useMemo, useState } from "react";
 
 export type autosData = {
     autos: {
@@ -107,71 +106,79 @@ const columns = [
     //     key: "DAT_CANC",
     //     label: "Data Canc",
     // },
-];
+]
 
 export default function InfractionLayout() {
 
+    //Data handling
     const [date, setDate] = useState<string>('2024-01-01');
-
-    const { data, error } = FetchInfractionsFirstInstance<autosData>("/autoInfracao/primeiraInstancia", date)
-
     const handleDateChange = (event: any) => {
         const newDate = event.target.value;
         setDate(newDate)
     }
+    
+    // Pagination
+    const [page, setPage] = useState(1)
 
-    useEffect(() => { }, [data])
+    //Data fetching  
+    const { data, error, isLoading } = FetchInfractionsFirstInstance<autosData>(`/autoInfracao/primeiraInstancia`, date)
+    const loadingState = isLoading || data?.autos.length === 0 ? "loading" : "idle"
 
-    if (!data) return (
-        <div className="flex flex-col w-full h-full gap-4">
-            <div className="flex flex-col relative m-6 gap-8">
-                <div className="flex flex-row gap-4">
-                    <label className="flex gap-2 text-white rounded-lg font-semibold">
-                        <>
-                            Data
-                        </>
-                        <input onChange={handleDateChange} type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input>
-                        {/* <input type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input> */}
-                    </label>
-                </div>
-            </div>
-            <div className="flex flex-col h-96 justify-center align-center">
-                <Loading></Loading>
-            </div>
-        </div>
-    )
 
+    const rowsPerPage = 15
+    const pages = useMemo(() => {
+        return data?.autos.length ? Math.ceil(data.autos.length / rowsPerPage) : 0
+    }, [data?.autos.length, rowsPerPage])
+
+    //Early returns
     if (error) return <Error></Error>;
 
     return (
-        <div className="flex flex-col w-full h-full gap-4">
+        <div className="flex flex-col w-full gap-4">
             <div className="flex flex-col relative gap-8">
                 <div className="flex flex-row gap-4">
                     <label className="flex gap-2 text-white rounded-lg font-semibold">
-                        <>
-                            Data
-                        </>
-                        <input onChange={handleDateChange} type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input>
+                        <>Data</>
+                        <input onChange={handleDateChange} type="date"
+                            className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input>
                         {/* <input type="date" className="w-36 pl-1 rounded-lg bg-white/60 text-black"></input> */}
                     </label>
                 </div>
             </div>
-            <div className="flex flex-col w-full h-96 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                <Table aria-label="First instance infractions table">
-                    <TableHeader >
-                        {columns.map((column) =>
-                            <TableColumn key={column.key}>{column.label}</TableColumn>)
-                        }
-                    </TableHeader>
-                    <TableBody items={data?.autos}>
-                        {data.autos.map((row) => (
-                            <TableRow key={row.NUM_NOTF}>
-                                {(columnKey) => <TableCell>{getKeyValue(row, columnKey)}</TableCell>}
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
+            <Table
+                aria-label="First instance infractions table"
+                bottomContent={
+                    pages > 0 ? (
+                        <div className="flex w-full justify-center">
+                            <Pagination
+                                isCompact
+                                showControls
+                                showShadow
+                                color="primary"
+                                page={page}
+                                total={pages}
+                                onChange={(page) => setPage(page)}/>
+                        </div>
+                    ) : null
+                }>
+                <TableHeader >
+                    {columns.map((column) =>
+                        <TableColumn key={column.key}>{column.label}</TableColumn>)
+                    }
+                </TableHeader>
+                <TableBody
+                    items={data?.autos ?? []}
+                    loadingContent={<Spinner color="danger" />}
+                    loadingState={loadingState}
+                    emptyContent={"Nada Encontrado"} 
+                >
+                    {(item) => (
+                        <TableRow key={item.NUM_NOTF}>
+                            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
         </div>
     )
 }

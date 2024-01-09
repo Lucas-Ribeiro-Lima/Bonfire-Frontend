@@ -1,9 +1,9 @@
 'use client'
 
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from "@nextui-org/react";
+import { Pagination, Spinner, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, getKeyValue } from "@nextui-org/react";
+import { Error } from '@/components/UI/error'
 import { FetchData } from "../../hooks/fetchData";
-import { Error } from "../UI/error";
-import { Loading } from "../UI/loading";
+import { useMemo, useState } from "react";
 
 type LinesFrameData = {
     linha: {
@@ -33,6 +33,7 @@ const columns = [
     }
 ]
 
+
 function LinesMenu() {
     return (
         <div className="flex flex-row items-center h-10 gap-8">
@@ -57,31 +58,59 @@ function LinesMenu() {
 }
 
 export default function LinesLayout() {
-    const { data, error } = FetchData<LinesFrameData>('linha');
 
-    if (!data) return <Loading></Loading>
+    // Pagination
+    const [page, setPage] = useState(1)
+
+    //Data fetching  
+    const { data, error, isLoading } = FetchData<LinesFrameData>('linha')
+    const loadingState = isLoading || data?.linha.length === 0 ? "loading" : "idle"
+
+    const rowsPerPage = 10
+
+    const pages = useMemo(() => {
+        return data?.linha.length ? Math.ceil(data.linha.length / rowsPerPage) : 0
+    }, [data?.linha.length, rowsPerPage])
 
     if (error) return <Error></Error>
 
     return (
         <div className="flex flex-col w-full h-full gap-4 p-4">
             <LinesMenu></LinesMenu>
-            <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                <Table aria-label="First instance infractions table">
-                    <TableHeader className="w-10">
-                        {columns.map((column) =>
-                            <TableColumn key={column.key}>{column.label}</TableColumn>)
-                        }
-                    </TableHeader>
-                    <TableBody items={data?.linha}>
-                        {data.linha.map((row) => (
-                            <TableRow key={row.COD_LINH}>
-                                {(columnKey) => <TableCell>{getKeyValue(row, columnKey)}</TableCell>}
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
+            <Table
+                aria-label="First instance infractions table"
+                bottomContent={
+                    pages > 0 ? (
+                        <div className="flex w-full justify-center">
+                            <Pagination
+                                isCompact
+                                showControls
+                                showShadow
+                                color="primary"
+                                page={page}
+                                total={pages}
+                                onChange={(page) => setPage(page)} />
+                        </div>
+                    ) : null
+                }>
+                <TableHeader >
+                    {columns.map((column) =>
+                        <TableColumn key={column.key}>{column.label}</TableColumn>)
+                    }
+                </TableHeader>
+                <TableBody
+                    items={data?.linha ?? []}
+                    loadingContent={<Spinner color="danger" />}
+                    loadingState={loadingState}
+                    emptyContent={"Nada Encontrado"}
+                >
+                    {(item) => (
+                        <TableRow key={item.COD_LINH}>
+                            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
         </div>
     )
 }

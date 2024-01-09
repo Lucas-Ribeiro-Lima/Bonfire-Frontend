@@ -1,9 +1,9 @@
 'use client'
 
 import { FetchData } from "../../hooks/fetchData";
-import { Loading } from "../UI/loading";
 import { Error } from '../UI/error'
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Pagination, Spinner } from "@nextui-org/react";
+import { useMemo, useState } from "react";
 
 type VehiclesData = {
     veiculos: {
@@ -53,31 +53,58 @@ function VehiclesMenu() {
 
 export default function VehiclesLayout() {
 
-    const { data, error } = FetchData<VehiclesData>('veiculos')
+    // Pagination
+    const [page, setPage] = useState(1)
 
-    if (!data) return <Loading></Loading>
+    //Data fetching  
+    const { data, error, isLoading } = FetchData<VehiclesData>('veiculos')
+    const loadingState = isLoading || data?.veiculos.length === 0 ? "loading" : "idle"
+
+    const rowsPerPage = 10
+
+    const pages = useMemo(() => {
+        return data?.veiculos.length ? Math.ceil(data.veiculos.length / rowsPerPage) : 0
+    }, [data?.veiculos.length, rowsPerPage])
 
     if (error) return <Error></Error>
 
     return (
         <div className="flex flex-col w-full h-full gap-4 p-4">
             <VehiclesMenu></VehiclesMenu>
-            <div className="flex flex-col h-96 pr-10 bg-zinc-700 rounded-lg overflow-y-scroll scrollbar">
-                <Table aria-label="First instance infractions table">
-                    <TableHeader >
-                        {columns.map((column) =>
-                            <TableColumn key={column.key}>{column.label}</TableColumn>)
-                        }
-                    </TableHeader>
-                    <TableBody items={data?.veiculos}>
-                        {data.veiculos.map((row) => (
-                            <TableRow key={row.IDN_PLAC_VEIC}>
-                                {(columnKey) => <TableCell>{getKeyValue(row, columnKey)}</TableCell>}
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
+            <Table
+                aria-label="First instance infractions table"
+                bottomContent={
+                    pages > 0 ? (
+                        <div className="flex w-full justify-center">
+                            <Pagination
+                                isCompact
+                                showControls
+                                showShadow
+                                color="primary"
+                                page={page}
+                                total={pages}
+                                onChange={(page) => setPage(page)}/>
+                        </div>
+                    ) : null
+                }>
+                <TableHeader >
+                    {columns.map((column) =>
+                        <TableColumn key={column.key}>{column.label}</TableColumn>)
+                    }
+                </TableHeader>
+                <TableBody
+                    items={data?.veiculos ?? []}
+                    loadingContent={<Spinner color="danger" />}
+                    loadingState={loadingState}
+                    emptyContent={"Nada Encontrado"} 
+                >
+                    {(item) => (
+                        <TableRow key={item.IDN_PLAC_VEIC}>
+                            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
         </div>
     )
 }
