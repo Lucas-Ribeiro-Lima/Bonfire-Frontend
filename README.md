@@ -1,36 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **Bonfire: Projeto em Next.Js**
 
-## Getting Started
+Apresento o Bonfire, um projeto de frontend desenvolvido exclusivamente por mim, Lucas Ribeiro Lima. Este aplicativo, construído em Next.js, reflete meu comprometimento com o desenvolvimento de software eficiente e aprimorado. Aqui estão as principais tecnologias e habilidades demonstradas:
 
-First, run the development server:
+- **Next.js** 🔗: Estrutura React poderosa para uma experiência de usuário rápida e eficiente.
+- **Tailwind CSS** 🎨: Framework CSS utilitário para estilos modernos e responsivos.
+- **Axios** 🌐: Cliente HTTP para comunicação eficaz com a API.
+- **SWR (Stale-While-Revalidate)** 🔄: Gerenciamento inteligente de estado para otimização de desempenho.
+- **Next UI** 🚀: Componentes prontos para uso, acelerando o desenvolvimento.
+- **React Hook Form** 📝: Manipulação e validação eficientes de formulários.
+- **Lucide React** ✨: Ícones elegantes para aprimorar a experiência visual.
+- **Zod** 🛡️: Garantia de validação de dados para integridade do projeto.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Agradeço a todos que contribuíram, especialmente a você, por explorar o Bonfire e testemunhar meu compromisso com a excelência no desenvolvimento de software. 🔥✨
