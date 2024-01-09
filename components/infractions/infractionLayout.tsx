@@ -146,6 +146,7 @@ export default function InfractionLayout() {
                 </div>
             </div>
             <Table
+                className="h-96"
                 aria-label="First instance infractions table"
                 bottomContent={
                     pages > 0 ? (

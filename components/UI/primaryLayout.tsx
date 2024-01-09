@@ -25,9 +25,9 @@ const PrimaryLayout: FC<Props> = ({ children }) => {
         </button>
       </div>
       <div className='flex flex-row flex-1'>
-        {sidebarOpen &&
+        <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} ease-in-out  duration-1000`}>
           <SideBar></SideBar>
-        }
+        </div>
         <div className="flex-1">
           {children}
         </div>
