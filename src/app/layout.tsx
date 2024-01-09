@@ -22,7 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='bg-zinc-900 text-white selection:text-white selection:bg-red-800 h-screen w-screen'>{children}</body>
+        <body className='dark bg-zinc-900 text-white selection:text-white selection:bg-red-800 h-screen w-screen'>
+          {children}
+        </body>
     </html>
   )
 }
