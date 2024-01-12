@@ -61,18 +61,23 @@ export default function LinesLayout() {
 
     // Pagination
     const [page, setPage] = useState(1)
+    const [rowsPerPage, setRowsPerPage] = useState<number>(15);
 
     //Data fetching  
     const { data, error, isLoading } = FetchData<LinesFrameData>('linha')
-    const loadingState = isLoading || data?.linha.length === 0 ? "loading" : "idle"
 
-    const rowsPerPage = 10
+    const pages = Math.ceil(data?.linha.length / rowsPerPage);
 
-    const pages = useMemo(() => {
-        return data?.linha.length ? Math.ceil(data.linha.length / rowsPerPage) : 0
-    }, [data?.linha.length, rowsPerPage])
+    const items = useMemo(() => {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+    
+        return data?.linha.slice(start, end);
+      }, [page, data]);
 
     if (error) return <Error></Error>
+
+    if (!data) return <Spinner color="danger" />;
 
     return (
         <div className="flex flex-col w-full h-full gap-4 p-4">
@@ -86,7 +91,7 @@ export default function LinesLayout() {
                                 isCompact
                                 showControls
                                 showShadow
-                                color="primary"
+                                color="danger"
                                 page={page}
                                 total={pages}
                                 onChange={(page) => setPage(page)} />
@@ -99,9 +104,7 @@ export default function LinesLayout() {
                     }
                 </TableHeader>
                 <TableBody
-                    items={data?.linha ?? []}
-                    loadingContent={<Spinner color="danger" />}
-                    loadingState={loadingState}
+                    items={items}
                     emptyContent={"Nada Encontrado"}
                 >
                     {(item) => (

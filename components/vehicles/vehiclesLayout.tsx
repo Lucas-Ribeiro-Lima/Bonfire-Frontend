@@ -30,7 +30,7 @@ const columns = [
 
 function VehiclesMenu() {
     return (
-        <div className="flex flex-row items-center h-10 gap-8">
+        <div className="flex flex-row w-full items-center gap-4">
             <div className="flex flex-row gap-2">
                 <label className="flex flex-row gap-2 text-white rounded-lg font-semibold">
                     Veículo:
@@ -55,21 +55,27 @@ export default function VehiclesLayout() {
 
     // Pagination
     const [page, setPage] = useState(1)
+    const [rowsPerPage, setRowsPerPage] = useState<number>(15);
 
     //Data fetching  
     const { data, error, isLoading } = FetchData<VehiclesData>('veiculos')
-    const loadingState = isLoading || data?.veiculos.length === 0 ? "loading" : "idle"
 
-    const rowsPerPage = 10
+    const pages = Math.ceil(data?.veiculos.length / rowsPerPage);
 
-    const pages = useMemo(() => {
-        return data?.veiculos.length ? Math.ceil(data.veiculos.length / rowsPerPage) : 0
-    }, [data?.veiculos.length, rowsPerPage])
+    const items = useMemo(() => {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+    
+        return data?.veiculos.slice(start, end);
+      }, [page, data]);
 
     if (error) return <Error></Error>
 
+    if (!data) return <Spinner color="danger" />;
+
+
     return (
-        <div className="flex flex-col w-full h-full gap-4 p-4">
+        <div className="flex flex-col w-full gap-4">
             <VehiclesMenu></VehiclesMenu>
             <Table
                 aria-label="First instance infractions table"
@@ -80,7 +86,7 @@ export default function VehiclesLayout() {
                                 isCompact
                                 showControls
                                 showShadow
-                                color="primary"
+                                color="danger"
                                 page={page}
                                 total={pages}
                                 onChange={(page) => setPage(page)}/>
@@ -93,9 +99,7 @@ export default function VehiclesLayout() {
                     }
                 </TableHeader>
                 <TableBody
-                    items={data?.veiculos ?? []}
-                    loadingContent={<Spinner color="danger" />}
-                    loadingState={loadingState}
+                    items={items}
                     emptyContent={"Nada Encontrado"} 
                 >
                     {(item) => (

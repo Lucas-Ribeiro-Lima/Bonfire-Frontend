@@ -26,6 +26,9 @@ export type autosData = {
         DAT_LIMIT_RECU: Date,
         VAL_INFR: number,
         DAT_CANC: Date
+    }[],
+    counter: {
+        TOTAL: number,
     }[]
 }
 
@@ -111,26 +114,33 @@ const columns = [
 export default function InfractionLayout() {
 
     //Data handling
-    const [date, setDate] = useState<string>();
+    const [date, setDate] = useState<string>('2024-01-01');  
     const handleDateChange = (event: any) => {
         const newDate = event.target.value;
         setDate(newDate)
-    }    
+    }
+
+    //Data fetch
+    const { data, error, isLoading } = FetchInfractionsFirstInstance<autosData>(`/autoInfracao/primeiraInstancia/${date}`)
+
     // Pagination
     const [page, setPage] = useState(1)
+    const [rowsPerPage, setRowsPerPage] = useState<number>(15);
 
-    //Data fetching  
-    const { data, error, isLoading } = FetchInfractionsFirstInstance<autosData>(`/autoInfracao/primeiraInstancia/${date}`)
-    const loadingState = isLoading || data?.autos.length === 0 ? "loading" : "idle"
+    const pages = Math.ceil(data?.autos.length / rowsPerPage);
 
-
-    const rowsPerPage = 15
-    const pages = useMemo(() => {
-        return data?.autos.length ? Math.ceil(data.autos.length / rowsPerPage) : 0
-    }, [data?.autos.length, rowsPerPage])
+    const items = useMemo(() => {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+    
+        return data?.autos.slice(start, end);
+      }, [page, data]);
 
     //Early returns
-    if (error) return <Error></Error>;
+    if (error) return <div>{error.message}</div>;
+
+    // Early return if data is not yet available
+    if (!data) return <Spinner color="danger" />;
 
     return (
         <div className="flex flex-col w-full gap-4">
@@ -145,7 +155,6 @@ export default function InfractionLayout() {
                 </div>
             </div>
             <Table
-                className="h-96"
                 aria-label="First instance infractions table"
                 bottomContent={
                     pages > 0 ? (
@@ -154,10 +163,10 @@ export default function InfractionLayout() {
                                 isCompact
                                 showControls
                                 showShadow
-                                color="primary"
+                                color="danger"
                                 page={page}
                                 total={pages}
-                                onChange={(page) => setPage(page)}/>
+                                onChange={(page) => setPage(page)} />
                         </div>
                     ) : null
                 }>
@@ -167,10 +176,8 @@ export default function InfractionLayout() {
                     }
                 </TableHeader>
                 <TableBody
-                    items={data?.autos ?? []}
-                    loadingContent={<Spinner color="danger" />}
-                    loadingState={loadingState}
-                    emptyContent={"Nada Encontrado"} 
+                    items={items}
+                    emptyContent={"Nada Encontrado"}
                 >
                     {(item) => (
                         <TableRow key={item.NUM_NOTF}>

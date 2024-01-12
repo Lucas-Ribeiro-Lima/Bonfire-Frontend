@@ -5,7 +5,7 @@ const apiPort = process.env.NEXT_PUBLIC_API_PORT;
 
 export const ApiClient = axios.create({
     baseURL: `${apiUrl}:${apiPort}/`,
-    timeout: 15000,
+    timeout: 30000,
     headers: {
         'X-Custom-Header': 'foobar',
     }
