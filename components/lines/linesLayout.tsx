@@ -80,7 +80,7 @@ export default function LinesLayout() {
     if (!data) return <Spinner color="danger" />;
 
     return (
-        <div className="flex flex-col w-full h-full gap-4 p-4">
+        <div className="flex flex-col w-full gap-4">
             <LinesMenu></LinesMenu>
             <Table
                 aria-label="First instance infractions table"
