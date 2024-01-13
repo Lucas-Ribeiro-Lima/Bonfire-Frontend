@@ -53,8 +53,8 @@ const ImportFormPrimeiraInstancia = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(handleImport)} className="flex flex-col gap-4 mt-4" encType="multipart/form-data">
-            <label htmlFor='file' className="flex flex-col gap-2">
+     <form onSubmit={handleSubmit(handleImport)} className="flex flex-col gap-4 mt-4" encType="multipart/form-data">
+            <label htmlFor='file' className=" flex-col flex gap-2">
                 Selecione o arquivo:
                 <input {...register('auto.file')} type='file' accept='.csv'
                     className='file:rounded-lg file:bg-zinc-400 file:font-semibold file:cursor-pointer'>

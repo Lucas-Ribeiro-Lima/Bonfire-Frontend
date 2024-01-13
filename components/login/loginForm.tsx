@@ -2,8 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { LockIcon } from "lucide-react";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/authContext";
+
 import Link from "next/link";
 
 export interface LoginFormInput {
@@ -12,8 +11,8 @@ export interface LoginFormInput {
     rememberMe: boolean;
 }
 
-async function handleSignIn({username, password, rememberMe }: LoginFormInput){
-    
+async function handleSignIn({ username, password, rememberMe }: LoginFormInput) {
+
     // const {signIn} = useContext(AuthContext);
 
     // await signIn({username, password});
@@ -31,11 +30,11 @@ const LoginForm = () => {
             <div className="flex flex-col rounded-md shadow-sm -space-y-px">
                 <label htmlFor="username">
                     <input {...register('username')} type="text" placeholder="Username" autoComplete="email" required
-                     className="w-96 rounded-t-md border border-gray-300 text-black indent-2 focus:outline-none focus:bg-zinc-300" ></input>
+                        className="w-96 rounded-t-md border border-gray-300 text-black indent-2 focus:outline-none focus:bg-zinc-300" ></input>
                 </label>
                 <label htmlFor="password">
                     <input {...register('password')} type="password" placeholder="Password" autoComplete="current-password" required
-                     className="w-96 rounded-b-md border border-gray-300 text-black indent-2 focus:outline-none focus:bg-zinc-300" ></input>
+                        className="w-96 rounded-b-md border border-gray-300 text-black indent-2 focus:outline-none focus:bg-zinc-300" ></input>
                 </label>
             </div>
             <div className="flex flex-row gap-12 text-sm">
