@@ -1,8 +1,8 @@
-import Footer from "./footer";
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from 'react'
+import Footer from './footer'
 
 interface SecondaryLayoutProp {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const SecondaryLayout: FC<SecondaryLayoutProp> = ({ children }) => {
@@ -15,7 +15,7 @@ const SecondaryLayout: FC<SecondaryLayoutProp> = ({ children }) => {
         <Footer></Footer>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SecondaryLayout;
+export default SecondaryLayout

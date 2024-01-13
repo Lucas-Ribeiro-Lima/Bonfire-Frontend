@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { ReactNode } from 'react'
 import { Inter } from 'next/font/google'
+import { ReactNode } from 'react'
 import './globals.css'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,16 +17,12 @@ export const viewport = {
   maximumScale: 1,
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-        <body className='dark bg-zinc-900 text-white selection:text-white selection:bg-red-800 h-screen w-screen'>
-          {children}
-        </body>
+      <body className="h-screen w-screen bg-zinc-900 text-white dark selection:bg-red-800 selection:text-white">
+        {children}
+      </body>
     </html>
   )
 }

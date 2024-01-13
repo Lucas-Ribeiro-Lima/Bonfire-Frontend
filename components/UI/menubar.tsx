@@ -1,19 +1,17 @@
-"use client";
+'use client'
 
-import {
-  LucideHome,
-  AlignJustify,
-  FileSpreadsheetIcon,
-  LucideImport,
-  Settings,
-  LogIn,
-} from "lucide-react";
 import {
   DropDownField,
   DropdownFatherField,
-  SimpleField,
-} from "@/components/dropdown/dropdown";
-import Link from "next/link";
+} from '@/components/dropdown/dropdown'
+import {
+  AlignJustify,
+  FileSpreadsheetIcon,
+  LogIn,
+  LucideHome,
+  LucideImport,
+} from 'lucide-react'
+import Link from 'next/link'
 
 const MenuBar = () => {
   return (
@@ -69,7 +67,7 @@ const MenuBar = () => {
         ></DropdownFatherField>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default MenuBar;
+export default MenuBar

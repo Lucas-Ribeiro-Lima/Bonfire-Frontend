@@ -1,18 +1,18 @@
-"use client";
-import Header from "./header";
-import React, { FC, ReactNode, useState } from "react";
-import { SideBar } from "./sidebar";
-import { SidebarCloseIcon } from "lucide-react";
+'use client'
+import { SidebarCloseIcon } from 'lucide-react'
+import { FC, ReactNode, useState } from 'react'
+import Header from './header'
+import { SideBar } from './sidebar'
 
 interface Props {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
 const PrimaryLayout: FC<Props> = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   function closeSideBar() {
-    setSidebarOpen(!sidebarOpen);
+    setSidebarOpen(!sidebarOpen)
   }
 
   return (
@@ -28,14 +28,14 @@ const PrimaryLayout: FC<Props> = ({ children }) => {
       </div>
       <div className="flex flex-1 flex-row">
         <div
-          className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} duration-1000  ease-in-out`}
+          className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} duration-1000  ease-in-out`}
         >
           <SideBar></SideBar>
         </div>
         <div className="flex-1">{children}</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PrimaryLayout;
+export default PrimaryLayout

@@ -1,16 +1,15 @@
-import { ReactNode, useState } from "react";
-import Link from "next/link";
-import Separator from "../UI/separator";
+import Link from 'next/link'
+import { ReactNode, useState } from 'react'
 
 interface DropDownFieldData {
-  path: string;
-  description: string;
-  icon?: ReactNode;
+  path: string
+  description: string
+  icon?: ReactNode
 }
 interface DropDownFatherFieldData {
-  description: string;
-  icon: ReactNode;
-  children?: ReactNode;
+  description: string
+  icon: ReactNode
+  children?: ReactNode
 }
 
 export const DropdownFatherField = ({
@@ -18,7 +17,7 @@ export const DropdownFatherField = ({
   icon,
   children,
 }: DropDownFatherFieldData) => {
-  const [isDropDown, setIsDropDown] = useState(false);
+  const [isDropDown, setIsDropDown] = useState(false)
 
   return (
     <div>
@@ -59,8 +58,8 @@ export const DropdownFatherField = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 export const DropDownField = ({
   path,
@@ -83,13 +82,13 @@ export const DropDownField = ({
                     hover:duration-1000"
         href={path}
       >
-        {" "}
+        {' '}
         {icon}
         {description}
       </Link>
     </>
-  );
-};
+  )
+}
 
 export const SimpleField = ({ path, description, icon }: DropDownFieldData) => {
   return (
@@ -103,5 +102,5 @@ export const SimpleField = ({ path, description, icon }: DropDownFieldData) => {
         {description}
       </div>
     </Link>
-  );
-};
+  )
+}

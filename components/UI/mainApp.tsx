@@ -1,8 +1,8 @@
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from 'react'
 
 interface MainAppProps {
-  children: ReactNode;
-  title?: string;
+  children: ReactNode
+  title?: string
 }
 
 const MainApp: FC<MainAppProps> = ({ children, title }) => {
@@ -11,7 +11,7 @@ const MainApp: FC<MainAppProps> = ({ children, title }) => {
       <h1 className="p-2 text-2xl font-semibold text-red-700">{title}</h1>
       {children}
     </main>
-  );
-};
+  )
+}
 
-export default MainApp;
+export default MainApp
