@@ -1,14 +1,13 @@
-import ConsortiumLayout from "@/components/consortium/consortiumLayout";
-import MainApp from "@/components/UI/mainApp";
-import PrimaryLayout from "@/components/UI/primaryLayout";
+import MainApp from '@/components/UI/mainApp'
+import PrimaryLayout from '@/components/UI/primaryLayout'
 
 export default function Home() {
-    return (
-        <PrimaryLayout>
-            <MainApp title="Consórcios">
-                {/* <ConsortiumLayout></ConsortiumLayout> */}
-                <></>
-            </MainApp>
-        </PrimaryLayout>
-    )
+  return (
+    <PrimaryLayout>
+      <MainApp title="Consórcios">
+        {/* <ConsortiumLayout></ConsortiumLayout> */}
+        <></>
+      </MainApp>
+    </PrimaryLayout>
+  )
 }

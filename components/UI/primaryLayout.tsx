@@ -1,15 +1,14 @@
 'use client'
-import Header from "./header";
-import React, { FC, ReactNode, useState } from "react";
-import { SideBar } from "./sidebar";
-import { SidebarCloseIcon } from "lucide-react";
+import { SidebarCloseIcon } from 'lucide-react'
+import { FC, ReactNode, useState } from 'react'
+import Header from './header'
+import { SideBar } from './sidebar'
 
 interface Props {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
 const PrimaryLayout: FC<Props> = ({ children }) => {
-
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
   function closeSideBar() {
@@ -17,23 +16,28 @@ const PrimaryLayout: FC<Props> = ({ children }) => {
   }
 
   return (
-    <div className='flex flex-col h-screen w-full'>
+    <div className="flex h-screen w-screen flex-col">
       <div>
         <Header></Header>
-        <button className="text-zinc-500 absolute z-10 top-2 left-2" onClick={closeSideBar}>
+        <button
+          className="absolute left-2 top-2 z-10 text-zinc-500"
+          onClick={closeSideBar}
+        >
           <SidebarCloseIcon></SidebarCloseIcon>
         </button>
       </div>
-      <div className='flex flex-row flex-1'>
-        <div className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} ease-in-out  duration-1000`}>
+      <div className="flex flex-1 flex-row">
+        <div
+          className={`${
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } duration-1000  ease-in-out`}
+        >
           <SideBar></SideBar>
         </div>
-        <div className="flex-1 bg-zinc-800">
-          {children}
-        </div>
+        <div className="flex-1">{children}</div>
       </div>
     </div>
-  );
+  )
 }
 
-export default PrimaryLayout;
+export default PrimaryLayout

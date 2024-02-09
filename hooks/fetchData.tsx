@@ -1,26 +1,25 @@
 'use client'
 
-import { ApiClient } from "@/services/apiClient";
-import useSWR from "swr";
+import { ApiClient } from '@/services/apiClient'
+import useSWR from 'swr'
 
-export function FetchInfractionsFirstInstance<Data = any, Error = any>(url: string) {
+export function FetchInfractionsFirstInstance<Data = unknown, Error = unknown>(
+  url: string,
+) {
+  const { data, error, isLoading } = useSWR<Data>(url, async () => {
+    const response = await ApiClient.get(`${url}`)
 
-    const { data, error, isLoading } = useSWR<Data>(url, async () => {
-        const response = await ApiClient.get(`${url}`);
+    return response.data
+  })
 
-        return response.data;
-    })
-
-    return { data, error, isLoading }
-
+  return { data, error, isLoading }
 }
 
-export function FetchData<Data = any, Error = any>(url: string) {
+export function FetchData<Data = unknown, Error = unknown>(url: string) {
+  const { data, error, isLoading } = useSWR<Data>(url, async () => {
+    const response = await ApiClient.get(url)
+    return response.data
+  })
 
-    const { data, error, isLoading } = useSWR<Data>(url, async () => {
-        const response = await ApiClient.get(url)
-        return response.data
-    })
-
-    return { data, error, isLoading }
+  return { data, error, isLoading }
 }

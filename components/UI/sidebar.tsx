@@ -1,8 +1,8 @@
-import MenuBar from "./menubar";
+import MenuBar from './menubar'
 
 export function SideBar() {
-  return(
-    <div  className="flex flex-col h-full bg-zinc-800 border-r border-white/25 z-10">
+  return (
+    <div className="z-10 flex h-full flex-col border-r border-white/25 bg-zinc-800">
       <MenuBar></MenuBar>
     </div>
   )

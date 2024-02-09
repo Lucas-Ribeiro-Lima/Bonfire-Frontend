@@ -1,88 +1,106 @@
-import { ReactNode, useState } from "react";
-import Link from "next/link";
-import Separator from "../UI/separator";
+import Link from 'next/link'
+import { ReactNode, useState } from 'react'
 
 interface DropDownFieldData {
-    path: string;
-    description: string;
-    icon?: ReactNode
+  path: string
+  description: string
+  icon?: ReactNode
 }
 interface DropDownFatherFieldData {
-    description: string;
-    icon: ReactNode;
-    children?: ReactNode;
+  description: string
+  icon: ReactNode
+  children?: ReactNode
 }
 
-export const DropdownFatherField = ({ description, icon, children }: DropDownFatherFieldData) => {
+export const DropdownFatherField = ({
+  description,
+  icon,
+  children,
+}: DropDownFatherFieldData) => {
+  const [isDropDown, setIsDropDown] = useState(false)
 
-    const [isDropDown, setIsDropDown] = useState(false);
-
-    return (
-        <div>
-            <button
-                onClick={() => setIsDropDown(!isDropDown)}
-                className="
-                        p-2
+  return (
+    <div>
+      <button
+        onClick={() => setIsDropDown(!isDropDown)}
+        className="
                         scale-75
-                        rounded-xl 
-                        focus:bg-red-950 
-                        focus:text-red-600 
+                        rounded-xl
+                        p-2 
                         hover:bg-red-950 
                         hover:text-red-600 
+                        hover:drop-shadow-2xl 
                         hover:duration-1000 
-                        hover:drop-shadow-2xl">
-                <div className="
+                        focus:bg-red-950 
+                        focus:text-red-600"
+      >
+        <div
+          className="
                         flex
                         justify-center 
-                        align-middle 
-                        gap-2">
-                    {icon}{description}
-                </div>
-            </button>
-            {isDropDown && (
-                <div className='
-                        rounded-xl 
-                        shadow-2xl 
-                        flex-col 
-                        bg-zinc-700 
-                        text-white'>
-                    {children}
-                </div>
-            )}
+                        gap-2 
+                        align-middle"
+        >
+          {icon}
+          {description}
         </div>
-    );
+      </button>
+      {isDropDown && (
+        <div
+          className="
+                        flex-col 
+                        rounded-xl 
+                        bg-zinc-700 
+                        text-white 
+                        shadow-2xl"
+        >
+          {children}
+        </div>
+      )}
+    </div>
+  )
 }
 
-export const DropDownField = ({ path, description, icon }: DropDownFieldData) => {
-    return (
-        <>
-            <Link className='
+export const DropDownField = ({
+  path,
+  description,
+  icon,
+}: DropDownFieldData) => {
+  return (
+    <>
+      <Link
+        className="
                     flex 
-                    p-2
                     scale-75
+                    cursor-pointer
                     justify-center
-                    align-middle
-                    rounded-xl 
+                    rounded-xl
+                    p-2 
+                    align-middle 
                     hover:bg-zinc-600 
-                    hover:duration-1000 
                     hover:drop-shadow-2xl 
-                    cursor-pointer'
-                href={path}> {icon}{description}
-            </Link>
-        </>
-    )
+                    hover:duration-1000"
+        href={path}
+      >
+        {' '}
+        {icon}
+        {description}
+      </Link>
+    </>
+  )
 }
 
 export const SimpleField = ({ path, description, icon }: DropDownFieldData) => {
-    return (
-            <Link 
-            href={path} 
-            className="flex justify-center w-36 h-10 rounded-xl focus:bg-red-950 focus:text-red-600 hover:bg-red-950 hover:text-red-600 hover:duration-1000 hover:drop-shadow-2xl">
-                <div className="flex flex-row self-center justify-self-center gap-2">
-                    {icon}
-                    {description}
-                </div>
-            </Link>
-    )
+  return (
+    <Link
+      href={path}
+      className="flex h-10 w-36 justify-center rounded-xl hover:bg-red-950 hover:text-red-600
+                 hover:drop-shadow-2xl hover:duration-1000 focus:bg-red-950 focus:text-red-600"
+    >
+      <div className="flex flex-row gap-2 self-center justify-self-center">
+        {icon}
+        {description}
+      </div>
+    </Link>
+  )
 }
-
