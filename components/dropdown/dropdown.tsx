@@ -27,12 +27,12 @@ export const DropdownFatherField = ({
                         scale-75
                         rounded-xl
                         p-2 
-                        hover:bg-red-950 
-                        hover:text-red-600 
+                        hover:bg-sky-950 
+                        hover:text-sky-600 
                         hover:drop-shadow-2xl 
                         hover:duration-1000 
-                        focus:bg-red-950 
-                        focus:text-red-600"
+                        focus:bg-sky-950 
+                        focus:text-sky-600"
       >
         <div
           className="
@@ -94,8 +94,8 @@ export const SimpleField = ({ path, description, icon }: DropDownFieldData) => {
   return (
     <Link
       href={path}
-      className="flex h-10 w-36 justify-center rounded-xl hover:bg-red-950 hover:text-red-600
-                 hover:drop-shadow-2xl hover:duration-1000 focus:bg-red-950 focus:text-red-600"
+      className="flex h-10 w-36 justify-center rounded-xl hover:bg-sky-950 hover:text-sky-600
+                 hover:drop-shadow-2xl hover:duration-1000 focus:bg-sky-950 focus:text-sky-600"
     >
       <div className="flex flex-row gap-2 self-center justify-self-center">
         {icon}

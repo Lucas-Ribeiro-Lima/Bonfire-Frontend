@@ -4,7 +4,7 @@ import LoginForm from './loginForm'
 const LoginMenu = () => {
   return (
     <div className="flex flex-col items-center gap-16">
-      <div className="scale-150 pl-5">
+      <div className="scale-150">
         <Logo></Logo>
       </div>
       <LoginForm></LoginForm>

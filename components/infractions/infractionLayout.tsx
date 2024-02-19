@@ -150,7 +150,7 @@ export default function InfractionLayout() {
   if (error) return <div>{error.message}</div>
 
   // Early return if data is not yet available
-  if (!data) return <Spinner color="danger" />
+  if (!data) return <Spinner color="primary" />
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -176,7 +176,7 @@ export default function InfractionLayout() {
                 isCompact
                 showControls
                 showShadow
-                color="danger"
+                color="primary"
                 page={page}
                 total={pages}
                 onChange={(page) => setPage(page)}

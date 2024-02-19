@@ -20,7 +20,7 @@ export const viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="h-screen w-screen bg-zinc-900 text-white dark selection:bg-red-800 selection:text-white">
+      <body className="h-screen w-screen bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900 text-white dark selection:bg-sky-800 selection:text-white">
         {children}
       </body>
     </html>

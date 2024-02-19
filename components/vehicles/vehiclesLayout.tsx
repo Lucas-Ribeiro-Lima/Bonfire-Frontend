@@ -91,7 +91,7 @@ export default function VehiclesLayout() {
 
   if (error) return <Error></Error>
 
-  if (!data) return <Spinner color="danger" />
+  if (!data) return <Spinner color="primary" />
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -105,7 +105,7 @@ export default function VehiclesLayout() {
                 isCompact
                 showControls
                 showShadow
-                color="danger"
+                color="primary"
                 page={page}
                 total={pages}
                 onChange={(page) => setPage(page)}

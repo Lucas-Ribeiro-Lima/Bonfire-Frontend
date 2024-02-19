@@ -37,7 +37,7 @@ const LoginForm = () => {
             placeholder="Username"
             autoComplete="email"
             required
-            className="w-96 rounded-t-md border border-gray-300 indent-2 text-black focus:bg-zinc-300 focus:outline-none"
+            className="w-96 rounded-t-md border border-gray-800 indent-2 text-black focus:bg-zinc-600 focus:outline-none"
           ></input>
         </label>
         <label htmlFor="password">
@@ -47,7 +47,7 @@ const LoginForm = () => {
             placeholder="Password"
             autoComplete="current-password"
             required
-            className="w-96 rounded-b-md border border-gray-300 indent-2 text-black focus:bg-zinc-300 focus:outline-none"
+            className="w-96 rounded-b-md border border-gray-800 indent-2 text-black focus:bg-zinc-600 focus:outline-none"
           ></input>
         </label>
       </div>
@@ -56,13 +56,13 @@ const LoginForm = () => {
           <input {...register('rememberMe')} type="checkbox"></input>
           Remember me
         </label>
-        <Link href="#" className="text-red-800">
+        <Link href="#" className="text-sky-800">
           Forgot password?
         </Link>
       </div>
       <button
         type="submit"
-        className="flex h-8 w-5/6 flex-row items-center justify-center gap-2 rounded-lg bg-zinc-400 text-black hover:bg-red-800 hover:shadow-2xl hover:shadow-black hover:duration-1000"
+        className="flex h-8 w-5/6 flex-row items-center justify-center gap-2 rounded-lg bg-zinc-400 text-black hover:bg-sky-800 hover:shadow-2xl hover:shadow-black hover:duration-1000"
       >
         <LockIcon></LockIcon>
         Sign in
