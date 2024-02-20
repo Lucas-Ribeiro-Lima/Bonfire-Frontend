@@ -15,10 +15,7 @@ async function handleSignIn({
   username,
   password,
   rememberMe,
-}: LoginFormInput) {
-  // const {signIn} = useContext(AuthContext);
-  // await signIn({username, password});
-}
+}: LoginFormInput) {}
 
 const LoginForm = () => {
   const { register, handleSubmit } = useForm<LoginFormInput>()
