@@ -5,6 +5,8 @@ export async function postAuto({ auto }: ImportFormData, option: number) {
   const body = new FormData()
 
   try {
+    if (!auto.file) return console.log(`Error: Auto vazio`)
+
     body.append('file', auto.file, auto.file?.name)
 
     if (option === 1) {
