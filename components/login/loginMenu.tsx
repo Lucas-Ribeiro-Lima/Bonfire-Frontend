@@ -1,5 +1,5 @@
 import Logo from '../UI/logo'
-import LoginForm from './loginForm'
+import LoginBtn from './loginBtn'
 
 const LoginMenu = () => {
   return (
@@ -7,7 +7,8 @@ const LoginMenu = () => {
       <div className="scale-150">
         <Logo></Logo>
       </div>
-      <LoginForm></LoginForm>
+      {/* <LoginForm></LoginForm> */}
+      <LoginBtn></LoginBtn>
     </div>
   )
 }

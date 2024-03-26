@@ -13,16 +13,30 @@ import {
   getKeyValue,
 } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
+import { z } from 'zod'
 import { FetchData } from '../../hooks/fetchData'
 
-type LinesFrameData = {
-  linha: {
-    COD_LINH: string
-    COMPARTILHADA: boolean
-    ID_OPERADORA: number
-    LINH_ATIV_EMPR: boolean
-  }[]
-}
+const LinesFrameDataSchema = z.object({
+  linha: z
+    .object({
+      COD_LINH: z.string().min(1),
+      COMPARTILHADA: z.boolean(),
+      ID_OPERADORA: z.number(),
+      LINHA_ATIV_EMPR: z.boolean(),
+    })
+    .array(),
+})
+
+type LinesFrameData = z.infer<typeof LinesFrameDataSchema>
+
+// type LinesFrameData = {
+//   linha: {
+//     COD_LINH: string
+//     COMPARTILHADA: boolean
+//     ID_OPERADORA: number
+//     LINH_ATIV_EMPR: boolean
+//   }[]
+// }
 
 const columns = [
   {
@@ -84,6 +98,14 @@ export default function LinesLayout() {
 
   // Data fetching
   const { data, error, isLoading } = FetchData<LinesFrameData>('linha')
+
+  console.log(data)
+
+  data.linha.forEach((item) => {
+    if (item.COMPARTILHADA) {
+      item.COMPARTILHADA = 'Sim'
+    }
+  })
 
   const pages = Math.ceil(data?.linha.length / rowsPerPage)
 

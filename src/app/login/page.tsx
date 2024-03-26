@@ -1,10 +1,15 @@
-import LoginMenu from '@/components/login/loginMenu'
+'use client'
 import SecondaryLayout from '@/components/UI/secondaryLayout'
+import LoginMenu from '@/components/login/loginMenu'
+import { Session } from 'next-auth'
+import { SessionProvider } from 'next-auth/react'
 
-export default function login() {
+export default function login(session: Session) {
   return (
-    <SecondaryLayout>
-      <LoginMenu></LoginMenu>
-    </SecondaryLayout>
+    <SessionProvider session={session}>
+      <SecondaryLayout>
+        <LoginMenu></LoginMenu>
+      </SecondaryLayout>
+    </SessionProvider>
   )
 }
