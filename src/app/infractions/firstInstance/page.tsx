@@ -1,18 +1,22 @@
 'use client'
 
-import InfractionLayout from '@/components/infractions/infractionLayout'
 import MainApp from '@/components/UI/mainApp'
 import PrimaryLayout from '@/components/UI/primaryLayout'
+import InfractionLayout from '@/components/infractions/infractionLayout'
 import { NextUIProvider } from '@nextui-org/react'
+import { Session } from 'next-auth'
+import { SessionProvider } from 'next-auth/react'
 
-export default function Home() {
+export default function Home(session: Session) {
   return (
-    <NextUIProvider>
-      <PrimaryLayout>
-        <MainApp title="Primeira Instância">
-          <InfractionLayout></InfractionLayout>
-        </MainApp>
-      </PrimaryLayout>
-    </NextUIProvider>
+    <SessionProvider session={session}>
+      <NextUIProvider>
+        <PrimaryLayout>
+          <MainApp title="Primeira Instância">
+            <InfractionLayout></InfractionLayout>
+          </MainApp>
+        </PrimaryLayout>
+      </NextUIProvider>
+    </SessionProvider>
   )
 }

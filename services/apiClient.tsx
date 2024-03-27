@@ -1,8 +1,7 @@
-import { env } from '@/services/env'
 import axios from 'axios'
 
 export const ApiClient = axios.create({
-  baseURL: `${env.NEXT_PUBLIC_API_URL}:${env.NEXT_PUBLIC_API_PORT}`,
+  baseURL: `http://localhost:5000`,
   timeout: 30000,
   headers: {
     'X-Custom-Header': 'foobar',

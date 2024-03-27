@@ -1,3 +1,4 @@
+'use client'
 import { FC, ReactNode } from 'react'
 import Footer from './footer'
 import Header from './header'

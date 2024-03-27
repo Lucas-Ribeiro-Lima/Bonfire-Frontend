@@ -127,7 +127,6 @@ export default function InfractionLayout() {
     const newDate = event.target.value
     setDate(newDate)
   }
-
   // Data fetch
   const { data, error, isLoading } = FetchInfractionsFirstInstance<autosData>(
     `/autoInfracao/primeiraInstancia/${date}`,
