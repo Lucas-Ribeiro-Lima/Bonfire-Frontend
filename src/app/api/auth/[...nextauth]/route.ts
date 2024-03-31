@@ -1,16 +1,6 @@
-import { env } from '@/services/env'
+import { authOptions } from '@/services/authOptions'
 import NextAuth from 'next-auth'
-import Keycloak from 'next-auth/providers/keycloak'
 
-const handler = NextAuth({
-  providers: [
-    Keycloak({
-      clientId: env.BONFIRE_ID,
-      clientSecret: env.BONFIRE_CLIENT_SECRET,
-      issuer: env.KEYCLOAK_ISSUER,
-    }),
-  ],
-  secret: env.NEXTAUTH_SECRET,
-})
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

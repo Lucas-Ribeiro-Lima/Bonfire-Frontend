@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react'
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { SignInBtn } from '../login/loginBtn'
 import LogoCompleta from './logo'
 
@@ -8,9 +8,9 @@ interface MainAppProps {
   title?: string
 }
 
-const MainApp: FC<MainAppProps> = ({ children, title }) => {
-  const { data: session } = useSession()
-  if (session)
+function MainApp({ children, title }: MainAppProps) {
+  const { status } = useSession()
+  if (status === 'authenticated')
     return (
       <main className=" flex h-full flex-col items-center p-4">
         <h1

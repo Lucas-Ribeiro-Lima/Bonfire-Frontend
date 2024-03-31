@@ -17,7 +17,7 @@ export function SignOutBtn() {
     <button
       className="flex h-8 w-5/6 flex-row items-center justify-center gap-2 rounded-lg bg-zinc-600
      text-white hover:bg-zinc-400 hover:shadow-2xl hover:shadow-black hover:duration-1000"
-      onClick={() => signOut()}
+      onClick={() => signOut({ redirect: false })}
     >
       Sair
     </button>

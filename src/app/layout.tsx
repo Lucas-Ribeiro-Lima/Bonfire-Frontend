@@ -17,10 +17,17 @@ export const viewport = {
   maximumScale: 1,
 }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+interface RootLayoutProps {
+  children: ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className="h-screen w-screen bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900 text-white dark selection:bg-sky-800 selection:text-white">
+      <body
+        className="h-screen w-screen bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900 
+      text-white dark selection:bg-sky-800 selection:text-white"
+      >
         {children}
       </body>
     </html>

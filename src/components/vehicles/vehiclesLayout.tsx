@@ -1,18 +1,18 @@
 'use client'
 
+import { FetchData } from '@/hooks/fetchData'
 import {
-    Pagination,
-    Spinner,
-    Table,
-    TableBody,
-    TableCell,
-    TableColumn,
-    TableHeader,
-    TableRow,
-    getKeyValue,
+  Pagination,
+  Spinner,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  getKeyValue,
 } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
-import { FetchData } from '../../src/hooks/fetchData'
 import { Error } from '../UI/error'
 
 type VehiclesData = {
@@ -72,15 +72,15 @@ function VehiclesMenu() {
   )
 }
 
-export default function VehiclesLayout() {
+export default async function VehiclesLayout() {
   // Pagination
   const [page, setPage] = useState(1)
-  const [rowsPerPage, setRowsPerPage] = useState<number>(15)
+  const [rowsPerPage] = useState<number>(15)
 
   // Data fetching
-  const { data, error, isLoading } = FetchData<VehiclesData>('veiculos')
+  const { data, error } = FetchData<VehiclesData>('veiculos')
 
-  const pages = Math.ceil(data?.veiculos.length / rowsPerPage)
+  const pages = Math.ceil(data!.veiculos?.length / rowsPerPage)
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage
@@ -108,7 +108,7 @@ export default function VehiclesLayout() {
                 color="primary"
                 page={page}
                 total={pages}
-                onChange={(page) => setPage(page)}
+                onChange={(page: number) => setPage(page)}
               />
             </div>
           ) : null
