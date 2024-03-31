@@ -1,18 +1,18 @@
 'use client'
 
 import {
-  Pagination,
-  Spinner,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-  getKeyValue,
+    Pagination,
+    Spinner,
+    Table,
+    TableBody,
+    TableCell,
+    TableColumn,
+    TableHeader,
+    TableRow,
+    getKeyValue,
 } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
-import { FetchData } from '../../hooks/fetchData'
+import { FetchData } from '../../src/hooks/fetchData'
 import { Error } from '../UI/error'
 
 type VehiclesData = {

@@ -29,14 +29,11 @@
         "./src/*"
       ],
       "@/components/*": [
-        "./components/*"
+        "./src/components/*"
       ],
       "@/services/*":[
-        "./services/*"
+        "./src/services/*"
       ],
-      "@/lib/*":[
-        "./lib/*"
-      ]
     }
   },
   "include": [

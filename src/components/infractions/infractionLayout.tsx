@@ -12,7 +12,7 @@ import {
   getKeyValue,
 } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
-import { FetchInfractionsFirstInstance } from '../../hooks/fetchData'
+import { FetchInfractionsFirstInstance } from '@/hooks/fetchData'
 
 export type autosData = {
   autos: {

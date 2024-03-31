@@ -1,6 +1,7 @@
 'use client'
 
 import { Error } from '@/components/UI/error'
+import { FetchData } from '@/hooks/fetchData'
 import {
   Pagination,
   Spinner,
@@ -14,7 +15,6 @@ import {
 } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
 import { z } from 'zod'
-import { FetchData } from '../../hooks/fetchData'
 
 const LinesFrameDataSchema = z.object({
   linha: z

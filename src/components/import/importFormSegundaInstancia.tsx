@@ -3,7 +3,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { postAuto } from '../../hooks/postInfractions'
+import { postAuto } from '@/hooks/postInfractions'
+import { ImportFormData } from './importFormPrimeiraInstancia'
 
 const ImportFormSchema = z.object({
   auto: z
@@ -15,24 +16,27 @@ const ImportFormSchema = z.object({
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: ['file'],
-          message: 'Anexe o arquivo CSV das infrações',
+          message: 'Anexe o arquivo DOCX das infrações',
         })
       }
-      // if  (file.type !== "application/csv") {
+      // if (file.type !== "application/docx") {
       //     {
       //         ctx.addIssue({
       //             code: z.ZodIssueCode.custom,
       //             path: ["file"],
-      //             message: "Anexe um arquivo CSV de primeira instância"
+      //             message: "Anexe um arquivo DOCX de segunda instância"
       //         })
       //     }
       // }
     }),
 })
 
-export type ImportFormData = z.infer<typeof ImportFormSchema>
+// Função de handling do import
+async function handleImport(auto: ImportFormData) {
+  await postAuto(auto, 2)
+}
 
-const ImportFormPrimeiraInstancia = () => {
+const ImportFormSegundaInstancia = () => {
   const {
     register,
     handleSubmit,
@@ -41,23 +45,18 @@ const ImportFormPrimeiraInstancia = () => {
     resolver: zodResolver(ImportFormSchema),
   })
 
-  // Função de handling do import
-  async function handleImport(auto: ImportFormData) {
-    await postAuto(auto, 1)
-  }
-
   return (
     <form
       onSubmit={handleSubmit(handleImport)}
       className="mt-4 flex flex-col gap-4"
       encType="multipart/form-data"
     >
-      <label htmlFor="file" className=" flex flex-col gap-2">
+      <label htmlFor="file" className="flex flex-col gap-2">
         Selecione o arquivo:
         <input
           {...register('auto.file')}
           type="file"
-          accept=".csv"
+          accept=".docx, .pdf"
           className="file:cursor-pointer file:rounded-lg file:bg-zinc-400 file:font-semibold"
         ></input>
         {errors.auto?.file && (
@@ -77,4 +76,4 @@ const ImportFormPrimeiraInstancia = () => {
   )
 }
 
-export default ImportFormPrimeiraInstancia
+export default ImportFormSegundaInstancia
