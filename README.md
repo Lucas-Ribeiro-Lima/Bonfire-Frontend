@@ -10,5 +10,16 @@ Apresento o Bonfire, um projeto de frontend desenvolvido exclusivamente por mim,
 - **React Hook Form** 📝: Manipulação e validação eficientes de formulários.
 - **Lucide React** ✨: Ícones elegantes para aprimorar a experiência visual.
 - **Zod** 🛡️: Garantia de validação de dados para integridade do projeto.
+- **NextAuth** 🅰️: Autenticação de terceiros e OAuth.
+
+# **Variaveis de Ambiente**
+
+- NEXT_PUBLIC_API_URL=http://localhost
+- NEXT_PUBLIC_API_PORT=5000
+- NEXTAUTH_SECRET=SECRET
+- NEXTAUTH_URL=http://localhost:3000
+- BONFIRE_ID=keycloak-client-id
+- BONFIRE_CLIENT_SECRET=keycloak-client-secret
+- KEYCLOAK_ISSUER=http://keycloak-host/realms/keycloak-realm
 
 Agradeço a todos que contribuíram, especialmente a você, por explorar o Bonfire e testemunhar meu compromisso com a excelência no desenvolvimento de software. 🔥✨
