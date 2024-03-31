@@ -10,6 +10,7 @@ const handler = NextAuth({
       issuer: env.KEYCLOAK_ISSUER,
     }),
   ],
+  secret: env.NEXTAUTH_SECRET,
 })
 
 export { handler as GET, handler as POST }
