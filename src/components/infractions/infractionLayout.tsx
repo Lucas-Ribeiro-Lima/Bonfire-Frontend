@@ -136,7 +136,7 @@ export default function InfractionLayout() {
   const [page, setPage] = useState(1)
   const [rowsPerPage] = useState<number>(15)
 
-  const pages = Math.ceil(data!.autos.length / rowsPerPage)
+  const pages = Math.ceil(data?.autos.length / rowsPerPage)
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage

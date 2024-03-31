@@ -110,7 +110,7 @@ export default function LinesLayout() {
     const start = (page - 1) * rowsPerPage
     const end = start + rowsPerPage
 
-    return data.linha.slice(start, end)
+    return data?.linha.slice(start, end)
   }, [page, data])
 
   if (error) return <Error></Error>

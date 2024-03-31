@@ -80,7 +80,7 @@ export default async function VehiclesLayout() {
   // Data fetching
   const { data, error } = FetchData<VehiclesData>('veiculos')
 
-  const pages = Math.ceil(data!.veiculos?.length / rowsPerPage)
+  const pages = Math.ceil(data?.veiculos.length / rowsPerPage)
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage
