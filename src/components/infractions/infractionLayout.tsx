@@ -1,5 +1,6 @@
 'use client'
 
+import { FetchInfractionsFirstInstance } from '@/hooks/fetchData'
 import {
   Pagination,
   Spinner,
@@ -12,7 +13,6 @@ import {
   getKeyValue,
 } from '@nextui-org/react'
 import { useMemo, useState } from 'react'
-import { FetchInfractionsFirstInstance } from '@/hooks/fetchData'
 
 export type autosData = {
   autos: {
@@ -128,13 +128,13 @@ export default function InfractionLayout() {
     setDate(newDate)
   }
   // Data fetch
-  const { data, error, isLoading } = FetchInfractionsFirstInstance<autosData>(
+  const { data, error } = FetchInfractionsFirstInstance<autosData>(
     `/autoInfracao/primeiraInstancia/${date}`,
   )
 
   // Pagination
   const [page, setPage] = useState(1)
-  const [rowsPerPage, setRowsPerPage] = useState<number>(15)
+  const [rowsPerPage] = useState<number>(15)
 
   const pages = Math.ceil(data?.autos.length / rowsPerPage)
 
@@ -178,7 +178,7 @@ export default function InfractionLayout() {
                 color="primary"
                 page={page}
                 total={pages}
-                onChange={(page) => setPage(page)}
+                onChange={(page: number) => setPage(page)}
               />
             </div>
           ) : null

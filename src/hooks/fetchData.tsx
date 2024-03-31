@@ -7,7 +7,7 @@ export function FetchInfractionsFirstInstance<Data = unknown>(url: string) {
     const response = await ApiClient.get(`${url}`)
     return response.data
   })
-  console.log(data)
+
   return { data, error, isLoading }
 }
 

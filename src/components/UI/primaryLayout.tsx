@@ -1,7 +1,8 @@
 'use client'
 import { SidebarCloseIcon } from 'lucide-react'
-import { useSession } from 'next-auth/react'
-import { FC, ReactNode, useState } from 'react'
+import { signIn, useSession } from 'next-auth/react'
+import { ReactNode, useState } from 'react'
+import Footer from './footer'
 import Header from './header'
 import { SideBar } from './sidebar'
 
@@ -9,9 +10,14 @@ interface Props {
   children?: ReactNode
 }
 
-const PrimaryLayout: FC<Props> = ({ children }) => {
+function PrimaryLayout({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const { data: session } = useSession()
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      return signIn('keycloak')
+    },
+  })
 
   function closeSideBar() {
     setSidebarOpen(!sidebarOpen)
@@ -26,7 +32,7 @@ const PrimaryLayout: FC<Props> = ({ children }) => {
           onClick={closeSideBar}
         >
           <SidebarCloseIcon></SidebarCloseIcon>
-          {session && session.user?.name}
+          {status === 'authenticated' && session.user?.name}
         </button>
       </div>
       <div className="flex flex-1 flex-row bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900">
@@ -36,6 +42,9 @@ const PrimaryLayout: FC<Props> = ({ children }) => {
           <SideBar></SideBar>
         </div>
         <div className="flex-1">{children}</div>
+      </div>
+      <div>
+        <Footer></Footer>
       </div>
     </div>
   )

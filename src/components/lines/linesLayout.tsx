@@ -94,19 +94,16 @@ function LinesMenu() {
 export default function LinesLayout() {
   // Pagination
   const [page, setPage] = useState(1)
-  const [rowsPerPage, setRowsPerPage] = useState<number>(15)
+  const [rowsPerPage] = useState<number>(15)
 
   // Data fetching
-  const { data, error, isLoading } = FetchData<LinesFrameData>('linha')
+  const { data, error } = FetchData<LinesFrameData>('linha')
 
-  console.log(data)
-
-  data.linha.forEach((item) => {
-    if (item.COMPARTILHADA) {
-      item.COMPARTILHADA = 'Sim'
-    }
-  })
-
+  // data!.linha.forEach((item) => {
+  //   if (item.COMPARTILHADA) {
+  //     item.COMPARTILHADA = 'Sim'
+  //   }
+  // })
   const pages = Math.ceil(data?.linha.length / rowsPerPage)
 
   const items = useMemo(() => {
@@ -135,7 +132,7 @@ export default function LinesLayout() {
                 color="primary"
                 page={page}
                 total={pages}
-                onChange={(page) => setPage(page)}
+                onChange={(page: number) => setPage(page)}
               />
             </div>
           ) : null

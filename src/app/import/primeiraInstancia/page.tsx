@@ -2,10 +2,9 @@
 import MainApp from '@/components/UI/mainApp'
 import PrimaryLayout from '@/components/UI/primaryLayout'
 import ImportFormPrimeiraInstancia from '@/components/import/importFormPrimeiraInstancia'
-import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 
-export default function Home(session: Session) {
+export default function Home(session: any) {
   return (
     <SessionProvider session={session}>
       <PrimaryLayout>

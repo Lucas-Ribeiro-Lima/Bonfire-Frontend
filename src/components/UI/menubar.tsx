@@ -19,6 +19,10 @@ function handleSignIn() {
   signIn('keycloak')
 }
 
+function handleSignOut() {
+  signOut({ redirect: false })
+}
+
 const MenuBar = () => {
   const { data: session } = useSession()
   return (
@@ -76,7 +80,7 @@ const MenuBar = () => {
         // </Link>
         <Button
           startContent={<LogIn />}
-          onPress={signOut}
+          onPress={handleSignOut}
           className="flex scale-75 cursor-pointer justify-start rounded-xl bg-transparent  p-2  
           align-middle text-zinc-500 hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
         >
