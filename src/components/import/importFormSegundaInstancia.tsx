@@ -1,35 +1,12 @@
 'use client'
 
+import { postAuto } from '@/hooks/postInfractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { postAuto } from '@/hooks/postInfractions'
-import { ImportFormData } from './importFormPrimeiraInstancia'
-
-const ImportFormSchema = z.object({
-  auto: z
-    .object({
-      file: z.instanceof(FileList).transform((list) => list.item(0)),
-    })
-    .superRefine(({ file }, ctx) => {
-      if (!file) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['file'],
-          message: 'Anexe o arquivo DOCX das infrações',
-        })
-      }
-      // if (file.type !== "application/docx") {
-      //     {
-      //         ctx.addIssue({
-      //             code: z.ZodIssueCode.custom,
-      //             path: ["file"],
-      //             message: "Anexe um arquivo DOCX de segunda instância"
-      //         })
-      //     }
-      // }
-    }),
-})
+import {
+  ImportFormData,
+  ImportFormSecondSchema,
+} from '../schemas/ImportFormSchema'
 
 // Função de handling do import
 async function handleImport(auto: ImportFormData) {
@@ -42,7 +19,7 @@ const ImportFormSegundaInstancia = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ImportFormData>({
-    resolver: zodResolver(ImportFormSchema),
+    resolver: zodResolver(ImportFormSecondSchema),
   })
 
   return (
