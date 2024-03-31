@@ -4,6 +4,7 @@ import {
   DropDownField,
   DropdownFatherField,
 } from '@/components/dropdown/dropdown'
+import { Button } from '@nextui-org/react'
 import {
   AlignJustify,
   FileSpreadsheetIcon,
@@ -11,9 +12,15 @@ import {
   LucideHome,
   LucideImport,
 } from 'lucide-react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 
+function handleSignIn() {
+  signIn('keycloak')
+}
+
 const MenuBar = () => {
+  const { data: session } = useSession()
   return (
     <div className="mt-4 flex flex-col gap-4 text-zinc-500">
       <Link href="/" className="m-0">
@@ -60,12 +67,37 @@ const MenuBar = () => {
           description="Segunda Instância"
         ></DropDownField>
       </DropdownFatherField>
-      <Link href="/login">
-        <DropdownFatherField
-          description="Sair"
-          icon={<LogIn />}
-        ></DropdownFatherField>
-      </Link>
+      {(session && (
+        // <Link href="/login">
+        //   <DropdownFatherField
+        //     description="Sair"
+        //     icon={<LogIn />}
+        //   ></DropdownFatherField>
+        // </Link>
+        <Button
+          startContent={<LogIn />}
+          onPress={signOut}
+          className="flex scale-75 cursor-pointer justify-start rounded-xl bg-transparent  p-2  
+          align-middle text-zinc-500 hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
+        >
+          Sair
+        </Button>
+      )) || (
+        // <Link href="/login">
+        //   <DropdownFatherField
+        //     description="Entrar"
+        //     icon={<LogIn />}
+        //   ></DropdownFatherField>
+        // </Link>
+        <Button
+          startContent={<LogIn />}
+          onPress={handleSignIn}
+          className="flex scale-75 cursor-pointer justify-start rounded-xl bg-transparent  p-2  
+          align-middle text-zinc-500 hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
+        >
+          Entrar
+        </Button>
+      )}
     </div>
   )
 }

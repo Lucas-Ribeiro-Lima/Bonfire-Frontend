@@ -2,7 +2,6 @@
 import { SidebarCloseIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { FC, ReactNode, useState } from 'react'
-import { SignInBtn } from '../login/loginBtn'
 import Header from './header'
 import { SideBar } from './sidebar'
 
@@ -27,12 +26,12 @@ const PrimaryLayout: FC<Props> = ({ children }) => {
           onClick={closeSideBar}
         >
           <SidebarCloseIcon></SidebarCloseIcon>
-          {(session && session.user?.name) || <SignInBtn></SignInBtn>}
+          {session && session.user?.name}
         </button>
       </div>
       <div className="flex flex-1 flex-row bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900">
         <div
-          className={` ${sidebarOpen ? 'translate-x-0' : 'hidden -translate-x-full'} duration-1000 ease-in-out`}
+          className={` ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} duration-1000 ease-in-out`}
         >
           <SideBar></SideBar>
         </div>

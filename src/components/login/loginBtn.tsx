@@ -7,7 +7,7 @@ export function SignInBtn() {
       text-white hover:bg-zinc-400 hover:shadow-2xl hover:shadow-black hover:duration-1000"
       onClick={() => signIn('keycloak')}
     >
-      Sign in
+      Entrar
     </button>
   )
 }
@@ -19,7 +19,7 @@ export function SignOutBtn() {
      text-white hover:bg-zinc-400 hover:shadow-2xl hover:shadow-black hover:duration-1000"
       onClick={() => signOut()}
     >
-      Sign out
+      Sair
     </button>
   )
 }

@@ -46,14 +46,7 @@ export const DropdownFatherField = ({
         </div>
       </button>
       {isDropDown && (
-        <div
-          className="
-                        flex-col 
-                        rounded-xl 
-                        bg-zinc-700 
-                        text-white 
-                        shadow-2xl"
-        >
+        <div className=" flex-col rounded-md bg-zinc-700 text-white">
           {children}
         </div>
       )}
