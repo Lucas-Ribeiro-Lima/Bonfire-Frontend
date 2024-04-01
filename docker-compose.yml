@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  bonfire-app:
+    container_name: bonfire-app
+    image: bonfire-app:v1
+    build:
+      context: ./frontend/
+    ports:
+    - '8080:3000'
+    networks:
+    - network
+    environment:
+    - NEXT_PUBLIC_API_URL=http://bonfire-worker
+    - NEXT_PUBLIC_API_PORT=5000
+    - NEXTAUTH_SECRET=Zo517o6Tu1H2BMom2E93Cl6nb01i/JATMZOFOVUCD3s=
+    - NEXTAUTH_URL=http://localhost:3000
+    - BONFIRE_ID=bonfire
+    - BONFIRE_CLIENT_SECRET=Z2wzU2y76hSgOzc4XZG14AUO1kFthn30
+    - KEYCLOAK_ISSUER=http://172.22.0.17:5050/realms/anchieta
+    volumes:
+      - ./bonfire:/app
+    restart: unless-stopped
+    
+  bonfire-worker:
+    container_name: bonfire-worker
+    image: bonfire-worker:v1
+    build:
+      context: ./backend/
+    restart: always
+    # ports:
+    # - '5000:5000'
+    networks:
+    - network
+    volumes:
+      - ./backend/data:/app/data
+      
+networks:
+  network:
+    driver: bridge

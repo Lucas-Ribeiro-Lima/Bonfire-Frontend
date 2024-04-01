@@ -16,12 +16,10 @@ import { useMemo, useState } from 'react'
 import { Error } from '../UI/error'
 
 type VehiclesData = {
-  veiculos: {
-    IDN_PLAC_VEIC: string
-    NUM_VEIC: number
-    VEIC_ATIV_EMPR: boolean
-  }[]
-}
+  IDN_PLAC_VEIC: string
+  NUM_VEIC: number
+  VEIC_ATIV_EMPR: boolean | string
+}[]
 
 const columns = [
   {
@@ -79,14 +77,21 @@ export default async function VehiclesLayout() {
 
   // Data fetching
   const { data, error } = FetchData<VehiclesData>('veiculos')
+  console.log(data)
 
-  const pages = Math.ceil(data?.veiculos.length / rowsPerPage)
+  data?.forEach((item) => {
+    if (item.VEIC_ATIV_EMPR) {
+      item.VEIC_ATIV_EMPR = 'Ativa'
+    }
+  })
+
+  const pages = Math.ceil((data || []).length / rowsPerPage)
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage
     const end = start + rowsPerPage
 
-    return data?.veiculos.slice(start, end)
+    return data?.slice(start, end)
   }, [page, data])
 
   if (error) return <Error></Error>

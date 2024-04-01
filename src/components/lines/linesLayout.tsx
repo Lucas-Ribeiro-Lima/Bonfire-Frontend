@@ -16,16 +16,14 @@ import {
 import { useMemo, useState } from 'react'
 import { z } from 'zod'
 
-const LinesFrameDataSchema = z.object({
-  linha: z
-    .object({
-      COD_LINH: z.string().min(1),
-      COMPARTILHADA: z.boolean(),
-      ID_OPERADORA: z.number(),
-      LINHA_ATIV_EMPR: z.boolean(),
-    })
-    .array(),
-})
+const LinesFrameDataSchema = z
+  .object({
+    COD_LINH: z.string().min(1),
+    COMPARTILHADA: z.boolean() || z.string(),
+    ID_OPERADORA: z.number(),
+    LINHA_ATIV_EMPR: z.boolean() || z.string(),
+  })
+  .array()
 
 type LinesFrameData = z.infer<typeof LinesFrameDataSchema>
 
@@ -99,19 +97,23 @@ export default function LinesLayout() {
   // Data fetching
   const { data, error } = FetchData<LinesFrameData>('linha')
 
-  // data!.linha.forEach((item) => {
-  //   if (item.COMPARTILHADA) {
-  //     item.COMPARTILHADA = 'Sim'
-  //   }
-  // })
-  const pages = Math.ceil(data?.linha.length / rowsPerPage)
+  data?.forEach((item) => {
+    if (item.COMPARTILHADA) {
+      item.COMPARTILHADA = 'Sim'
+    } else if (item.LINHA_ATIV_EMPR) {
+      item.LINHA_ATIV_EMPR = 'Ativa'
+    }
+  })
+
+  const pages = useMemo(() => {
+    return Math.ceil((data || []).length / rowsPerPage)
+  }, [data])
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage
     const end = start + rowsPerPage
-
-    return data?.linha.slice(start, end)
-  }, [page, data])
+    return data?.slice(start, end)
+  }, [page, rowsPerPage, data])
 
   if (error) return <Error></Error>
 
