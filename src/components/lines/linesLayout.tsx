@@ -19,22 +19,15 @@ import { z } from 'zod'
 const LinesFrameDataSchema = z
   .object({
     COD_LINH: z.string().min(1),
-    COMPARTILHADA: z.boolean() || z.string(),
+    COMPARTILHADA: z.boolean(),
+    COMPARTILHADA_STR: z.string(),
     ID_OPERADORA: z.number(),
-    LINHA_ATIV_EMPR: z.boolean() || z.string(),
+    LINH_ATIV_EMPR: z.boolean(),
+    LINH_ATIV_EMPR_STR: z.string(),
   })
   .array()
 
 type LinesFrameData = z.infer<typeof LinesFrameDataSchema>
-
-// type LinesFrameData = {
-//   linha: {
-//     COD_LINH: string
-//     COMPARTILHADA: boolean
-//     ID_OPERADORA: number
-//     LINH_ATIV_EMPR: boolean
-//   }[]
-// }
 
 const columns = [
   {
@@ -42,7 +35,7 @@ const columns = [
     label: 'Linha',
   },
   {
-    key: 'COMPARTILHADA',
+    key: 'COMPARTILHADA_STR',
     label: 'Compartilhada',
   },
   {
@@ -50,7 +43,7 @@ const columns = [
     label: 'Operadora',
   },
   {
-    key: 'LINH_ATIV_EMPR',
+    key: 'LINH_ATIV_EMPR_STR',
     label: 'Status',
   },
 ]
@@ -99,15 +92,21 @@ export default function LinesLayout() {
 
   data?.forEach((item) => {
     if (item.COMPARTILHADA) {
-      item.COMPARTILHADA = 'Sim'
-    } else if (item.LINHA_ATIV_EMPR) {
-      item.LINHA_ATIV_EMPR = 'Ativa'
+      item.COMPARTILHADA_STR = 'Sim'
+    } else {
+      item.COMPARTILHADA_STR = 'Não'
+    }
+
+    if (item.LINH_ATIV_EMPR) {
+      item.LINH_ATIV_EMPR_STR = 'Ativa'
+    } else {
+      item.LINH_ATIV_EMPR_STR = 'Inativa'
     }
   })
 
   const pages = useMemo(() => {
     return Math.ceil((data || []).length / rowsPerPage)
-  }, [data])
+  }, [data, rowsPerPage])
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage
