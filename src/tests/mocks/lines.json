@@ -1,0 +1,62 @@
+[
+  {
+    "COD_LINH": "2104",
+    "ID_OPERADORA": 113,
+    "COMPARTILHADA": true,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "3250",
+    "ID_OPERADORA": 123,
+    "COMPARTILHADA": true,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "4103",
+    "ID_OPERADORA": 123,
+    "COMPARTILHADA": true,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "4110",
+    "ID_OPERADORA": 37,
+    "COMPARTILHADA": false,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "4111",
+    "ID_OPERADORA": 37,
+    "COMPARTILHADA": false,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "4801A",
+    "ID_OPERADORA": 37,
+    "COMPARTILHADA": true,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "4802A",
+    "ID_OPERADORA": 123,
+    "COMPARTILHADA": false,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "5203",
+    "ID_OPERADORA": 123,
+    "COMPARTILHADA": true,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "6030",
+    "ID_OPERADORA": 107,
+    "COMPARTILHADA": true,
+    "LINH_ATIV_EMPR": true
+  },
+  {
+    "COD_LINH": "607",
+    "ID_OPERADORA": 107,
+    "COMPARTILHADA": false,
+    "LINH_ATIV_EMPR": true
+  }
+]
