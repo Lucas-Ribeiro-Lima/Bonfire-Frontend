@@ -1,4 +1,4 @@
-import Logo from '../UI/logo'
+import Logo from '../ui/logo'
 import LoginBtn from './loginBtn'
 
 const LoginMenu = () => {

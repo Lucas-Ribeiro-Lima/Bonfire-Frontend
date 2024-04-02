@@ -1,8 +1,8 @@
 'use client'
 
 import LinesLayout from '@/components/lines/linesLayout'
-import MainApp from '@/components/UI/mainApp'
-import PrimaryLayout from '@/components/UI/primaryLayout'
+import MainApp from '@/components/ui/mainApp'
+import PrimaryLayout from '@/components/ui/primaryLayout'
 import { NextUIProvider } from '@nextui-org/react'
 import { SessionProvider } from 'next-auth/react'
 

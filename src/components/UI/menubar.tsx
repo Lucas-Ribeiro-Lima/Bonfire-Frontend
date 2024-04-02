@@ -26,7 +26,7 @@ function handleSignOut() {
 const MenuBar = () => {
   const { data: session } = useSession()
   return (
-    <div className="mt-4 flex flex-col gap-4 text-zinc-500">
+    <div className="mt-4 flex flex-col gap-4 text-white">
       <Link href="/" className="m-0">
         <DropdownFatherField
           description="Inicio"
@@ -72,17 +72,11 @@ const MenuBar = () => {
         ></DropDownField>
       </DropdownFatherField>
       {(session && (
-        // <Link href="/login">
-        //   <DropdownFatherField
-        //     description="Sair"
-        //     icon={<LogIn />}
-        //   ></DropdownFatherField>
-        // </Link>
         <Button
           startContent={<LogIn />}
           onPress={handleSignOut}
           className="flex scale-75 cursor-pointer justify-start rounded-xl bg-transparent  p-2  
-          align-middle text-zinc-500 hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
+          align-middle text-white hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
         >
           Sair
         </Button>
@@ -97,7 +91,7 @@ const MenuBar = () => {
           startContent={<LogIn />}
           onPress={handleSignIn}
           className="flex scale-75 cursor-pointer justify-start rounded-xl bg-transparent  p-2  
-          align-middle text-zinc-500 hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
+          align-middle text-white hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
         >
           Entrar
         </Button>

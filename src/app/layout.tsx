@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       text-white dark selection:bg-sky-800 selection:text-white"
       >
         {children}
+        <Toaster />
       </body>
     </html>
   )

@@ -16,13 +16,13 @@ export const ImportFormFirstSchema = z.object({
                 message: 'Anexe o arquivo CSV das infrações',
               })
             }
-            if (file?.type !== 'application/csv') {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                path: ['file'],
-                message: 'Anexe um arquivo CSV de primeira instância',
-              })
-            }
+            // if (file?.type !== 'application/csv') {
+            //   ctx.addIssue({
+            //     code: z.ZodIssueCode.custom,
+            //     path: ['file'],
+            //     message: 'Anexe um arquivo CSV de primeira instância',
+            //   })
+            // }
           }),
 })
 

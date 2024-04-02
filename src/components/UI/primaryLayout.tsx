@@ -28,10 +28,12 @@ function PrimaryLayout({ children }: Props) {
       <div>
         <Header></Header>
         <button
-          className="absolute left-2 top-2 z-10 flex items-center gap-4 text-zinc-500"
+          className="absolute left-2 top-2 z-10 flex items-center gap-4 text-white"
           onClick={closeSideBar}
         >
-          <SidebarCloseIcon></SidebarCloseIcon>
+          <div className="text-sky-800">
+            <SidebarCloseIcon></SidebarCloseIcon>
+          </div>
           {status === 'authenticated' && session.user?.name}
         </button>
       </div>

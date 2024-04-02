@@ -46,7 +46,7 @@ export const DropdownFatherField = ({
         </div>
       </button>
       {isDropDown && (
-        <div className=" flex-col rounded-md bg-zinc-700 text-white">
+        <div className=" flex-col rounded-md bg-slate-900 text-white">
           {children}
         </div>
       )}
@@ -70,7 +70,8 @@ export const DropDownField = ({
                     rounded-xl
                     p-2 
                     align-middle 
-                    hover:bg-zinc-600 
+                    hover:bg-sky-950
+                    hover:text-sky-600 
                     hover:drop-shadow-2xl 
                     hover:duration-1000"
         href={path}

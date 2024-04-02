@@ -1,8 +1,8 @@
 'use client'
 
-import MainApp from '@/components/UI/mainApp'
-import PrimaryLayout from '@/components/UI/primaryLayout'
 import InfractionLayout from '@/components/infractions/infractionLayout'
+import MainApp from '@/components/ui/mainApp'
+import PrimaryLayout from '@/components/ui/primaryLayout'
 import { NextUIProvider } from '@nextui-org/react'
 import { SessionProvider } from 'next-auth/react'
 

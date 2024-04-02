@@ -1,5 +1,5 @@
-import Logo from '@/components/UI/logo'
-import SecondaryLayout from '@/components/UI/secondaryLayout'
+import Logo from '@/components/ui/logo'
+import SecondaryLayout from '@/components/ui/secondaryLayout'
 
 export function Error() {
   return <div className="text-5xl font-extrabold text-red-700">Error!</div>

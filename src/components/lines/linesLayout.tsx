@@ -1,159 +1,22 @@
 'use client'
 
-import { Error } from '@/components/UI/error'
+import { Error } from '@/components/ui/error'
 import { FetchData } from '@/hooks/fetchData'
-import {
-  Pagination,
-  Spinner,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-  getKeyValue,
-} from '@nextui-org/react'
-import { useMemo, useState } from 'react'
-import { z } from 'zod'
-
-const LinesFrameDataSchema = z
-  .object({
-    COD_LINH: z.string().min(1),
-    COMPARTILHADA: z.boolean(),
-    COMPARTILHADA_STR: z.string(),
-    ID_OPERADORA: z.number(),
-    LINH_ATIV_EMPR: z.boolean(),
-    LINH_ATIV_EMPR_STR: z.string(),
-  })
-  .array()
-
-type LinesFrameData = z.infer<typeof LinesFrameDataSchema>
-
-const columns = [
-  {
-    key: 'COD_LINH',
-    label: 'Linha',
-  },
-  {
-    key: 'COMPARTILHADA_STR',
-    label: 'Compartilhada',
-  },
-  {
-    key: 'ID_OPERADORA',
-    label: 'Operadora',
-  },
-  {
-    key: 'LINH_ATIV_EMPR_STR',
-    label: 'Status',
-  },
-]
-
-function LinesMenu() {
-  return (
-    <div className="flex h-10 flex-row items-center gap-8">
-      <div className="flex flex-row gap-2">
-        <label className="flex flex-row gap-2 rounded-lg font-semibold text-white">
-          Veículo:
-          <input
-            type="text"
-            className="w-36 rounded-lg bg-white/60 pl-1 text-black"
-          ></input>
-        </label>
-        <label className="flex flex-row gap-2 rounded-lg font-semibold text-white">
-          Placa:
-          <input
-            type="text"
-            className="w-36 rounded-lg bg-white/60 pl-1 text-black"
-          ></input>
-        </label>
-      </div>
-      <button
-        className="flex items-center justify-center rounded-lg bg-white/60 p-2 
-                font-semibold text-black hover:bg-white/90"
-      >
-        {' '}
-        Filtrar{' '}
-      </button>
-      {/* <button className="bg-emerald-500 hover:bg-emerald-400 rounded-lg text-black p-2 
-                font-semibold"> Cadastrar </button>
-            <button className="bg-white/60 hover:bg-white/90 rounded-lg text-black p-2 
-                font-semibold"> Desativar </button> */}
-    </div>
-  )
-}
+import { DEFAULTDATA } from '@/lib/utils'
+import { LinesFrameData, columns } from './columns'
+import { DataTable } from './data-table'
+import { useState } from 'react'
 
 export default function LinesLayout() {
-  // Pagination
-  const [page, setPage] = useState(1)
-  const [rowsPerPage] = useState<number>(15)
-
   // Data fetching
-  const { data, error } = FetchData<LinesFrameData>('linha')
-
-  data?.forEach((item) => {
-    if (item.COMPARTILHADA) {
-      item.COMPARTILHADA_STR = 'Sim'
-    } else {
-      item.COMPARTILHADA_STR = 'Não'
-    }
-
-    if (item.LINH_ATIV_EMPR) {
-      item.LINH_ATIV_EMPR_STR = 'Ativa'
-    } else {
-      item.LINH_ATIV_EMPR_STR = 'Inativa'
-    }
-  })
-
-  const pages = useMemo(() => {
-    return Math.ceil((data || []).length / rowsPerPage)
-  }, [data, rowsPerPage])
-
-  const items = useMemo(() => {
-    const start = (page - 1) * rowsPerPage
-    const end = start + rowsPerPage
-    return data?.slice(start, end)
-  }, [page, rowsPerPage, data])
+  const [date, setDate] = useState(DEFAULTDATA)
+  const { data, error } = FetchData<LinesFrameData[]>('linha')
 
   if (error) return <Error></Error>
 
-  if (!data) return <Spinner color="primary" />
-
   return (
-    <div className="flex w-full flex-col gap-4">
-      <LinesMenu></LinesMenu>
-      <Table
-        aria-label="First instance infractions table"
-        bottomContent={
-          pages > 0 ? (
-            <div className="flex w-full justify-center">
-              <Pagination
-                isCompact
-                showControls
-                showShadow
-                color="primary"
-                page={page}
-                total={pages}
-                onChange={(page: number) => setPage(page)}
-              />
-            </div>
-          ) : null
-        }
-      >
-        <TableHeader>
-          {columns.map((column) => (
-            <TableColumn key={column.key}>{column.label}</TableColumn>
-          ))}
-        </TableHeader>
-        <TableBody items={items} emptyContent={'Nada Encontrado'}>
-          {(item) => (
-            <TableRow key={item.COD_LINH}>
-              {(columnKey) => (
-                <TableCell>{getKeyValue(item, columnKey)}</TableCell>
-              )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+    <div className="flex w-5/6 flex-col">
+      <DataTable columns={columns} data={data || []}></DataTable>
     </div>
   )
 }
