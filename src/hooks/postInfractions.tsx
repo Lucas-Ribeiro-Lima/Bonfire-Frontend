@@ -1,14 +1,14 @@
-import { ImportFormData } from '@/components/schemas/ImportFormSchema'
+import { ImportFormData } from '@/schemas/ImportFormSchema'
 import { api } from '@/services/apiClient'
 import { toast } from 'sonner'
 
-export async function postAuto({ auto }: ImportFormData, option: number) {
+export async function postAuto({ file }: ImportFormData, option: number) {
   const body = new FormData()
 
   try {
-    if (!auto!.file) return console.log(`Error: Auto vazio`)
+    if (file) return console.log(`Error: Auto vazio`)
 
-    body.append('file', auto!.file, auto!.file.name)
+    body.append('file', file, file?.name)
 
     if (option === 1) {
       api

@@ -1,58 +1,58 @@
 'use client'
 
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/UI/form'
 import { postAuto } from '@/hooks/postInfractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { Button } from '../UI/button'
-import { Input } from '../UI/input'
 import {
   ImportFormData,
   ImportFormFirstSchema,
-} from '../schemas/ImportFormSchema'
+} from '../../schemas/ImportFormSchema'
+import { Button } from '../UI/button'
+import { Input } from '../UI/input'
 
 const ImportFormPrimeiraInstancia = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ImportFormData>({
+  const form = useForm<ImportFormData>({
     resolver: zodResolver(ImportFormFirstSchema),
   })
 
   // Função de handling do import
-  async function handleImport(auto: ImportFormData) {
-    await postAuto(auto, 1).then(() => toast('Importando Arquivo'))
+  async function onSubmitImport(file: ImportFormData) {
+    console.log(file)
+    await postAuto(file, 1).then(() => toast('Importando Arquivo'))
   }
 
   return (
-    <div className="flex w-fit items-center justify-center rounded-lg bg-slate-950 p-8">
-      <form
-        onSubmit={handleSubmit(handleImport)}
-        encType="multipart/form-data"
-        className="flex flex-col gap-4"
-      >
-        <label htmlFor="firstInstanceFile" className=" flex flex-col gap-2">
-          Selecione o arquivo de primeira instância:
-        </label>
-        <div className="flex gap-2 ">
-          <Input
-            {...register('auto.file')}
-            id="firstInstanceFile"
-            type="file"
-            accept=".csv"
-            className="bg-slate-800"
-          ></Input>
-          <Button type="submit" variant="secondary">
-            Importar
-          </Button>
-        </div>
-        {errors.auto?.file && (
-          <span className="text-sm text-red-500">
-            {errors.auto.file.message}
-          </span>
-        )}
-      </form>
+    <div className="rounded-md bg-slate-950 p-8">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmitImport)}
+          className="space-y-8"
+        >
+          <FormField
+            control={form.control}
+            name="file"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Arquivo</FormLabel>
+                <FormControl>
+                  <Input type="file" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
     </div>
   )
 }

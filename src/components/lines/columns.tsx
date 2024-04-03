@@ -1,21 +1,19 @@
 'use client'
 
+import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
 import { ColumnDef } from '@tanstack/react-table'
-import { DeleteIcon, MoreHorizontal, PencilIcon } from 'lucide-react'
-import { toast } from 'sonner'
-import z from 'zod'
+import { MoreHorizontal, PencilIcon } from 'lucide-react'
+import { useState } from 'react'
 import { Button } from '../UI/button'
 import { Checkbox } from '../UI/checkbox'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../UI/dropdown-menu'
-
-const LinesFrameDataSchema = z.object({
-  COD_LINH: z.string().min(1),
-  COMPARTILHADA: z.boolean(),
-  ID_OPERADORA: z.number(),
-  LINH_ATIV_EMPR: z.boolean(),
-})
-
-export type LinesFrameData = z.infer<typeof LinesFrameDataSchema>
+import { Dialog, DialogTrigger } from '../UI/dialog'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu'
+import { DialogContentLine } from './dialogLines'
 
 export const columns: ColumnDef<LinesFrameData>[] = [
   {
@@ -77,46 +75,60 @@ export const columns: ColumnDef<LinesFrameData>[] = [
     header: () => <div className="text-center font-bold">Ações</div>,
     cell: ({ row }) => {
       const line = row.original
+      const [dialogOption, setDialogOption] = useState<string | undefined>()
 
-      function handleEditLine() {
-        toast(`Editar a linha ${line.COD_LINH}`)
-        return console.log(`Editar a linha ${line.COD_LINH}`)
+      // function handleEditLine() {
+      //   toast(`Editar a linha ${line.COD_LINH}`)
+      //   return console.log(`Editar a linha ${line.COD_LINH}`)
+      // }
+
+      function handleDialogOptionEdit() {
+        setDialogOption('edit')
       }
 
-      function handleDeleteLine() {
-        toast(`Deletar a linha ${line.COD_LINH}`)
-        return console.log(`Deletar a linha ${line.COD_LINH}`)
+      function handleDialogOptionDelete() {
+        setDialogOption('delete')
       }
 
       return (
         <div className="flex justify-center">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <MoreHorizontal />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                <Button
-                  onClick={handleEditLine}
-                  variant="ghost"
-                  className="flex gap-1"
-                >
-                  <PencilIcon />
-                  Editar
-                </Button>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Button
-                  onClick={handleDeleteLine}
-                  variant="destructive"
-                  className="flex gap-1"
-                >
-                  <DeleteIcon />
-                  Excluir
-                </Button>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Dialog>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <MoreHorizontal />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <DialogTrigger asChild>
+                    <Button
+                      onClick={handleDialogOptionEdit}
+                      variant="ghost"
+                      className="flex gap-1"
+                    >
+                      <PencilIcon />
+                      Editar
+                    </Button>
+                  </DialogTrigger>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <DialogTrigger asChild>
+                    <Button
+                      onClick={handleDialogOptionDelete}
+                      variant="destructive"
+                      className="flex gap-1"
+                    >
+                      <PencilIcon />
+                      Excluir
+                    </Button>
+                  </DialogTrigger>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <DialogContentLine
+              line={line}
+              option={dialogOption}
+            ></DialogContentLine>
+          </Dialog>
         </div>
       )
     },

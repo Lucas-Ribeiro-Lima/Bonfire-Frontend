@@ -2,8 +2,9 @@
 
 import { FetchData } from '@/hooks/fetchData'
 import { toast } from 'sonner'
-import { LinesFrameData, columns } from './columns'
+import { columns } from './columns'
 import { DataTable } from './data-table'
+import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
 
 export default function LinesLayout() {
   const { data, error } = FetchData<LinesFrameData[]>('linha')
