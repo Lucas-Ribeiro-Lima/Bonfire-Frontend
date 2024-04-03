@@ -6,7 +6,8 @@ Apresento o Bonfire, um projeto de frontend desenvolvido exclusivamente por mim,
 - **Tailwind CSS** 🎨: Framework CSS utilitário para estilos modernos e responsivos.
 - **Axios** 🌐: Cliente HTTP para comunicação eficaz com a API.
 - **SWR (Stale-While-Revalidate)** 🔄: Gerenciamento inteligente de estado para otimização de desempenho.
-- **Next UI** 🚀: Componentes prontos para uso, acelerando o desenvolvimento.
+- **Shadcn/UI** 🚀: Componentes prontos para uso, acelerando o desenvolvimento.
+- **Tanstack React Tables** 📉: Biblioteca para manipulação de tabelas React.
 - **React Hook Form** 📝: Manipulação e validação eficientes de formulários.
 - **Lucide React** ✨: Ícones elegantes para aprimorar a experiência visual.
 - **Zod** 🛡️: Garantia de validação de dados para integridade do projeto.
