@@ -1,4 +1,4 @@
-import { Toaster } from '@/components/ui/sonner'
+import { Toaster } from '@/components/UI/sonner'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -26,8 +26,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        className="h-screen w-screen bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900 
-      text-white dark selection:bg-sky-800 selection:text-white"
+        className="dark h-screen w-screen bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900 
+      text-white selection:bg-sky-800 selection:text-white"
       >
         {children}
         <Toaster />

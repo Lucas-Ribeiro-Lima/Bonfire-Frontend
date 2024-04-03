@@ -1,26 +1,19 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { Button } from '../UI/button'
 
 export function SignInBtn() {
   return (
-    <button
-      className="flex h-8 w-5/6 flex-row items-center justify-center gap-2 rounded-lg bg-zinc-600
-      text-white hover:bg-zinc-400 hover:shadow-2xl hover:shadow-black hover:duration-1000"
-      onClick={() => signIn('keycloak')}
-    >
+    <Button variant="secondary" onClick={() => signIn('keycloak')}>
       Entrar
-    </button>
+    </Button>
   )
 }
 
 export function SignOutBtn() {
   return (
-    <button
-      className="flex h-8 w-5/6 flex-row items-center justify-center gap-2 rounded-lg bg-zinc-600
-     text-white hover:bg-zinc-400 hover:shadow-2xl hover:shadow-black hover:duration-1000"
-      onClick={() => signOut({ redirect: false })}
-    >
+    <Button variant="secondary" onClick={() => signOut({ redirect: false })}>
       Sair
-    </button>
+    </Button>
   )
 }
 

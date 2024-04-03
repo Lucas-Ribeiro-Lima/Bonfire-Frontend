@@ -1,8 +1,14 @@
 import MenuBar from './menubar'
 
-export function SideBar() {
+interface sidebarProp {
+  sidebarOpen: boolean
+}
+
+export function SideBar({ sidebarOpen }: sidebarProp) {
   return (
-    <div className="z-10 flex h-full flex-col border-r border-white/25 bg-slate-950 p-2">
+    <div
+      className={`${sidebarOpen ? 'flex' : 'hidden'} h-full flex-col border-r border-white/25 bg-slate-950 p-4`}
+    >
       <MenuBar></MenuBar>
     </div>
   )

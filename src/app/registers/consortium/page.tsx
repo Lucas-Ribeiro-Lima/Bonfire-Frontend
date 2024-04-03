@@ -1,18 +1,15 @@
 'use client'
 
-import MainApp from '@/components/ui/mainApp'
-import PrimaryLayout from '@/components/ui/primaryLayout'
-import { SessionProvider } from 'next-auth/react'
+import MainApp from '@/components/UI/mainApp'
+import PrimaryLayout from '@/components/UI/primaryLayout'
 
-export default function Home(session: any) {
+export default function Home() {
   return (
-    <SessionProvider session={session}>
-      <PrimaryLayout>
-        <MainApp title="Consórcios">
-          {/* <ConsortiumLayout></ConsortiumLayout> */}
-          <></>
-        </MainApp>
-      </PrimaryLayout>
-    </SessionProvider>
+    <PrimaryLayout>
+      <MainApp title="Consórcios">
+        {/* <ConsortiumLayout></ConsortiumLayout> */}
+        <></>
+      </MainApp>
+    </PrimaryLayout>
   )
 }

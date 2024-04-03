@@ -1,10 +1,11 @@
 'use client'
-
 import {
-  DropDownField,
-  DropdownFatherField,
-} from '@/components/dropdown/dropdown'
-import { Button } from '@nextui-org/react'
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from './dropdown-menu'
+
+import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu'
 import {
   AlignJustify,
   FileSpreadsheetIcon,
@@ -14,6 +15,7 @@ import {
 } from 'lucide-react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { Button } from './button'
 
 function handleSignIn() {
   signIn('keycloak')
@@ -26,76 +28,131 @@ function handleSignOut() {
 const MenuBar = () => {
   const { data: session } = useSession()
   return (
-    <div className="mt-4 flex flex-col gap-4 text-white">
-      <Link href="/" className="m-0">
-        <DropdownFatherField
-          description="Inicio"
-          icon={<LucideHome />}
-        ></DropdownFatherField>
-      </Link>
-      <DropdownFatherField description="Cadastros" icon={<AlignJustify />}>
-        <DropDownField
-          path="/registers/vehicles"
-          description="Veiculos"
-        ></DropDownField>
-        <DropDownField
-          path="/registers/lines"
-          description="Linhas"
-        ></DropDownField>
-        <DropDownField
-          path="/registers/consortium"
-          description="Consórcio"
-        ></DropDownField>
-      </DropdownFatherField>
-      <DropdownFatherField
-        description="Infrações"
-        icon={<FileSpreadsheetIcon />}
-      >
-        <DropDownField
-          path="/infractions/firstInstance"
-          description="Primeira Instancia"
-        ></DropDownField>
-        <DropDownField
-          path="/infractions/secondInstance"
-          description="Segunda Instancia"
-        ></DropDownField>
-      </DropdownFatherField>
-
-      <DropdownFatherField description="Importação" icon={<LucideImport />}>
-        <DropDownField
-          path="/import/primeiraInstancia"
-          description="Primeira Instância"
-        ></DropDownField>
-        <DropDownField
-          path="/import/segundaInstancia"
-          description="Segunda Instância"
-        ></DropDownField>
-      </DropdownFatherField>
-      {(session && (
-        <Button
-          startContent={<LogIn />}
-          onPress={handleSignOut}
-          className="flex scale-75 cursor-pointer justify-start rounded-xl bg-transparent  p-2  
-          align-middle text-white hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
-        >
-          Sair
-        </Button>
-      )) || (
-        // <Link href="/login">
-        //   <DropdownFatherField
-        //     description="Entrar"
-        //     icon={<LogIn />}
-        //   ></DropdownFatherField>
-        // </Link>
-        <Button
-          startContent={<LogIn />}
-          onPress={handleSignIn}
-          className="flex scale-75 cursor-pointer justify-start rounded-xl bg-transparent  p-2  
-          align-middle text-white hover:bg-sky-950 hover:text-sky-600 hover:drop-shadow-2xl hover:duration-1000"
-        >
-          Entrar
-        </Button>
-      )}
+    <div className="mt-8 flex flex-col gap-8">
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Link href="/">
+            <div className="flex items-center gap-2">
+              <LucideHome />
+              Inicio
+            </div>
+          </Link>
+        </DropdownMenuTrigger>
+      </DropdownMenu>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <div className="flex items-center gap-2">
+            <AlignJustify />
+            Cadastros
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2">
+          <DropdownMenuItem>
+            <Link
+              href="/registers/vehicles"
+              className="flex justify-center p-2"
+            >
+              <div className="flex flex-row gap-2 self-center justify-self-center">
+                Veiculos
+              </div>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/registers/lines" className="flex justify-center p-2">
+              <div className="flex flex-row gap-2 self-center justify-self-center">
+                Linhas
+              </div>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link
+              href="/registers/consortium"
+              className="flex justify-center p-2"
+            >
+              <div className="flex flex-row gap-2 self-center justify-self-center">
+                Consorcio
+              </div>
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <div className="flex items-center gap-2">
+            <FileSpreadsheetIcon />
+            Infrações
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2">
+          <DropdownMenuItem>
+            <Link
+              href="/infractions/firstInstance"
+              className="flex justify-center p-2"
+            >
+              <div className="flex flex-row gap-2 self-center justify-self-center">
+                Primeira Instância
+              </div>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link
+              href="/infractions/secondInstance"
+              className="flex justify-center p-2"
+            >
+              <div className="flex flex-row gap-2 self-center justify-self-center">
+                Segunda Instância
+              </div>
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <div className="flex items-center gap-2">
+            <LucideImport />
+            Importacao
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2">
+          <DropdownMenuItem>
+            <Link
+              href="/import/firstInstance"
+              className="flex justify-center p-2"
+            >
+              <div className="flex flex-row gap-2 self-center justify-self-center">
+                Primeira Instância
+              </div>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link
+              href="/import/secondInstance"
+              className="flex justify-center p-2"
+            >
+              <div className="flex flex-row gap-2 self-center justify-self-center">
+                Segunda Instância
+              </div>
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          {(session && (
+            <Button variant="secondary" onClick={handleSignOut}>
+              <div className="flex items-center gap-2">
+                <LogIn /> Sair
+              </div>
+            </Button>
+          )) || (
+            <Button variant="secondary" onClick={handleSignIn}>
+              <div className="flex items-center gap-2">
+                <LogIn /> Entrar
+              </div>
+            </Button>
+          )}
+        </DropdownMenuTrigger>
+      </DropdownMenu>
     </div>
   )
 }

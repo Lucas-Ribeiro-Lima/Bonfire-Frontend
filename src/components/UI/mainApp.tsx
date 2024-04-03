@@ -5,6 +5,7 @@ import LogoCompleta from './logo'
 
 interface MainAppProps {
   children: ReactNode
+  title?: string
 }
 
 function MainApp({ children }: MainAppProps) {
@@ -21,14 +22,15 @@ function MainApp({ children }: MainAppProps) {
         {children}
       </main>
     )
-  return (
-    <main className=" flex h-full flex-col items-center justify-center p-4">
-      <div className="flex flex-col items-center justify-center gap-20">
-        <LogoCompleta></LogoCompleta>
-        <SignInBtn></SignInBtn>
-      </div>
-    </main>
-  )
+  else
+    return (
+      <main className=" flex h-full flex-col items-center justify-center p-4">
+        <div className="flex flex-col items-center justify-center gap-20">
+          <LogoCompleta></LogoCompleta>
+          <SignInBtn></SignInBtn>
+        </div>
+      </main>
+    )
 }
 
 export default MainApp

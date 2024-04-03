@@ -3,6 +3,9 @@
 import { postAuto } from '@/hooks/postInfractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { Button } from '../UI/button'
+import { Input } from '../UI/input'
 import {
   ImportFormData,
   ImportFormFirstSchema,
@@ -19,37 +22,38 @@ const ImportFormPrimeiraInstancia = () => {
 
   // Função de handling do import
   async function handleImport(auto: ImportFormData) {
-    await postAuto(auto, 1)
+    await postAuto(auto, 1).then(() => toast('Importando Arquivo'))
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(handleImport)}
-      className="mt-4 flex flex-col gap-4"
-      encType="multipart/form-data"
-    >
-      <label htmlFor="file" className=" flex flex-col gap-2">
-        Selecione o arquivo:
-        <input
-          {...register('auto.file')}
-          type="file"
-          accept=".csv"
-          className="file:cursor-pointer file:rounded-lg file:bg-zinc-400 file:font-semibold"
-        ></input>
+    <div className="flex w-fit items-center justify-center rounded-lg bg-slate-950 p-8">
+      <form
+        onSubmit={handleSubmit(handleImport)}
+        encType="multipart/form-data"
+        className="flex flex-col gap-4"
+      >
+        <label htmlFor="firstInstanceFile" className=" flex flex-col gap-2">
+          Selecione o arquivo de primeira instância:
+        </label>
+        <div className="flex gap-2 ">
+          <Input
+            {...register('auto.file')}
+            id="firstInstanceFile"
+            type="file"
+            accept=".csv"
+            className="bg-slate-800"
+          ></Input>
+          <Button type="submit" variant="secondary">
+            Importar
+          </Button>
+        </div>
         {errors.auto?.file && (
           <span className="text-sm text-red-500">
-            {' '}
-            {errors.auto.file.message}{' '}
+            {errors.auto.file.message}
           </span>
         )}
-      </label>
-      <button
-        type="submit"
-        className="w-96 rounded-lg bg-green-700 p-1 font-semibold text-black hover:bg-green-500 hover:duration-1000"
-      >
-        Importar
-      </button>
-    </form>
+      </form>
+    </div>
   )
 }
 

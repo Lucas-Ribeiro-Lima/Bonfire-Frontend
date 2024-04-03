@@ -3,36 +3,32 @@
 import { ColumnDef } from '@tanstack/react-table'
 import z from 'zod'
 
-const autosSchema = z.object({
-  autos: z.object({
-    NUM_NOTF: z.string(),
-    TIP_PENL: z.string(),
-    NUM_AI: z.string(),
-    NOM_CONC: z.string(),
-    COD_LINH: z.number(),
-    NOM_LINH: z.string(),
-    NUM_VEIC: z.number(),
-    IDN_PLAC_VEIC: z.string(),
-    DAT_OCOR_INFR: z.number(),
-    DAT_OCOR_INFR_STR: z.string(),
-    DES_LOCA: z.string(),
-    COD_IRRG_FISC: z.string(),
-    ARTIGO: z.string(),
-    DESC_OBSE: z.string(),
-    NUM_MATR_FISC: z.number(),
-    QTE_PONT: z.number(),
-    DAT_EMIS_NOTF: z.number(),
-    DAT_EMIS_NOTF_STR: z.string(),
-    DAT_LIMIT_RECU: z.date(),
-    VAL_INFR: z.number(),
-    DAT_CANC: z.date(),
-  }),
-  counter: z.number(),
+const autoSchema = z.object({
+  NUM_NOTF: z.string(),
+  TIP_PENL: z.string(),
+  NUM_AI: z.string(),
+  NOM_CONC: z.string(),
+  COD_LINH: z.string(),
+  NOM_LINH: z.string(),
+  NUM_VEIC: z.number(),
+  IDN_PLAC_VEIC: z.string(),
+  DAT_OCOR_INFR: z.number(),
+  DAT_OCOR_INFR_STR: z.string(),
+  DES_LOCA: z.string(),
+  COD_IRRG_FISC: z.number(),
+  ARTIGO: z.string(),
+  DESC_OBSE: z.string(),
+  NUM_MATR_FISC: z.number(),
+  QTE_PONT: z.number(),
+  DAT_EMIS_NOTF: z.number(),
+  DAT_EMIS_NOTF_STR: z.string(),
+  DAT_LIMIT_RECU: z.date(),
+  VAL_INFR: z.number(),
+  DAT_CANC: z.date(),
 })
+export type autoData = z.infer<typeof autoSchema>
 
-export type autosData = z.infer<typeof autosSchema>
-
-export const columns: ColumnDef<autosData>[] = [
+export const columns: ColumnDef<autoData>[] = [
   {
     accessorKey: 'NUM_NOTF',
     header: () => <div className=" text-center font-bold">N° Notificação</div>,

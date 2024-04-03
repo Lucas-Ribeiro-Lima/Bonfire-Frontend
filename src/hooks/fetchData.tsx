@@ -1,10 +1,10 @@
 'use client'
-import { ApiClient } from '@/services/apiClient'
+import { api } from '@/services/apiClient'
 import useSWR from 'swr'
 
 export function FetchInfractionsFirstInstance<Data = unknown>(url: string) {
-  const { data, error, isLoading } = useSWR<Data>(url, async () => {
-    const response = await ApiClient.get(`${url}`)
+  const { data, error, isLoading } = useSWR<Data, Error>(url, async () => {
+    const response = await api.get(`${url}`)
     return response.data
   })
 
@@ -12,8 +12,8 @@ export function FetchInfractionsFirstInstance<Data = unknown>(url: string) {
 }
 
 export function FetchData<Data = unknown>(url: string) {
-  const { data, error, isLoading } = useSWR<Data>(url, async () => {
-    const response = await ApiClient.get(url)
+  const { data, error, isLoading } = useSWR<Data, Error>(url, async () => {
+    const response = await api.get(url)
     return response.data
   })
 
