@@ -42,13 +42,13 @@ export const ImportFormSecondSchema = z.object({
                 message: 'Anexe o arquivo DOCX das infrações',
               })
             }
-            if (file?.type !== 'application/docx') {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                path: ['file'],
-                message: 'Anexe um arquivo DOCX de segunda instância',
-              })
-            }
+            // if (file?.type !== 'application/docx') {
+            //   ctx.addIssue({
+            //     code: z.ZodIssueCode.custom,
+            //     path: ['file'],
+            //     message: 'Anexe um arquivo DOCX de segunda instância',
+            //   })
+            // }
           }),
 })
 

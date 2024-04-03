@@ -7,11 +7,18 @@ import { toast } from 'sonner'
 import { autoData, columns } from './columns'
 import { DataTable } from './data-table'
 
+interface autosFetch {
+  autos: autoData[]
+}
+
 export default function InfractionLayout() {
   // Data fetch
   const [date, setDate] = useState(DEFAULTDATA)
 
-  const { data, error } = FetchInfractionsFirstInstance<autoData[]>(
+  const {
+    data: { autos },
+    error,
+  } = FetchInfractionsFirstInstance<autosFetch>(
     `/autoInfracao/primeiraInstancia/${date}`,
   )
 
@@ -21,7 +28,7 @@ export default function InfractionLayout() {
     <div className="flex w-full flex-col">
       <DataTable
         columns={columns}
-        data={data || []}
+        data={autos || []}
         setDate={setDate}
       ></DataTable>
     </div>

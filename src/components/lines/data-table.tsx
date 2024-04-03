@@ -33,6 +33,7 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [rowSelection, setRowSelection] = useState({})
   const table = useReactTable({
     data,
     columns,
@@ -40,8 +41,10 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onRowSelectionChange: setRowSelection,
     state: {
       columnFilters,
+      rowSelection,
     },
   })
 
@@ -109,8 +112,15 @@ export function DataTable<TData, TValue>({
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={7}>
+              <TableCell colSpan={4}>
                 {`Total de linhas:  ${table.getRowCount()}`}
+              </TableCell>
+              <TableCell>
+                <div className="flex-1 text-sm text-muted-foreground">
+                  {table.getFilteredSelectedRowModel().rows.length} de{' '}
+                  {table.getFilteredRowModel().rows.length} veiculo(s)
+                  selecionados.
+                </div>
               </TableCell>
               <TableCell>
                 <div className="flex gap-2">
