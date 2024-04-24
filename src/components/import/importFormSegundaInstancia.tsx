@@ -3,56 +3,47 @@
 import { postAuto } from '@/hooks/postInfractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import {
   ImportFormData,
   ImportFormSecondSchema,
 } from '../../schemas/ImportFormSchema'
 import { Button } from '../UI/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../UI/form'
-import { Input } from '../UI/input'
-
-// Função de handling do import
 
 const ImportFormSegundaInstancia = () => {
-  const form = useForm<ImportFormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ImportFormData>({
     resolver: zodResolver(ImportFormSecondSchema),
   })
 
-  async function onSubmitImportSegunda(file: ImportFormData) {
-    await postAuto(file, 2).then(() => toast('Importando Arquivo'))
+  async function onSubmitImportSegunda(data: ImportFormData) {
+    if (!data.file) throw new Error('Formulário vazio')
+    await postAuto(data.file, 2)
   }
 
   return (
-    <div className="rounded-md bg-slate-950 p-8">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmitImportSegunda)}
-          className="space-y-8"
+    <div className="space-y-4 rounded-md bg-slate-950 p-8">
+      <div className="flex items-center justify-center font-semibold">
+        Segunda Instância
+      </div>
+      <form className="mt-4 flex flex-col gap-4" encType="multipart/form-data">
+        <div className="flex flex-col space-y-2">
+          <label htmlFor="file"></label>
+          <input {...register('file')} type="file" accept=".docx"></input>
+          {errors.file && (
+            <span className="text-sm text-red-500">{errors.file.message}</span>
+          )}
+        </div>
+        <Button
+          type="submit"
+          onClick={handleSubmit(onSubmitImportSegunda)}
+          variant="secondary"
         >
-          <FormField
-            control={form.control}
-            name="file"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Arquivo</FormLabel>
-                <FormControl>
-                  <Input type="file" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
+          Importar
+        </Button>
+      </form>
     </div>
   )
 }

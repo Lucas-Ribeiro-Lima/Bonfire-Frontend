@@ -6,20 +6,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/UI/dropdown-menu'
+import { VehiclesData } from '@/schemas/VechicleSchema'
 import { ColumnDef } from '@tanstack/react-table'
-import { DeleteIcon, MoreHorizontal, PencilIcon } from 'lucide-react'
-import { toast } from 'sonner'
-import z from 'zod'
+import { MoreHorizontal, PencilIcon } from 'lucide-react'
+import { useState } from 'react'
 import { Button } from '../UI/button'
 import { Checkbox } from '../UI/checkbox'
-
-const VehicleSchema = z.object({
-  NUM_VEIC: z.number(),
-  IDN_PLAC_VEIC: z.string(),
-  VEIC_ATIV_EMPR: z.boolean(),
-})
-
-export type VehiclesData = z.infer<typeof VehicleSchema>
+import { Dialog, DialogTrigger } from '../UI/dialog'
+import { DialogContentLine } from './dialogVehicles'
 
 export const columns: ColumnDef<VehiclesData>[] = [
   {
@@ -28,7 +22,8 @@ export const columns: ColumnDef<VehiclesData>[] = [
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
+          table.getIsSomePageRowsSelected() ||
+          'indeterminate'
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -73,46 +68,55 @@ export const columns: ColumnDef<VehiclesData>[] = [
     header: () => <div className="text-center font-bold">Ações</div>,
     cell: ({ row }) => {
       const vehicle = row.original
+      const [dialogOption, setDialogOption] = useState<string | undefined>()
 
-      function handleEditVeic() {
-        toast(`Editar o veiculo ${vehicle.NUM_VEIC}`)
-        return console.log(`Editar o veiculo ${vehicle.NUM_VEIC}`)
+      function handleDialogOptionEdit() {
+        setDialogOption('edit')
       }
 
-      function handleDeleteVeic() {
-        toast(`Deletar o veiculo ${vehicle.NUM_VEIC}`)
-        return console.log(`Deletar o veiculo ${vehicle.NUM_VEIC}`)
+      function handleDialogOptionDelete() {
+        setDialogOption('delete')
       }
 
       return (
         <div className="flex justify-center">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <MoreHorizontal />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                <Button
-                  onClick={handleEditVeic}
-                  variant="ghost"
-                  className="flex gap-1"
-                >
-                  <PencilIcon />
-                  Editar
-                </Button>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Button
-                  onClick={handleDeleteVeic}
-                  variant="destructive"
-                  className="flex gap-1"
-                >
-                  <DeleteIcon />
-                  Excluir
-                </Button>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Dialog>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <MoreHorizontal />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <DialogTrigger asChild>
+                    <Button
+                      onClick={handleDialogOptionEdit}
+                      variant="ghost"
+                      className="flex gap-1"
+                    >
+                      <PencilIcon />
+                      Editar
+                    </Button>
+                  </DialogTrigger>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <DialogTrigger asChild>
+                    <Button
+                      onClick={handleDialogOptionDelete}
+                      variant="destructive"
+                      className="flex gap-1"
+                    >
+                      <PencilIcon />
+                      Excluir
+                    </Button>
+                  </DialogTrigger>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <DialogContentLine
+              veic={vehicle}
+              option={dialogOption}
+            ></DialogContentLine>
+          </Dialog>
         </div>
       )
     },

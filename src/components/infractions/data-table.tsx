@@ -21,8 +21,8 @@ import {
 } from '@/components/UI/table'
 import { DEFAULTDATA } from '@/lib/utils'
 import { useState } from 'react'
-import { Button } from '../UI/button'
-import { Input } from '../UI/input'
+import { Button } from '@/components/UI/button'
+import { Input } from '@/components/UI/input'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

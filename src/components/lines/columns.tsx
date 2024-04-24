@@ -1,18 +1,18 @@
 'use client'
 
-import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
-import { ColumnDef } from '@tanstack/react-table'
-import { MoreHorizontal, PencilIcon } from 'lucide-react'
-import { useState } from 'react'
-import { Button } from '../UI/button'
-import { Checkbox } from '../UI/checkbox'
-import { Dialog, DialogTrigger } from '../UI/dialog'
+import { Button } from '@/components/UI/button'
+import { Checkbox } from '@/components/UI/checkbox'
+import { Dialog, DialogTrigger } from '@/components/UI/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
+} from '@/components/UI/dropdown-menu'
+import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
+import { ColumnDef } from '@tanstack/react-table'
+import { MoreHorizontal, PencilIcon } from 'lucide-react'
+import { useState } from 'react'
 import { DialogContentLine } from './dialogLines'
 
 export const columns: ColumnDef<LinesFrameData>[] = [
@@ -22,7 +22,8 @@ export const columns: ColumnDef<LinesFrameData>[] = [
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
+          table.getIsSomePageRowsSelected() ||
+          'indeterminate'
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"

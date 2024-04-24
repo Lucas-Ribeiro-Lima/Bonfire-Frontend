@@ -15,10 +15,7 @@ export default function InfractionLayout() {
   // Data fetch
   const [date, setDate] = useState(DEFAULTDATA)
 
-  const {
-    data: { autos },
-    error,
-  } = FetchInfractionsFirstInstance<autosFetch>(
+  const { data, error } = FetchInfractionsFirstInstance<autosFetch>(
     `/autoInfracao/primeiraInstancia/${date}`,
   )
 
@@ -28,7 +25,7 @@ export default function InfractionLayout() {
     <div className="flex w-full flex-col">
       <DataTable
         columns={columns}
-        data={autos || []}
+        data={data?.autos || []}
         setDate={setDate}
       ></DataTable>
     </div>

@@ -16,39 +16,35 @@ import {
   FormLabel,
 } from '@/components/UI/form'
 import { Input } from '@/components/UI/input'
-import {
-  LinesFrameData,
-  LinesFrameDataSchema,
-} from '@/schemas/LinesFrameDataSchema'
+import { VehicleSchema, VehiclesData } from '@/schemas/VechicleSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 interface DialogContentLineProp {
-  line: LinesFrameData
+  veic: VehiclesData
   option: string
 }
 
 export function DialogContentLine({
-  line: { COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR },
+  veic: { IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR },
   option,
 }: DialogContentLineProp) {
-  const form = useForm<LinesFrameData>({
-    resolver: zodResolver(LinesFrameDataSchema),
+  const form = useForm<VehiclesData>({
+    resolver: zodResolver(VehicleSchema),
     defaultValues: {
-      COD_LINH,
-      ID_OPERADORA,
-      COMPARTILHADA,
-      LINH_ATIV_EMPR,
+      IDN_PLAC_VEIC,
+      NUM_VEIC,
+      VEIC_ATIV_EMPR,
     },
   })
 
   function onSubmit() {
-    toast(`Editando a linha ${COD_LINH} - Operadora: ${ID_OPERADORA}`)
+    toast(`Editando o veículo ${NUM_VEIC} - Placa: ${IDN_PLAC_VEIC}`)
   }
 
   function handleDelete() {
-    toast(`Deletando a linha ${COD_LINH}`)
+    toast(`Deletando o veíuclo ${NUM_VEIC}`)
   }
 
   if (option === 'edit') {
@@ -57,23 +53,23 @@ export function DialogContentLine({
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Editar linha</DialogTitle>
+              <DialogTitle>Editar veículo</DialogTitle>
               <DialogDescription>
-                Faça alterações no cadastro da linha
+                Faça alterações no cadastro do veículo
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-8">
               <FormField
                 control={form.control}
-                name="COD_LINH"
+                name="NUM_VEIC"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center gap-4">
-                      <FormLabel className="w-24">Código Linha:</FormLabel>
+                      <FormLabel className="w-24">N° Veículo:</FormLabel>
                       <FormControl>
                         <Input
                           className="w-44"
-                          placeholder="Código Linha"
+                          placeholder="N° Veículo"
                           {...field}
                         />
                       </FormControl>
@@ -83,15 +79,15 @@ export function DialogContentLine({
               />
               <FormField
                 control={form.control}
-                name="ID_OPERADORA"
+                name="IDN_PLAC_VEIC"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center gap-4">
-                      <FormLabel className="w-24">Operadora:</FormLabel>
+                      <FormLabel className="w-24">Placa:</FormLabel>
                       <FormControl>
                         <Input
                           className="w-44"
-                          placeholder="Operadora"
+                          placeholder="Placa"
                           {...field}
                         />
                       </FormControl>
@@ -99,42 +95,23 @@ export function DialogContentLine({
                   </FormItem>
                 )}
               />
-              <div className="justify-left flex space-x-16">
-                <FormField
-                  control={form.control}
-                  name="COMPARTILHADA"
-                  render={({ field }) => (
-                    <FormItem>
-                      <div className="flex items-center gap-2">
-                        <FormLabel>Compartilhada</FormLabel>
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          ></Checkbox>
-                        </FormControl>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="LINH_ATIV_EMPR"
-                  render={({ field }) => (
-                    <FormItem>
-                      <div className="flex items-center gap-2">
-                        <FormLabel>Ativa</FormLabel>
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          ></Checkbox>
-                        </FormControl>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="VEIC_ATIV_EMPR"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center gap-2">
+                      <FormLabel>Ativo</FormLabel>
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        ></Checkbox>
+                      </FormControl>
+                    </div>
+                  </FormItem>
+                )}
+              />
             </div>
             <DialogFooter>
               <DialogClose asChild>
@@ -156,7 +133,7 @@ export function DialogContentLine({
     return (
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Deletar linha</DialogTitle>
+          <DialogTitle>Deletar veículo</DialogTitle>
           <DialogDescription>
             Confirme a deleção deste registro
           </DialogDescription>
