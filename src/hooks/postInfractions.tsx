@@ -34,7 +34,6 @@ export async function postAuto(file: File, option: number) {
       .then((response) => {
         if (response.status === 200) {
           toast(`${response.data.message} Quantidade: ${response.data.counter}`)
-          return response.data
         }
       })
       .catch((error: AxiosError<TCustomError>) => {
