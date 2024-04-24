@@ -8,3 +8,7 @@ export const LinesFrameDataSchema = z.object({
 })
 
 export type LinesFrameData = z.infer<typeof LinesFrameDataSchema>
+
+export type LoadLines = {
+  linhas: LinesFrameData[]
+}

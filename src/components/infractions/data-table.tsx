@@ -27,7 +27,7 @@ import { Input } from '@/components/UI/input'
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  setDate: (event) => void
+  setDate: (event: string) => void
 }
 
 export function DataTable<TData, TValue>({

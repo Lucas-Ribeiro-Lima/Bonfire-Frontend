@@ -1,19 +1,16 @@
 'use client'
 
 import { FetchData } from '@/hooks/fetchData'
-import { toast } from 'sonner'
+import { LoadLines } from '@/schemas/LinesFrameDataSchema'
 import { columns } from './columns'
 import { DataTable } from './data-table'
-import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
 
 export default function LinesLayout() {
-  const { data, error } = FetchData<LinesFrameData[]>('linha')
-
-  if (error) return toast(error.message)
+  const { data } = FetchData<LoadLines>('linha')
 
   return (
     <div className="flex w-full flex-col">
-      <DataTable columns={columns} data={data || []}></DataTable>
+      <DataTable columns={columns} data={data?.linhas || []}></DataTable>
     </div>
   )
 }

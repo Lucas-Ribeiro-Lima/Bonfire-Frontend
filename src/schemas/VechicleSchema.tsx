@@ -7,3 +7,7 @@ export const VehicleSchema = z.object({
 })
 
 export type VehiclesData = z.infer<typeof VehicleSchema>
+
+export type LoadVehicles = {
+  veiculos: VehiclesData[]
+}

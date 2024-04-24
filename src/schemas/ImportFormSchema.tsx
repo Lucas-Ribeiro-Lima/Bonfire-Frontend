@@ -49,13 +49,11 @@ export const ImportFormSecondSchema = z.object({
           }),
 })
 
-export const responseImportFirstSchema = z.object({
-  message: z.string(),
-})
-
 export const responseImportSecondSchema = z.object({
   message: z.string(),
-  counter: z.string(),
+  counter: z.number().optional(),
 })
+
+export type TResponseImport = z.infer<typeof responseImportSecondSchema>
 
 export type ImportFormData = z.infer<typeof ImportFormFirstSchema>
