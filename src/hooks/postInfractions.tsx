@@ -36,7 +36,7 @@ export async function postAuto(file: File, option: number) {
         .then((response) => {
           if (response.status === 200) {
             const data = responseImportSecondSchema.parse(response.data)
-            toast(`${data.message}, ${data.counter}`)
+            toast(`${data.message} Quantidade: ${data.counter}`)
           }
         })
         .catch((error: AxiosError) => {
