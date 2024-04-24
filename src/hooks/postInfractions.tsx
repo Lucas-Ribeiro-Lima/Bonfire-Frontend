@@ -16,7 +16,7 @@ export async function postAuto(file: File, option: number) {
 
     if (option === 1) {
       api
-        .post('autoInfracao/primeiraInstanciaCSV', body, { timeout: 1800000 })
+        .post('autoInfracao/primeiraInstanciaCSV', body, { timeout: 320000 })
         .then((response) => {
           if (response.status === 200) {
             const body = responseImportFirstSchema.parse(response.data)
@@ -32,7 +32,7 @@ export async function postAuto(file: File, option: number) {
 
     if (option === 2) {
       api
-        .post('autoInfracao/segundaInstancia', body, { timeout: 180000 })
+        .post('autoInfracao/segundaInstancia', body, { timeout: 320000 })
         .then((response) => {
           if (response.status === 200) {
             const data = responseImportSecondSchema.parse(response.data)
