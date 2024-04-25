@@ -10,7 +10,7 @@ export default function LinesLayout() {
 
   return (
     <div className="flex w-full flex-col">
-      <DataTable columns={columns} data={data?.linhas || []}></DataTable>
+      <DataTable columns={columns} data={data?.linha || []}></DataTable>
     </div>
   )
 }

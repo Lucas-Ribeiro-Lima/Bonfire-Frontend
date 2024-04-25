@@ -6,14 +6,14 @@ import { useState } from 'react'
 import { autoData, columns } from './columns'
 import { DataTable } from './data-table'
 
-interface autosFetch {
+interface ILoadAutos {
   autos: autoData[]
 }
 
 export default function InfractionLayout() {
   // Data fetch
   const [date, setDate] = useState(DEFAULTDATA)
-  const { data } = FetchData<autosFetch>(
+  const { data } = FetchData<ILoadAutos>(
     `/autoInfracao/primeiraInstancia/${date}`,
   )
 
