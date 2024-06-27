@@ -23,4 +23,24 @@ Apresento o Bonfire, um projeto de frontend desenvolvido exclusivamente por mim,
 - BONFIRE_CLIENT_SECRET=keycloak-client-secret
 - KEYCLOAK_ISSUER=http://keycloak-host/realms/keycloak-realm
 
+# **🎨 Illustration**
+
+### Home Page
+![Home page](./public/home-page.png)
+
+### Tables
+![React tables](./public/CRUD-vehicles.png)
+
+![CRUD edit modal](./public/delete-modal.png)
+
+![CRUD delete modal](./public/edit-modal.png)
+
+### Import
+
+![Import second instance page](./public/import-second-instance.png)
+
+### Next-auth Keycloak
+
+![Keycloack login page](./public/next-auth-keycloak-integration.png)
+
 Agradeço a todos que contribuíram, especialmente a você, por explorar o Bonfire e testemunhar meu compromisso com a excelência no desenvolvimento de software. 🔥✨
