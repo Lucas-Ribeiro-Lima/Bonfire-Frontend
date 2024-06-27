@@ -18,7 +18,7 @@ const SecondaryLayout: FC<SecondaryLayoutProp> = ({
     <SessionProvider session={session}>
       <div className="flex h-screen flex-col bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900">
         <div>
-          <Header></Header>
+          <Header setSidebarOpen={() => null}></Header>
         </div>
         <div className="relative bottom-10 flex flex-1 items-center justify-center">
           {children}

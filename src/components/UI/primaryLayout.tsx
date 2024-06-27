@@ -3,8 +3,8 @@ import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { ReactNode, useState } from 'react'
 import Footer from './footer'
-import { SideBar } from './sidebar'
 import Header from './header'
+import { SideBar } from './sidebar'
 
 interface Props {
   children?: ReactNode
