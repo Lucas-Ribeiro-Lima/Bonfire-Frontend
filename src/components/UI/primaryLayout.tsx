@@ -25,7 +25,7 @@ function PrimaryLayout({ children, session }: Props) {
           <div
             className={` ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} duration-1000 ease-in-out`}
           >
-            <SideBar sidebarOpen={sidebarOpen}></SideBar>
+            <SideBar></SideBar>
           </div>
           <div className="flex-1">{children}</div>
         </div>
