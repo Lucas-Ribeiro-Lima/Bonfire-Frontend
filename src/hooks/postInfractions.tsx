@@ -10,6 +10,68 @@ export type eventT = {
   message?: string
 }
 
+export async function postAutoFirstInstance(file: File) {
+  if (!file) throw new Error('Auto vazio')
+
+  const event: eventT = {}
+
+  const body = new FormData()
+  body.append('file', file, file.name)
+
+  event.document = file.name
+
+  await api
+    .post<TResponseImport>('autoInfracao/primeiraInstanciaCSV', body, {
+      timeout: 320000,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        event.message = response.data.message
+      }
+    })
+    .catch((error: AxiosError<TCustomError>) => {
+      event.message = error.response?.data.message
+    })
+    .finally(() => {
+      toast(event.message)
+      SetNotificationLocalStorage(event)
+    })
+}
+
+export async function PostAutoSecondInstance(file: File) {
+  if (!file) throw new Error('Auto vazio')
+
+  const event: eventT = {}
+
+  const body = new FormData()
+  body.append('file', file, file.name)
+
+  event.document = file.name
+
+  await api
+    .post<TResponseImport>('autoInfracao/segundaInstancia', body, {
+      timeout: 320000,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        event.message = `${response.data.message} Quantidade: ${response.data.counter}`
+      }
+    })
+    .catch((error: AxiosError<TCustomError>) => {
+      event.message = error.response?.data.message
+    })
+    .finally(() => {
+      toast(event.message)
+      SetNotificationLocalStorage(event)
+    })
+}
+
+/**
+ * PostAuto
+ * @param file
+ * @param option
+ * @deprecated
+ */
 export async function postAuto(file: File, option: number) {
   if (!file) throw new Error('Auto vazio')
 

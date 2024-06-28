@@ -1,6 +1,6 @@
 'use client'
 
-import { postAuto } from '@/hooks/postInfractions'
+import { PostAutoSecondInstance } from '@/hooks/postInfractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
@@ -25,7 +25,7 @@ const ImportFormSegundaInstancia = () => {
   function onSubmitImportSegunda(data: ImportFormData) {
     if (!data.file) return
     setImporting(true)
-    postAuto(data.file, 2).finally(() => setImporting(false))
+    PostAutoSecondInstance(data.file).finally(() => setImporting(false))
   }
 
   return (
