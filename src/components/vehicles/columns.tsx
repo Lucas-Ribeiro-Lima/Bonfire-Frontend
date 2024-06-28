@@ -68,7 +68,7 @@ export const columns: ColumnDef<VehiclesData>[] = [
     header: () => <div className="text-center font-bold">Ações</div>,
     cell: ({ row }) => {
       const vehicle = row.original
-      const [dialogOption, setDialogOption] = useState<string | undefined>()
+      const [dialogOption, setDialogOption] = useState<string>('')
 
       function handleDialogOptionEdit() {
         setDialogOption('edit')
