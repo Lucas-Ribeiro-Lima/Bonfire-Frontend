@@ -23,7 +23,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }: headerProp) => {
         <button className="text-white" onClick={handleSideBar}>
           <SidebarCloseIcon></SidebarCloseIcon>
         </button>
-        <div className="bg-gradient-to-r from-sky-500 via-sky-700 to-sky-400 bg-clip-text text-2xl font-bold text-transparent">
+        <div className="bonfire-color text-2xl font-semibold">
           {status === 'authenticated' ? session.user?.name : null}
         </div>
       </div>

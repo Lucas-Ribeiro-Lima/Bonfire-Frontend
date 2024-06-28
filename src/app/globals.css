@@ -66,6 +66,19 @@
   }
 }
 
+.bonfire-color {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --tw-gradient-from: #0ea5e9 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(14 165 233 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  --tw-gradient-to: rgb(3 105 161 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #0369a1 var(--tw-gradient-via-position), var(--tw-gradient-to);
+  --tw-gradient-to: #38bdf8 var(--tw-gradient-to-position);
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+
 @layer base {
   * {
     @apply border-border;
