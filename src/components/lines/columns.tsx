@@ -76,7 +76,9 @@ export const columns: ColumnDef<LinesFrameData>[] = [
     header: () => <div className="text-center font-bold">Ações</div>,
     cell: ({ row }) => {
       const line = row.original
-      const [dialogOption, setDialogOption] = useState<string>('')
+      const [dialogOption, setDialogOption] = useState<
+        'edit' | 'include' | 'delete'
+      >('include')
 
       function handleDialogOptionEdit() {
         setDialogOption('edit')

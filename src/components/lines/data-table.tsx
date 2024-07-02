@@ -10,6 +10,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
+import { Button } from '@/components/UI/button'
+import { Input } from '@/components/UI/input'
 import {
   Table,
   TableBody,
@@ -20,8 +22,8 @@ import {
   TableRow,
 } from '@/components/UI/table'
 import { useState } from 'react'
-import { Button } from '@/components/UI/button'
-import { Input } from '@/components/UI/input'
+import { Dialog, DialogTrigger } from '../UI/dialog'
+import { DialogContentLine } from './dialogLines'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -50,7 +52,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border bg-slate-950 p-2">
-      <div className="flex items-center py-4 pl-4">
+      <div className="flex w-full items-center justify-between py-4 pl-4">
         <Input
           placeholder="Linha"
           value={
@@ -61,6 +63,22 @@ export function DataTable<TData, TValue>({
           }
           className="w-36"
         />
+        <Dialog>
+          <DialogTrigger>
+            <Button className="mr-8 self-end">Incluir</Button>
+          </DialogTrigger>
+          <div className="hidden">
+            <DialogContentLine
+              line={{
+                COD_LINH: '',
+                COMPARTILHADA: false,
+                ID_OPERADORA: 0,
+                LINH_ATIV_EMPR: false,
+              }}
+              option="include"
+            ></DialogContentLine>
+          </div>
+        </Dialog>
       </div>
       <div className="borde rounded-md">
         <Table>

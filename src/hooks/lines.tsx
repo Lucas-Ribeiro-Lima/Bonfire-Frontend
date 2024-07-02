@@ -23,6 +23,36 @@ export function useGetLines() {
   return { data, mutate }
 }
 
+export async function postLine({
+  COD_LINH,
+  ID_OPERADORA,
+  COMPARTILHADA,
+  LINH_ATIV_EMPR,
+}: LinesFrameData) {
+  const event: eventT = {}
+  const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR }]
+
+  event.document = COD_LINH
+
+  await api
+    .post('/linha', linha)
+    .then((response: AxiosResponse<TApiResponse>) => {
+      if (response.status === 201) {
+        event.message = response.data.message
+      }
+    })
+    .catch((error: AxiosError<TCustomError>) => {
+      event.message = error.response?.data.message
+    })
+    .finally(() => {
+      SetNotificationLocalStorage({
+        document: event.document,
+        message: event.message,
+      })
+      toast(event.message)
+    })
+}
+
 export async function patchLine({
   COD_LINH,
   ID_OPERADORA,

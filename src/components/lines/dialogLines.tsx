@@ -17,7 +17,7 @@ import {
 } from '@/components/UI/form'
 import { Input } from '@/components/UI/input'
 import { linesContext } from '@/contexts/lineContext'
-import { patchLine } from '@/hooks/lines'
+import { patchLine, postLine } from '@/hooks/lines'
 import {
   LinesFrameData,
   LinesFrameDataSchema,
@@ -29,7 +29,7 @@ import { toast } from 'sonner'
 
 interface DialogContentLineProp {
   line: LinesFrameData
-  option: string
+  option: 'edit' | 'delete' | 'include'
 }
 
 export function DialogContentLine({
@@ -45,24 +45,38 @@ export function DialogContentLine({
       LINH_ATIV_EMPR,
     },
   })
-
   const { data, mutate } = useContext(linesContext)
 
-  function onSubmit({
+  function handleUpdate({
     COMPARTILHADA,
     COD_LINH,
     LINH_ATIV_EMPR,
     ID_OPERADORA,
   }: LinesFrameData) {
     patchLine({ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR })
-
     const updatedData = data?.map((line) => {
       if (line.COD_LINH === COD_LINH) {
         return { ...line, COMPARTILHADA, LINH_ATIV_EMPR }
       }
       return line
     })
+    mutate(updatedData, false)
+  }
 
+  function handleInclude({
+    COMPARTILHADA,
+    COD_LINH,
+    LINH_ATIV_EMPR,
+    ID_OPERADORA,
+  }: LinesFrameData) {
+    postLine({ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR })
+    data?.push({
+      COD_LINH,
+      ID_OPERADORA,
+      COMPARTILHADA,
+      LINH_ATIV_EMPR,
+    })
+    const updatedData = data
     mutate(updatedData, false)
   }
 
@@ -73,7 +87,7 @@ export function DialogContentLine({
   if (option === 'edit') {
     return (
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(handleUpdate)}>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Editar linha</DialogTitle>
@@ -161,7 +175,106 @@ export function DialogContentLine({
                   Cancelar
                 </Button>
               </DialogClose>
-              <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
+              <Button type="submit" onClick={form.handleSubmit(handleUpdate)}>
+                Salvar
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </form>
+      </Form>
+    )
+  }
+
+  if (option === 'include') {
+    return (
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleInclude)}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Cadastrar linha</DialogTitle>
+              <DialogDescription>Faça inclusão da linha</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-8">
+              <FormField
+                control={form.control}
+                name="COD_LINH"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center gap-4">
+                      <FormLabel className="w-24">Código Linha:</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="w-44"
+                          placeholder="Código Linha"
+                          {...field}
+                        />
+                      </FormControl>
+                    </div>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="ID_OPERADORA"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center gap-4">
+                      <FormLabel className="w-24">Operadora:</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="w-44"
+                          placeholder="Operadora"
+                          {...field}
+                        />
+                      </FormControl>
+                    </div>
+                  </FormItem>
+                )}
+              />
+              <div className="justify-left flex space-x-16">
+                <FormField
+                  control={form.control}
+                  name="COMPARTILHADA"
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="flex items-center gap-2">
+                        <FormLabel>Compartilhada</FormLabel>
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          ></Checkbox>
+                        </FormControl>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="LINH_ATIV_EMPR"
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="flex items-center gap-2">
+                        <FormLabel>Ativa</FormLabel>
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          ></Checkbox>
+                        </FormControl>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="button" variant="secondary">
+                  Cancelar
+                </Button>
+              </DialogClose>
+              <Button type="submit" onClick={form.handleSubmit(handleInclude)}>
                 Salvar
               </Button>
             </DialogFooter>
