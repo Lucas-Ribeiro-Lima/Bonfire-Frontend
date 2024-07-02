@@ -16,11 +16,14 @@ import {
   FormLabel,
 } from '@/components/UI/form'
 import { Input } from '@/components/UI/input'
+import { linesContext } from '@/contexts/lineContext'
+import { patchLine } from '@/hooks/lines'
 import {
   LinesFrameData,
   LinesFrameDataSchema,
 } from '@/schemas/LinesFrameDataSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -43,8 +46,24 @@ export function DialogContentLine({
     },
   })
 
-  function onSubmit() {
-    toast(`Editando a linha ${COD_LINH} - Operadora: ${ID_OPERADORA}`)
+  const { data, mutate } = useContext(linesContext)
+
+  function onSubmit({
+    COMPARTILHADA,
+    COD_LINH,
+    LINH_ATIV_EMPR,
+    ID_OPERADORA,
+  }: LinesFrameData) {
+    patchLine({ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR })
+
+    const updatedData = data?.map((line) => {
+      if (line.COD_LINH === COD_LINH) {
+        return { ...line, COMPARTILHADA, LINH_ATIV_EMPR }
+      }
+      return line
+    })
+
+    mutate(updatedData, false)
   }
 
   function handleDelete() {

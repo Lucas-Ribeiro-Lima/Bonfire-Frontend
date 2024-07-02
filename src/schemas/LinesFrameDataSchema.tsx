@@ -12,3 +12,8 @@ export type LinesFrameData = z.infer<typeof LinesFrameDataSchema>
 export type LoadLines = {
   linha: LinesFrameData[]
 }
+
+export type TPatchLines = {
+  message: string
+  counter: string
+}

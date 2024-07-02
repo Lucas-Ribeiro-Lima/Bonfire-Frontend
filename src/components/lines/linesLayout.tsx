@@ -1,16 +1,16 @@
 'use client'
 
-import { FetchData } from '@/hooks/fetchData'
-import { LoadLines } from '@/schemas/LinesFrameDataSchema'
+import { linesContext } from '@/contexts/lineContext'
+import { useContext } from 'react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
 
 export default function LinesLayout() {
-  const { data } = FetchData<LoadLines>('linha')
+  const { data } = useContext(linesContext)
 
   return (
     <div className="flex w-full flex-col">
-      <DataTable columns={columns} data={data?.linha || []}></DataTable>
+      <DataTable columns={columns} data={data || []}></DataTable>
     </div>
   )
 }

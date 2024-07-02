@@ -1,14 +1,10 @@
 import { SetNotificationLocalStorage } from '@/components/UI/notificationBar'
 import { TResponseImport } from '@/schemas/ImportFormSchema'
 import { TCustomError } from '@/schemas/errorsSchema'
+import { eventT } from '@/schemas/notificationSchema'
 import { api } from '@/services/apiClient'
 import { AxiosError } from 'axios'
 import { toast } from 'sonner'
-
-export type eventT = {
-  document?: string
-  message?: string
-}
 
 export async function postAutoFirstInstance(file: File) {
   if (!file) throw new Error('Auto vazio')

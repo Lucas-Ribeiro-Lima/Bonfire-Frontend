@@ -6,3 +6,12 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const DEFAULTDATA = new Date().toISOString().split('T')[0]
+
+export function convertToBoolean(value: string | boolean) {
+  if (value === '\u0001') {
+    return true
+  } else if (value === '\u0000') {
+    return false
+  }
+  return Boolean(value)
+}

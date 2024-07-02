@@ -1,6 +1,6 @@
 import z from 'zod'
 
-export const errorSchema = z.object({
+export const ErrorSchema = z.object({
   error: z.string(),
   message: z.string(),
   status: z.number().optional(),
@@ -8,4 +8,4 @@ export const errorSchema = z.object({
   qtdTables: z.number().optional(),
 })
 
-export type TCustomError = z.infer<typeof errorSchema>
+export type TCustomError = z.infer<typeof ErrorSchema>

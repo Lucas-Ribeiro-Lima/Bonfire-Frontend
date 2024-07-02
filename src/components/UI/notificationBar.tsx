@@ -1,5 +1,5 @@
 import { ScrollArea } from '@/components/UI/scroll-area'
-import { eventT } from '@/hooks/postInfractions'
+import { eventT } from '@/schemas/notificationSchema'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -64,7 +64,7 @@ export function NotificationBar() {
           {qtdNotifications}
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="relative right-4 top-2 shadow-md shadow-zinc-700">
+      <DropdownMenuContent className="relative right-4 top-2 z-20 shadow-md shadow-zinc-700">
         <ScrollArea className="flex h-96 w-72 flex-col rounded-lg bg-slate-950">
           <div className="fixed flex w-full justify-end p-4">
             <button onClick={clearNotifications}>

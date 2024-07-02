@@ -78,11 +78,6 @@ export const columns: ColumnDef<LinesFrameData>[] = [
       const line = row.original
       const [dialogOption, setDialogOption] = useState<string>('')
 
-      // function handleEditLine() {
-      //   toast(`Editar a linha ${line.COD_LINH}`)
-      //   return console.log(`Editar a linha ${line.COD_LINH}`)
-      // }
-
       function handleDialogOptionEdit() {
         setDialogOption('edit')
       }
