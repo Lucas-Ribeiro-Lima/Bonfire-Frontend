@@ -60,7 +60,7 @@ export function NotificationBar() {
     <DropdownMenu>
       <DropdownMenuTrigger className="flex">
         <LucideBell className="scale-90" />
-        <div className="relative right-2 top-2 flex h-4 w-4 scale-90 items-center justify-center rounded-full bg-red-800 text-sm">
+        <div className="relative right-2 top-2 z-10 flex h-4 w-4 scale-90 items-center justify-center rounded-full bg-red-800 p-3 text-sm">
           {qtdNotifications}
         </div>
       </DropdownMenuTrigger>
