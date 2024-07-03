@@ -21,10 +21,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/UI/table'
+import { useLines } from '@/hooks/useLines'
 import { useState } from 'react'
 import { Dialog, DialogTrigger } from '../UI/dialog'
 import { DialogInsertLine } from './dialogLines'
-import { IncludeLine } from '@/services/lines'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -37,6 +37,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [rowSelection, setRowSelection] = useState({})
+  const { handleInsert } = useLines()
   const table = useReactTable({
     data,
     columns,
@@ -76,7 +77,7 @@ export function DataTable<TData, TValue>({
                 ID_OPERADORA: 0,
                 LINH_ATIV_EMPR: false,
               }}
-              onInsertLine={IncludeLine}
+              onInsertLine={handleInsert}
             ></DialogInsertLine>
           </div>
         </Dialog>

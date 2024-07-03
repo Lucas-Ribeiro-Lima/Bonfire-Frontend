@@ -16,6 +16,7 @@ import {
   FormLabel,
 } from '@/components/UI/form'
 import { Input } from '@/components/UI/input'
+import { useLines } from '@/hooks/useLines'
 import {
   LinesFrameData,
   LinesFrameDataSchema,
@@ -27,22 +28,9 @@ interface DialogContentLineProp {
   line: LinesFrameData
 }
 
-interface DialogEditLineProp extends DialogContentLineProp {
-  onUpdateLine: (data: LinesFrameData) => void
-}
-
-interface DialogInsertLineProp extends DialogContentLineProp {
-  onInsertLine: (data: LinesFrameData) => void
-}
-
-interface DialogDeleteLineProp extends DialogContentLineProp {
-  onDeleteLine: (COD_LINH: string) => void
-}
-
 export function DialogEditLine({
   line: { COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR },
-  onUpdateLine,
-}: Readonly<DialogEditLineProp>) {
+}: Readonly<DialogContentLineProp>) {
   const form = useForm<LinesFrameData>({
     resolver: zodResolver(LinesFrameDataSchema),
     defaultValues: {
@@ -52,10 +40,11 @@ export function DialogEditLine({
       LINH_ATIV_EMPR,
     },
   })
+  const { handleUpdate } = useLines()
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onUpdateLine)}>
+      <form onSubmit={form.handleSubmit(handleUpdate)}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Editar linha</DialogTitle>
@@ -143,7 +132,7 @@ export function DialogEditLine({
                 Cancelar
               </Button>
             </DialogClose>
-            <Button type="submit" onClick={form.handleSubmit(onUpdateLine)}>
+            <Button type="submit" onClick={form.handleSubmit(handleUpdate)}>
               Salvar
             </Button>
           </DialogFooter>
@@ -155,8 +144,7 @@ export function DialogEditLine({
 
 export function DialogInsertLine({
   line: { COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR },
-  onInsertLine,
-}: Readonly<DialogInsertLineProp>) {
+}: Readonly<DialogContentLineProp>) {
   const form = useForm<LinesFrameData>({
     resolver: zodResolver(LinesFrameDataSchema),
     defaultValues: {
@@ -166,10 +154,11 @@ export function DialogInsertLine({
       LINH_ATIV_EMPR,
     },
   })
+  const { handleInsert } = useLines()
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onInsertLine)}>
+      <form onSubmit={form.handleSubmit(handleInsert)}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Cadastrar linha</DialogTitle>
@@ -255,7 +244,7 @@ export function DialogInsertLine({
                 Cancelar
               </Button>
             </DialogClose>
-            <Button type="submit" onClick={form.handleSubmit(onInsertLine)}>
+            <Button type="submit" onClick={form.handleSubmit(handleInsert)}>
               Salvar
             </Button>
           </DialogFooter>
@@ -267,8 +256,9 @@ export function DialogInsertLine({
 
 export function DialogDeleteLine({
   line: { COD_LINH },
-  onDeleteLine,
-}: Readonly<DialogDeleteLineProp>) {
+}: Readonly<DialogContentLineProp>) {
+  const { handleDelete } = useLines()
+
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
@@ -284,7 +274,7 @@ export function DialogDeleteLine({
         <Button
           variant="destructive"
           type="submit"
-          onClick={() => onDeleteLine(COD_LINH)}
+          onClick={() => handleDelete(COD_LINH)}
         >
           Excluir
         </Button>

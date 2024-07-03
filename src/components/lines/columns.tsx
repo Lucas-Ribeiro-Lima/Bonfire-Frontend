@@ -10,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/UI/dropdown-menu'
 import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
-import { DeleteLine, UpdateLine } from '@/services/lines'
 import { ColumnDef } from '@tanstack/react-table'
 import { MoreHorizontal, PencilIcon } from 'lucide-react'
 import { useState } from 'react'
@@ -116,16 +115,10 @@ export const columns: ColumnDef<LinesFrameData>[] = [
               </DropdownMenuContent>
             </DropdownMenu>
             {dialogOption === 'edit' && (
-              <DialogEditLine
-                line={line}
-                onUpdateLine={UpdateLine}
-              ></DialogEditLine>
+              <DialogEditLine line={line}></DialogEditLine>
             )}
             {dialogOption === 'delete' && (
-              <DialogDeleteLine
-                line={line}
-                onDeleteLine={DeleteLine}
-              ></DialogDeleteLine>
+              <DialogDeleteLine line={line}></DialogDeleteLine>
             )}
           </Dialog>
         </div>

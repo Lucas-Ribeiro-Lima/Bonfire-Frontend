@@ -1,14 +1,12 @@
 import { SetNotificationLocalStorage } from '@/components/UI/notificationBar'
-import { linesContext } from '@/contexts/lineContext'
+import { convertToBoolean } from '@/lib/utils'
 import { LinesFrameData, LoadLines } from '@/schemas/LinesFrameDataSchema'
 import { eventT } from '@/schemas/notificationSchema'
 import { TApiResponse } from '@/schemas/responseSchema'
 import { AxiosError } from 'axios'
-import { useContext } from 'react'
 import { toast } from 'sonner'
-import { api } from './apiClient'
-import { convertToBoolean } from '@/lib/utils'
 import useSWR from 'swr'
+import { api } from './apiClient'
 
 export function GetLines() {
   const { data, mutate } = useSWR<LinesFrameData[]>('/linha', async () => {
@@ -30,7 +28,6 @@ export async function UpdateLine({
   LINH_ATIV_EMPR,
   ID_OPERADORA,
 }: LinesFrameData) {
-  const { data, mutate } = useContext(linesContext)
   const event: eventT = {}
   const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR }]
 
@@ -48,14 +45,7 @@ export async function UpdateLine({
     })
     toast(event.message)
   }
-
-  const updatedData = data?.map((line) => {
-    if (line.COD_LINH === COD_LINH) {
-      return { ...line, COMPARTILHADA, LINH_ATIV_EMPR }
-    }
-    return line
-  })
-  mutate(updatedData, false)
+  return linha[0]
 }
 
 export async function IncludeLine({
@@ -64,7 +54,6 @@ export async function IncludeLine({
   LINH_ATIV_EMPR,
   ID_OPERADORA,
 }: LinesFrameData) {
-  const { data, mutate } = useContext(linesContext)
   const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR }]
   const event: eventT = {}
 
@@ -84,16 +73,10 @@ export async function IncludeLine({
     })
     toast(event.message)
   }
-
-  if (data) {
-    const updatedData = [
-      ...data,
-      { COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR },
-    ]
-    mutate(updatedData, false)
-  }
+  return linha[0]
 }
 
 export async function DeleteLine(COD_LINH: string) {
   toast(`Deletando a linha ${COD_LINH}`)
+  return COD_LINH
 }
