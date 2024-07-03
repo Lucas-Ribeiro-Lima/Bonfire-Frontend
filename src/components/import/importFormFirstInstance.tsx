@@ -1,9 +1,8 @@
 'use client'
 
-import { PostAutoFirstInstance } from '@/services/infractions'
+import { useInfractionsFirst } from '@/hooks/useInfractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   ImportFormData,
@@ -12,8 +11,6 @@ import {
 import { Button } from '../UI/button'
 
 function ImportFormFirstInstance() {
-  const [importing, setImporting] = useState(false)
-
   const {
     register,
     handleSubmit,
@@ -21,17 +18,7 @@ function ImportFormFirstInstance() {
   } = useForm<ImportFormData>({
     resolver: zodResolver(ImportFormFirstSchema),
   })
-
-  // Função de handling do import
-  function HandleImportFirst(data: ImportFormData) {
-    if (!data.file) return
-    try {
-      setImporting(true)
-      PostAutoFirstInstance(data.file).finally(() => setImporting(false))
-    } finally {
-      setImporting(false)
-    }
-  }
+  const { importing, HandleImportFirst } = useInfractionsFirst()
 
   return (
     <div className="space-y-4 rounded-md bg-slate-950 p-8">

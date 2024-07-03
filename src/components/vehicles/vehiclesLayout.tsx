@@ -1,19 +1,16 @@
 'use client'
 
-import { FetchData } from '@/hooks/fetchData'
-import { LoadVehicles } from '@/schemas/VechicleSchema'
-import { toast } from 'sonner'
+import { VehicleContext } from '@/contexts/vehicleContext'
+import { useContext } from 'react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
 
 export default function VehiclesLayout() {
-  const { data, error } = FetchData<LoadVehicles>('veiculos')
-
-  if (error) return toast(error.message)
+  const { data } = useContext(VehicleContext)
 
   return (
     <div className="flex w-full flex-col">
-      <DataTable columns={columns} data={data?.veiculos || []}></DataTable>
+      <DataTable columns={columns} data={data || []}></DataTable>
     </div>
   )
 }

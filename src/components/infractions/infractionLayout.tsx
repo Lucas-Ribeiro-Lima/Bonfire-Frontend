@@ -1,12 +1,15 @@
 'use client'
 
-import { useInfractionsFirst } from '@/hooks/useInfractions'
+import { DEFAULTDATA } from '@/lib/utils'
+import { GetAutoFirstInstance } from '@/services/infractions'
+import { useState } from 'react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
 
 export default function InfractionLayout() {
   // Data fetch
-  const { data, setDate } = useInfractionsFirst()
+  const [date, setDate] = useState(DEFAULTDATA)
+  const { data } = GetAutoFirstInstance(date)
 
   return (
     <div className="flex w-full flex-col">

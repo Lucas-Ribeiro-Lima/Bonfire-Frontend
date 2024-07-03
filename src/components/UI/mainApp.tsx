@@ -5,7 +5,7 @@ import LogoCompleta from './logo'
 
 interface MainAppProps {
   children: ReactNode
-  // title?: string
+  title?: string
 }
 
 function MainApp({ children }: MainAppProps) {

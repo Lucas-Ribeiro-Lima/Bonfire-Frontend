@@ -1,11 +1,9 @@
-import { SetNotificationLocalStorage } from '@/components/UI/notificationBar'
 import { autoData } from '@/components/infractions/columns'
 import { TResponseImport } from '@/schemas/ImportFormSchema'
 import { TCustomError } from '@/schemas/errorsSchema'
-import { eventT } from '@/schemas/notificationSchema'
+import { EventT } from '@/schemas/notificationSchema'
 import { api } from '@/services/apiClient'
 import { AxiosError } from 'axios'
-import { toast } from 'sonner'
 import useSWR from 'swr'
 
 interface ILoadAutos {
@@ -23,10 +21,21 @@ export function GetAutoFirstInstance(date: string) {
   return { data, error, isLoading }
 }
 
+export function GetAutoSecondInstance(date: string) {
+  const { data, error, isLoading } = useSWR<ILoadAutos>(
+    `/autoInfracao/segundaInstancia/${date}`,
+    async () => {
+      const response = await api.get(`/autoInfracao/segundaInstancia/${date}`)
+      return response.data
+    },
+  )
+  return { data, error, isLoading }
+}
+
 export async function PostAutoFirstInstance(file: File) {
   if (!file) throw new Error('Auto vazio')
 
-  const event: eventT = {}
+  const event: EventT = {}
   const body = new FormData()
   event.document = file.name
 
@@ -45,16 +54,13 @@ export async function PostAutoFirstInstance(file: File) {
     if (error instanceof AxiosError) {
       event.message = error.response?.data.message
     }
-  } finally {
-    toast(event.message)
-    SetNotificationLocalStorage(event)
   }
 }
 
 export async function PostAutoSecondInstance(file: File) {
   if (!file) throw new Error('Auto vazio')
 
-  const event: eventT = {}
+  const event: EventT = {}
   const body = new FormData()
   event.document = file.name
 
@@ -73,9 +79,6 @@ export async function PostAutoSecondInstance(file: File) {
     if (error instanceof AxiosError) {
       event.message = error.response?.data.message
     }
-  } finally {
-    toast(event.message)
-    SetNotificationLocalStorage(event)
   }
 }
 
@@ -88,7 +91,7 @@ export async function PostAutoSecondInstance(file: File) {
 export async function PostAuto(file: File, option: number) {
   if (!file) throw new Error('Auto vazio')
 
-  const event: eventT = {}
+  const event: EventT = {}
 
   const body = new FormData()
   body.append('file', file, file.name)
@@ -108,10 +111,6 @@ export async function PostAuto(file: File, option: number) {
       .catch((error: AxiosError<TCustomError>) => {
         event.message = error.response?.data.message
       })
-      .finally(() => {
-        toast(event.message)
-        SetNotificationLocalStorage(event)
-      })
   }
 
   if (option === 2) {
@@ -126,10 +125,6 @@ export async function PostAuto(file: File, option: number) {
       })
       .catch((error: AxiosError<TCustomError>) => {
         event.message = error.response?.data.message
-      })
-      .finally(() => {
-        toast(event.message)
-        SetNotificationLocalStorage(event)
       })
   }
 }

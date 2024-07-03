@@ -1,9 +1,8 @@
 'use client'
 
-import { PostAutoSecondInstance } from '@/services/infractions'
+import { useInfractionsSecond } from '@/hooks/useInfractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   ImportFormData,
@@ -12,8 +11,6 @@ import {
 import { Button } from '../UI/button'
 
 function ImportFormSecondInstance() {
-  const [importing, setImporting] = useState(false)
-
   const {
     register,
     handleSubmit,
@@ -22,15 +19,7 @@ function ImportFormSecondInstance() {
     resolver: zodResolver(ImportFormSecondSchema),
   })
 
-  function HandleImportSecond(data: ImportFormData) {
-    if (!data.file) return
-    try {
-      setImporting(true)
-      PostAutoSecondInstance(data.file).finally(() => setImporting(false))
-    } finally {
-      setImporting(false)
-    }
-  }
+  const { importing, HandleImportSecond } = useInfractionsSecond()
 
   return (
     <div className="space-y-4 rounded-md bg-slate-950 p-8">

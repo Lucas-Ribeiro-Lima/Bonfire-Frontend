@@ -13,7 +13,7 @@ import { useState } from 'react'
 import { Button } from '../UI/button'
 import { Checkbox } from '../UI/checkbox'
 import { Dialog, DialogTrigger } from '../UI/dialog'
-import { DialogContentLine } from './dialogVehicles'
+import { DialogDeleteVehicle, DialogEditVehicle } from './dialogVehicles'
 
 export const columns: ColumnDef<VehiclesData>[] = [
   {
@@ -68,15 +68,9 @@ export const columns: ColumnDef<VehiclesData>[] = [
     header: () => <div className="text-center font-bold">Ações</div>,
     cell: ({ row }) => {
       const vehicle = row.original
-      const [dialogOption, setDialogOption] = useState<string>('')
-
-      function handleDialogOptionEdit() {
-        setDialogOption('edit')
-      }
-
-      function handleDialogOptionDelete() {
-        setDialogOption('delete')
-      }
+      const [dialogOption, setDialogOption] = useState<'edit' | 'delete'>(
+        'edit',
+      )
 
       return (
         <div className="flex justify-center">
@@ -89,7 +83,7 @@ export const columns: ColumnDef<VehiclesData>[] = [
                 <DropdownMenuItem>
                   <DialogTrigger asChild>
                     <Button
-                      onClick={handleDialogOptionEdit}
+                      onClick={() => setDialogOption('edit')}
                       variant="ghost"
                       className="flex gap-1"
                     >
@@ -101,7 +95,7 @@ export const columns: ColumnDef<VehiclesData>[] = [
                 <DropdownMenuItem>
                   <DialogTrigger asChild>
                     <Button
-                      onClick={handleDialogOptionDelete}
+                      onClick={() => setDialogOption('delete')}
                       variant="destructive"
                       className="flex gap-1"
                     >
@@ -112,10 +106,12 @@ export const columns: ColumnDef<VehiclesData>[] = [
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <DialogContentLine
-              veic={vehicle}
-              option={dialogOption}
-            ></DialogContentLine>
+            {dialogOption === 'edit' && (
+              <DialogEditVehicle vehicle={vehicle}></DialogEditVehicle>
+            )}
+            {dialogOption === 'delete' && (
+              <DialogDeleteVehicle vehicle={vehicle}></DialogDeleteVehicle>
+            )}
           </Dialog>
         </div>
       )

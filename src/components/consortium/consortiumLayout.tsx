@@ -1,15 +1,5 @@
 'use client'
 
-import { FetchData } from '@/hooks/fetchData'
-import ConsortiumFrame from './consortiumFrame'
-
-type ConsortiumDataType = {
-  consorcio: {
-    nome: string
-    compartilhado: string
-  }[]
-}
-
 // function ConsortiumMenu() {
 //   return (
 //     <div className="relative m-6 flex flex-col gap-8">
@@ -48,23 +38,22 @@ type ConsortiumDataType = {
 // }
 
 export default async function ConsortiumLayout() {
-  const { data: ConsortiumData } = FetchData<ConsortiumDataType>('consorcio')
-
-  return (
-    <div className="flex flex-row">
-      {/* <ConsortiumsMenu></ConsortiumsMenu> */}
-      <div className="scrollbar flex h-96 flex-col overflow-y-scroll rounded-lg bg-zinc-700 pr-10">
-        {ConsortiumData?.consorcio.map(({ nome, compartilhado }) => {
-          return (
-            <div key={nome}>
-              <ConsortiumFrame
-                nome={nome}
-                compartilhado={compartilhado}
-              ></ConsortiumFrame>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
+  // const { data: ConsortiumData } = FetchData<ConsortiumDataType>('consorcio')
+  // return (
+  //   <div className="flex flex-row">
+  //     {/* <ConsortiumsMenu></ConsortiumsMenu> */}
+  //     <div className="scrollbar flex h-96 flex-col overflow-y-scroll rounded-lg bg-zinc-700 pr-10">
+  //       {ConsortiumData?.consorcio.map(({ nome, compartilhado }) => {
+  //         return (
+  //           <div key={nome}>
+  //             <ConsortiumFrame
+  //               nome={nome}
+  //               compartilhado={compartilhado}
+  //             ></ConsortiumFrame>
+  //           </div>
+  //         )
+  //       })}
+  //     </div>
+  //   </div>
+  // )
 }

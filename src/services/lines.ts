@@ -1,12 +1,10 @@
-import { SetNotificationLocalStorage } from '@/components/UI/notificationBar'
 import { convertToBoolean } from '@/lib/utils'
 import { LinesFrameData, LoadLines } from '@/schemas/LinesFrameDataSchema'
-import { eventT } from '@/schemas/notificationSchema'
+import { EventT } from '@/schemas/notificationSchema'
 import { TApiResponse } from '@/schemas/responseSchema'
 import { AxiosError } from 'axios'
-import { toast } from 'sonner'
-import useSWR from 'swr'
 import { api } from './apiClient'
+import useSWR from 'swr'
 
 export function GetLines() {
   const { data, mutate } = useSWR<LinesFrameData[]>('/linha', async () => {
@@ -18,7 +16,6 @@ export function GetLines() {
     linha.COMPARTILHADA = convertToBoolean(linha.COMPARTILHADA)
     linha.LINH_ATIV_EMPR = convertToBoolean(linha.LINH_ATIV_EMPR)
   })
-
   return { data, mutate }
 }
 
@@ -28,8 +25,10 @@ export async function UpdateLine({
   LINH_ATIV_EMPR,
   ID_OPERADORA,
 }: LinesFrameData) {
-  const event: eventT = {}
+  const event: EventT = {}
   const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR }]
+
+  event.document = COD_LINH
 
   try {
     const response = await api.patch<TApiResponse>('/linha', linha)
@@ -38,14 +37,8 @@ export async function UpdateLine({
     if (error instanceof AxiosError) {
       event.message = error.response?.data.message
     }
-  } finally {
-    SetNotificationLocalStorage({
-      document: COD_LINH,
-      message: event.message,
-    })
-    toast(event.message)
   }
-  return linha[0]
+  return { linha: linha[0], event }
 }
 
 export async function IncludeLine({
@@ -55,7 +48,7 @@ export async function IncludeLine({
   ID_OPERADORA,
 }: LinesFrameData) {
   const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR }]
-  const event: eventT = {}
+  const event: EventT = {}
 
   event.document = COD_LINH
 
@@ -66,17 +59,10 @@ export async function IncludeLine({
     if (error instanceof AxiosError) {
       event.message = error.response?.data.message
     }
-  } finally {
-    SetNotificationLocalStorage({
-      document: event.document,
-      message: event.message,
-    })
-    toast(event.message)
   }
-  return linha[0]
+  return { linha: linha[0], event }
 }
 
 export async function DeleteLine(COD_LINH: string) {
-  toast(`Deletando a linha ${COD_LINH}`)
   return COD_LINH
 }
