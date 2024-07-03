@@ -10,10 +10,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/UI/dropdown-menu'
 import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
+import { DeleteLine, UpdateLine } from '@/services/lines'
 import { ColumnDef } from '@tanstack/react-table'
 import { MoreHorizontal, PencilIcon } from 'lucide-react'
 import { useState } from 'react'
-import { DialogContentLine } from './dialogLines'
+import { DialogDeleteLine, DialogEditLine } from './dialogLines'
 
 export const columns: ColumnDef<LinesFrameData>[] = [
   {
@@ -80,14 +81,6 @@ export const columns: ColumnDef<LinesFrameData>[] = [
         'edit' | 'include' | 'delete'
       >('include')
 
-      function handleDialogOptionEdit() {
-        setDialogOption('edit')
-      }
-
-      function handleDialogOptionDelete() {
-        setDialogOption('delete')
-      }
-
       return (
         <div className="flex justify-center">
           <Dialog>
@@ -99,7 +92,7 @@ export const columns: ColumnDef<LinesFrameData>[] = [
                 <DropdownMenuItem>
                   <DialogTrigger asChild>
                     <Button
-                      onClick={handleDialogOptionEdit}
+                      onClick={() => setDialogOption('edit')}
                       variant="ghost"
                       className="flex gap-1"
                     >
@@ -111,7 +104,7 @@ export const columns: ColumnDef<LinesFrameData>[] = [
                 <DropdownMenuItem>
                   <DialogTrigger asChild>
                     <Button
-                      onClick={handleDialogOptionDelete}
+                      onClick={() => setDialogOption('delete')}
                       variant="destructive"
                       className="flex gap-1"
                     >
@@ -122,10 +115,18 @@ export const columns: ColumnDef<LinesFrameData>[] = [
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <DialogContentLine
-              line={line}
-              option={dialogOption}
-            ></DialogContentLine>
+            {dialogOption === 'edit' && (
+              <DialogEditLine
+                line={line}
+                onUpdateLine={UpdateLine}
+              ></DialogEditLine>
+            )}
+            {dialogOption === 'delete' && (
+              <DialogDeleteLine
+                line={line}
+                onDeleteLine={DeleteLine}
+              ></DialogDeleteLine>
+            )}
           </Dialog>
         </div>
       )

@@ -26,6 +26,7 @@ const autoSchema = z.object({
   VAL_INFR: z.number(),
   DAT_CANC: z.date(),
 })
+
 export type autoData = z.infer<typeof autoSchema>
 
 export const columns: ColumnDef<autoData>[] = [

@@ -23,7 +23,8 @@ import {
 } from '@/components/UI/table'
 import { useState } from 'react'
 import { Dialog, DialogTrigger } from '../UI/dialog'
-import { DialogContentLine } from './dialogLines'
+import { DialogInsertLine } from './dialogLines'
+import { IncludeLine } from '@/services/lines'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -68,15 +69,15 @@ export function DataTable<TData, TValue>({
             <Button className="mr-8 self-end">Incluir</Button>
           </DialogTrigger>
           <div className="hidden">
-            <DialogContentLine
+            <DialogInsertLine
               line={{
                 COD_LINH: '',
                 COMPARTILHADA: false,
                 ID_OPERADORA: 0,
                 LINH_ATIV_EMPR: false,
               }}
-              option="include"
-            ></DialogContentLine>
+              onInsertLine={IncludeLine}
+            ></DialogInsertLine>
           </div>
         </Dialog>
       </div>

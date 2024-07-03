@@ -48,10 +48,6 @@ export function DataTable<TData, TValue>({
     },
   })
 
-  function handleDataChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setDate(event.target.value)
-  }
-
   return (
     <div className="rounded-md border bg-slate-950 p-2">
       <div className="flex items-center gap-4 py-4 pl-4">
@@ -59,7 +55,7 @@ export function DataTable<TData, TValue>({
           placeholder="Data"
           className="w-36"
           type="date"
-          onBlur={handleDataChange}
+          onBlur={(event) => setDate(event.target.value)}
           defaultValue={DEFAULTDATA}
         />
         <Input

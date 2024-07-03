@@ -1,17 +1,17 @@
 'use client'
 
-import { postAutoFirstInstance } from '@/hooks/postInfractions'
+import { PostAutoSecondInstance } from '@/services/infractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   ImportFormData,
-  ImportFormFirstSchema,
+  ImportFormSecondSchema,
 } from '../../schemas/ImportFormSchema'
 import { Button } from '../UI/button'
 
-const ImportFormPrimeiraInstancia = () => {
+function ImportFormSecondInstance() {
   const [importing, setImporting] = useState(false)
 
   const {
@@ -19,20 +19,23 @@ const ImportFormPrimeiraInstancia = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ImportFormData>({
-    resolver: zodResolver(ImportFormFirstSchema),
+    resolver: zodResolver(ImportFormSecondSchema),
   })
 
-  // Função de handling do import
-  function onSubmitImport(data: ImportFormData) {
+  function HandleImportSecond(data: ImportFormData) {
     if (!data.file) return
-    setImporting(true)
-    postAutoFirstInstance(data.file).finally(() => setImporting(false))
+    try {
+      setImporting(true)
+      PostAutoSecondInstance(data.file).finally(() => setImporting(false))
+    } finally {
+      setImporting(false)
+    }
   }
 
   return (
     <div className="space-y-4 rounded-md bg-slate-950 p-8">
       <div className="flex items-center justify-center font-semibold">
-        Primeira Instância
+        Segunda Instância
       </div>
       <form className="mt-4 flex flex-col gap-4" encType="multipart/form-data">
         <div className="flex flex-col space-y-2">
@@ -44,7 +47,7 @@ const ImportFormPrimeiraInstancia = () => {
         </div>
         <Button
           type="submit"
-          onClick={handleSubmit(onSubmitImport)}
+          onClick={handleSubmit(HandleImportSecond)}
           variant="secondary"
           disabled={importing}
         >
@@ -61,4 +64,4 @@ const ImportFormPrimeiraInstancia = () => {
   )
 }
 
-export default ImportFormPrimeiraInstancia
+export default ImportFormSecondInstance

@@ -2,7 +2,14 @@
 import { api } from '@/services/apiClient'
 import useSWR from 'swr'
 
-export function FetchData<T = unknown>(url: string) {
+/**
+ *
+ * @deprecated
+ * @param url
+ * @returns
+ *
+ */
+export function useFetchData<T = unknown>(url: string) {
   const { data, error, isLoading, mutate } = useSWR<T, Error>(url, async () => {
     const response = await api.get<T>(url)
     return response.data

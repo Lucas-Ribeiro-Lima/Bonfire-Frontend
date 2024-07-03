@@ -1,7 +1,7 @@
 'use client'
 
-import { useGetLines } from '@/hooks/lines'
 import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
+import { GetLines } from '@/services/lines'
 import { createContext } from 'react'
 import { KeyedMutator } from 'swr'
 
@@ -16,8 +16,8 @@ type LinesProviderProps = {
 
 export const linesContext = createContext({} as LinesContextProps)
 
-export function LinesProvider({ children }: LinesProviderProps) {
-  const { data, mutate } = useGetLines()
+export function LinesProvider({ children }: Readonly<LinesProviderProps>) {
+  const { data, mutate } = GetLines()
 
   return (
     <linesContext.Provider value={{ data, mutate }}>

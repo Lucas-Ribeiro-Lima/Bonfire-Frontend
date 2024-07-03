@@ -1,13 +1,13 @@
 'use client'
-import ImportFormPrimeiraInstancia from '@/components/import/importFormPrimeiraInstancia'
 import MainApp from '@/components/UI/mainApp'
 import PrimaryLayout from '@/components/UI/primaryLayout'
+import ImportFormFirstInstance from '@/components/import/importFormFirstInstance'
 
 export default function Home() {
   return (
     <PrimaryLayout>
       <MainApp title="Importação Primeira Instância">
-        <ImportFormPrimeiraInstancia></ImportFormPrimeiraInstancia>
+        <ImportFormFirstInstance></ImportFormFirstInstance>
       </MainApp>
     </PrimaryLayout>
   )
