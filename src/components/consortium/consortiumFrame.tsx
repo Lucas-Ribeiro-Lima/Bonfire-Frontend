@@ -1,12 +1,9 @@
-type ConsortiumFrameType = {
-  nome: string
-  compartilhado: string
-}
+import { ConsortiumFrameData } from '@/schemas/consortiumSchema'
 
 export default function ConsortiumFrame({
   nome,
   compartilhado,
-}: ConsortiumFrameType) {
+}: Readonly<ConsortiumFrameData>) {
   return (
     <div className="m-4 flex w-full cursor-pointer flex-row justify-center gap-4 rounded-lg bg-zinc-500 p-4 hover:bg-zinc-400">
       <div className="font-bold text-sky-700 hover:text-sky-600">Nome: </div>

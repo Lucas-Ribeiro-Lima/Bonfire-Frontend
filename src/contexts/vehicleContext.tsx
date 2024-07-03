@@ -1,6 +1,6 @@
 import { VehiclesData } from '@/schemas/VechicleSchema'
 import { GetVehicles } from '@/services/vehicles'
-import { createContext } from 'react'
+import { createContext, useMemo } from 'react'
 import { KeyedMutator } from 'swr'
 
 type VehiclesContextProps = {
@@ -19,8 +19,10 @@ export function VehiclesProvider({
 }: Readonly<VehiclesProviderProps>) {
   const { data, mutate } = GetVehicles()
 
+  const valueMemo = useMemo(() => ({ data, mutate }), [data, mutate])
+
   return (
-    <VehicleContext.Provider value={{ data, mutate }}>
+    <VehicleContext.Provider value={valueMemo}>
       {children}
     </VehicleContext.Provider>
   )

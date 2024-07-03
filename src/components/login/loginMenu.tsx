@@ -7,7 +7,6 @@ const LoginMenu = () => {
       <div className="scale-150">
         <Logo></Logo>
       </div>
-      {/* <LoginForm></LoginForm> */}
       <LoginBtn></LoginBtn>
     </div>
   )
