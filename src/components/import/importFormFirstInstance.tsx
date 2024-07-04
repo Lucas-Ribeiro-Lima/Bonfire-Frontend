@@ -29,12 +29,10 @@ function ImportFormFirstInstance() {
         <div className="flex flex-col space-y-2">
           <label htmlFor="file">
             <input {...register('file')} type="file" accept=".docx"></input>
-            {errors.file && (
-              <span className="text-sm text-red-500">
-                {errors.file.message}
-              </span>
-            )}
           </label>
+          {errors.file && (
+            <span className="text-sm text-red-500">{errors.file.message}</span>
+          )}
         </div>
         <Button
           type="submit"
