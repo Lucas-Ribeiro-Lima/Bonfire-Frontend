@@ -4,31 +4,41 @@ import {
   PostAutoSecondInstance,
 } from '@/services/infractions'
 import { useState } from 'react'
+import { toast } from 'sonner'
+import { useNotifications } from './useNotifications'
 
 export function useInfractionsFirst() {
   // Função de handling do import
   const [importing, setImporting] = useState(false)
-  function HandleImportFirst(data: ImportFormData) {
+  const { handleInsert: handleInsertNotification } = useNotifications()
+
+  async function HandleImportFirst(data: ImportFormData) {
     if (!data.file) return
     try {
       setImporting(true)
-      PostAutoFirstInstance(data.file).finally(() => setImporting(false))
+      const { event } = await PostAutoFirstInstance(data.file)
+      toast(event.message)
+      handleInsertNotification(event)
     } finally {
       setImporting(false)
     }
   }
+
   return { importing, HandleImportFirst }
 }
 
 // Função de handling do import
 export function useInfractionsSecond() {
   const [importing, setImporting] = useState(false)
+  const { handleInsert: handleInsertNotification } = useNotifications()
 
-  function HandleImportSecond(data: ImportFormData) {
+  async function HandleImportSecond(data: ImportFormData) {
     if (!data.file) return
     try {
       setImporting(true)
-      PostAutoSecondInstance(data.file).finally(() => setImporting(false))
+      const { event } = await PostAutoSecondInstance(data.file)
+      toast(event.message)
+      handleInsertNotification(event)
     } finally {
       setImporting(false)
     }

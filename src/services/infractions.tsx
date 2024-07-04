@@ -61,6 +61,8 @@ export async function PostAutoFirstInstance(file: File) {
       event.message = error.response?.data.message
     }
   }
+
+  return { event }
 }
 
 export async function PostAutoSecondInstance(file: File) {
@@ -86,6 +88,8 @@ export async function PostAutoSecondInstance(file: File) {
       event.message = error.response?.data.message
     }
   }
+
+  return { event }
 }
 
 /**
