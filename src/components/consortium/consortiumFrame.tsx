@@ -1,4 +1,4 @@
-import { ConsortiumFrameData } from '@/schemas/consortiumSchema'
+import { ConsortiumFrameData } from '@/schemas/ConsortiumSchema'
 
 export default function ConsortiumFrame({
   nome,

@@ -1,10 +1,10 @@
 import { convertToBoolean } from '@/lib/utils'
 import { LinesFrameData, LoadLines } from '@/schemas/LinesFrameDataSchema'
-import { EventT } from '@/schemas/notificationSchema'
-import { TApiResponse } from '@/schemas/responseSchema'
+import { EventT } from '@/schemas/NotificationSchema'
+import { TApiResponse } from '@/schemas/ResponseSchema'
 import { AxiosError } from 'axios'
-import { api } from './apiClient'
 import useSWR from 'swr'
+import { api } from './apiClient'
 
 export function GetLines() {
   const { data, mutate } = useSWR<LinesFrameData[]>('/linha', async () => {

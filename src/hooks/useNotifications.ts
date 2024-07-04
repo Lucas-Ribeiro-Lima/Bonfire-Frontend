@@ -1,4 +1,4 @@
-import { EventT } from '@/schemas/notificationSchema'
+import { EventT } from '@/schemas/NotificationSchema'
 import {
   ClearNotificationLocalStorage,
   GetNotificationLocalStorage,

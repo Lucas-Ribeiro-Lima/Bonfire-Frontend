@@ -1,5 +1,5 @@
 import { convertToBoolean } from '@/lib/utils'
-import { ConsortiumFrameData, LoadConsortium } from '@/schemas/consortiumSchema'
+import { ConsortiumFrameData, LoadConsortium } from '@/schemas/ConsortiumSchema'
 import useSWR from 'swr'
 import { api } from './apiClient'
 
