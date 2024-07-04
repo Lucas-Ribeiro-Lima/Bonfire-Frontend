@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios'
 
 function ApiClient() {
@@ -16,6 +15,7 @@ function ApiClient() {
 /**
  * API for using in test enviroment
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ApiTest() {
   const api = axios.create({
     baseURL: `http://localhost:5000`,
@@ -28,4 +28,4 @@ function ApiTest() {
   return api
 }
 
-export const api = ApiTest()
+export const api = ApiClient()
