@@ -16,16 +16,16 @@ function ApiClient() {
  * API for using in test enviroment
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function ApiTest() {
-  const api = axios.create({
-    baseURL: `http://localhost:5000`,
-    timeout: 30000,
-    headers: {
-      'X-Custom-Header': 'foobar',
-    },
-  })
+// function ApiTest() {
+//   const api = axios.create({
+//     baseURL: `http://localhost:5000`,
+//     timeout: 30000,
+//     headers: {
+//       'X-Custom-Header': 'foobar',
+//     },
+//   })
 
-  return api
-}
+//   return api
+// }
 
-export const api = ApiTest()
+export const api = ApiClient()
