@@ -28,11 +28,14 @@ function ImportFormSecondInstance() {
       </div>
       <form className="mt-4 flex flex-col gap-4" encType="multipart/form-data">
         <div className="flex flex-col space-y-2">
-          <label htmlFor="file"></label>
-          <input {...register('file')} type="file" accept=".docx"></input>
-          {errors.file && (
-            <span className="text-sm text-red-500">{errors.file.message}</span>
-          )}
+          <label htmlFor="file">
+            <input {...register('file')} type="file" accept=".docx"></input>
+            {errors.file && (
+              <span className="text-sm text-red-500">
+                {errors.file.message}
+              </span>
+            )}
+          </label>
         </div>
         <Button
           type="submit"
