@@ -5,15 +5,15 @@ import { ColumnDef } from '@tanstack/react-table'
 
 export const columns: ColumnDef<ConsortiumFrameData>[] = [
   {
-    accessorKey: 'id',
+    accessorKey: 'ID',
     header: 'Código',
   },
   {
-    accessorKey: 'nome',
+    accessorKey: 'NOME',
     header: 'Nome',
   },
   {
-    accessorKey: 'concessionaria',
+    accessorKey: 'CONCESSIONARIA',
     header: 'Concessionaria',
   },
 ]

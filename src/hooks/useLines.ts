@@ -3,8 +3,8 @@ import { linesContext } from '@/contexts/lineContext'
 import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
 import { DeleteLine, IncludeLine, UpdateLine } from '@/services/lines'
 import { useContext } from 'react'
-import { useNotifications } from './useNotifications'
 import { toast } from 'sonner'
+import { useNotifications } from './useNotifications'
 
 export function useLines() {
   const { data, mutate } = useContext(linesContext)
