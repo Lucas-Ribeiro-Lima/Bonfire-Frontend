@@ -4,12 +4,11 @@ FROM node:20-alpine
 #Instalando yarn
 RUN apk add --no-cache yarn
 
-WORKDIR /
+WORKDIR /app
 
 COPY . /app
 
 # Defina o diretório de trabalho no contêiner
-WORKDIR /app
 
 #Instala as dependências do projeto
 # RUN yarn install
