@@ -28,4 +28,4 @@ function ApiTest() {
   return api
 }
 
-export const api = ApiClient()
+export const api = ApiTest()

@@ -19,9 +19,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/UI/table'
+import { Dialog, DialogTrigger } from '@radix-ui/react-dialog'
 import { useState } from 'react'
 import { Button } from '../UI/button'
 import { Input } from '../UI/input'
+import { DialogIncludeVehicle } from './dialogVehicles'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -71,6 +73,20 @@ export function DataTable<TData, TValue>({
           }
           className="w-36"
         />
+        <Dialog>
+          <DialogTrigger>
+            <Button className="mr-8 self-end">Incluir</Button>
+          </DialogTrigger>
+          <div className="hidden">
+            <DialogIncludeVehicle
+              vehicle={{
+                IDN_PLAC_VEIC: '',
+                NUM_VEIC: '',
+                VEIC_ATIV_EMPR: false,
+              }}
+            ></DialogIncludeVehicle>
+          </div>
+        </Dialog>
       </div>
       <div className="borde rounded-md">
         <Table>

@@ -51,6 +51,7 @@ export async function IncludeLine({
   const event: EventT = {}
 
   event.document = COD_LINH
+  console.log(linha)
 
   try {
     const response = await api.post<TApiResponse>('/linha', linha)
@@ -60,7 +61,7 @@ export async function IncludeLine({
       event.message = error.response?.data.message
     }
   }
-  return { linha: linha[0], event }
+  return { linha, event }
 }
 
 export async function DeleteLine(COD_LINH: string) {
