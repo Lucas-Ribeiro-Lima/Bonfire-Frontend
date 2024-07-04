@@ -1,4 +1,3 @@
-import { convertToBoolean } from '@/lib/utils'
 import { ConsortiumFrameData, LoadConsortium } from '@/schemas/ConsortiumSchema'
 import useSWR from 'swr'
 import { api } from './apiClient'
@@ -11,10 +10,6 @@ export function GetConsortiums() {
       return response.data.consorcios
     },
   )
-
-  data?.forEach((consorcio) => {
-    consorcio.compartilhado = convertToBoolean(consorcio.compartilhado)
-  })
 
   return { data, mutate }
 }
