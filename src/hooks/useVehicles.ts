@@ -35,15 +35,15 @@ export function useVehicles() {
     }
   }
 
-  async function handleDelete(vehicle: VehiclesData) {
-    const NUM_VEIC = DeleteVehicles(vehicle)
-    toast(NUM_VEIC)
+  async function handleDelete(NUM_VEIC: string) {
+    const { NUM_VEIC: deletedVehicle, event } = await DeleteVehicles(NUM_VEIC)
+    toast(event.message)
 
     if (data) {
       const updatedData = data.filter(
-        (vehicle) => vehicle.NUM_VEIC !== NUM_VEIC,
+        (vehicle) => vehicle.NUM_VEIC !== deletedVehicle,
       )
-      mutate(updatedData, false)
+      mutate(updatedData, true)
     }
   }
 

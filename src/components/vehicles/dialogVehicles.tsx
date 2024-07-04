@@ -117,7 +117,7 @@ export function DialogEditVehicle({
 }
 
 export function DialogDeleteVehicle({
-  vehicle: { IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR },
+  vehicle: { NUM_VEIC },
 }: DialogContentVehicleProp) {
   const { handleDelete } = useVehicles()
 
@@ -137,7 +137,7 @@ export function DialogDeleteVehicle({
           variant="destructive"
           type="submit"
           onClick={() => {
-            handleDelete({ IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR })
+            handleDelete(NUM_VEIC)
           }}
         >
           Excluir

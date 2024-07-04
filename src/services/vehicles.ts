@@ -70,6 +70,19 @@ export async function InsertVehicles({
   return { vehicle: data[0], event }
 }
 
-export function DeleteVehicles({ NUM_VEIC }: VehiclesData) {
-  return NUM_VEIC
+export async function DeleteVehicles(NUM_VEIC: string) {
+  const event: EventT = {}
+
+  event.document = NUM_VEIC
+
+  try {
+    const response = await api.delete<TApiResponse>(`/veiculos/${NUM_VEIC}`)
+    if (response.status === 200) event.message = response.data.message
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      event.message = error.response?.data.message
+    }
+  }
+
+  return { NUM_VEIC, event }
 }

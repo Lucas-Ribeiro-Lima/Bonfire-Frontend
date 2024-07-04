@@ -51,7 +51,6 @@ export async function IncludeLine({
   const event: EventT = {}
 
   event.document = COD_LINH
-  console.log(linha)
 
   try {
     const response = await api.post<TApiResponse>('/linha', linha)
@@ -61,9 +60,22 @@ export async function IncludeLine({
       event.message = error.response?.data.message
     }
   }
-  return { linha, event }
+  return { linha: linha[0], event }
 }
 
 export async function DeleteLine(COD_LINH: string) {
-  return COD_LINH
+  const event: EventT = {}
+
+  event.document = COD_LINH
+
+  try {
+    const response = await api.delete<TApiResponse>(`/linha/${COD_LINH}`)
+    if (response.status === 200) event.message = response.data.message
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      event.message = error.response?.data.message
+    }
+  }
+
+  return { COD_LINH, event }
 }

@@ -22,19 +22,19 @@ export function useLines() {
   }
 
   async function handleInsert(line: LinesFrameData) {
-    const { linha: insertedLine, event } = await IncludeLine(line)
+    const { linha, event } = await IncludeLine(line)
     handleInsertNotification(event)
     toast(event.message)
 
     if (data) {
-      const updatedData = [...data, insertedLine]
+      const updatedData = [...data, linha]
       mutate(updatedData, true)
     }
   }
 
   async function handleDelete(COD_LINH: string) {
-    const deletedLine = await DeleteLine(COD_LINH)
-    toast(deletedLine)
+    const { COD_LINH: deletedLine, event } = await DeleteLine(COD_LINH)
+    toast(event.message)
 
     if (data) {
       const updatedData = data.filter((line) => line.COD_LINH !== deletedLine)
