@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios'
 
 function ApiClient() {
@@ -12,4 +13,19 @@ function ApiClient() {
   return api
 }
 
-export const api = ApiClient()
+/**
+ * API for using in test enviroment
+ */
+function ApiTest() {
+  const api = axios.create({
+    baseURL: `http://localhost:5000`,
+    timeout: 30000,
+    headers: {
+      'X-Custom-Header': 'foobar',
+    },
+  })
+
+  return api
+}
+
+export const api = ApiTest()

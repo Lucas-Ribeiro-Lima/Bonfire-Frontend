@@ -3,7 +3,6 @@ import { EventT } from '@/schemas/NotificationSchema'
 import { TApiResponse } from '@/schemas/ResponseSchema'
 import { LoadVehicles, VehiclesData } from '@/schemas/VechicleSchema'
 import { AxiosError } from 'axios'
-import { toast } from 'sonner'
 import useSWR from 'swr'
 import { api } from './apiClient'
 
@@ -72,6 +71,5 @@ export async function InsertVehicles({
 }
 
 export function DeleteVehicles({ NUM_VEIC }: VehiclesData) {
-  toast(`Deletando o veiculo ${NUM_VEIC}`)
   return NUM_VEIC
 }
