@@ -61,8 +61,23 @@ export function DataTable<TData, TValue>({
             placeholder="Data Publicação"
             className="w-36"
             type="date"
-            onBlur={(event) => setDate(event.target.value)}
+            onChange={(event) => {
+              setDate(event.target.value)
+            }}
             defaultValue={DEFAULTDATA}
+          />
+        </Label>
+        <Label className="flex items-center gap-2">
+          N° Auto:
+          <Input
+            placeholder="N° Auto"
+            value={
+              (table.getColumn('NUM_AI')?.getFilterValue() as string) ?? ''
+            }
+            onChange={(event) =>
+              table.getColumn('NUM_AI')?.setFilterValue(event.target.value)
+            }
+            className="w-36"
           />
         </Label>
       </div>
