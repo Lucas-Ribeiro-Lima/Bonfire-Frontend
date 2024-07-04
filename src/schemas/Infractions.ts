@@ -36,4 +36,4 @@ const recurseSchema = z.object({
 
 export type autoData = z.infer<typeof autoSchema>
 
-export type recuseData = z.infer<typeof recurseSchema>
+export type recurseData = z.infer<typeof recurseSchema>

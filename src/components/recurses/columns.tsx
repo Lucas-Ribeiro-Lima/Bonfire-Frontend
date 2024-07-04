@@ -1,9 +1,9 @@
 'use client'
 
-import { recuseData } from '@/schemas/Infractions'
+import { recurseData } from '@/schemas/Infractions'
 import { ColumnDef } from '@tanstack/react-table'
 
-export const columns: ColumnDef<recuseData>[] = [
+export const columns: ColumnDef<recurseData>[] = [
   {
     accessorKey: 'NUM_ATA',
     header: () => <div className=" text-center font-bold">Ata</div>,

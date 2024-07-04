@@ -1,6 +1,6 @@
 import { TCustomError } from '@/schemas/ErrorsSchema'
 import { TResponseImport } from '@/schemas/ImportFormSchema'
-import { autoData, recuseData } from '@/schemas/Infractions'
+import { autoData, recurseData } from '@/schemas/Infractions'
 import { EventT } from '@/schemas/NotificationSchema'
 import { api } from '@/services/apiClient'
 import { AxiosError } from 'axios'
@@ -11,7 +11,7 @@ interface ILoadAutos {
 }
 
 interface ILoadRecurses {
-  recursos: recuseData[]
+  autos: recurseData[]
 }
 
 export function GetAutoFirstInstance(date: string) {
@@ -26,13 +26,13 @@ export function GetAutoFirstInstance(date: string) {
 }
 
 export function GetAutoSecondInstance(datePubl: string) {
-  const { data, error, isLoading } = useSWR<recuseData[]>(
+  const { data, error, isLoading } = useSWR<recurseData[]>(
     `/autoInfracao/segundaInstancia/${datePubl}`,
     async () => {
       const response = await api.get<ILoadRecurses>(
         `/autoInfracao/segundaInstancia/${datePubl}`,
       )
-      return response.data.recursos
+      return response.data.autos
     },
   )
   return { data, error, isLoading }

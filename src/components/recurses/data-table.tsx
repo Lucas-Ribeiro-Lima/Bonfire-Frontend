@@ -10,6 +10,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
+import { Button } from '@/components/UI/button'
+import { Input } from '@/components/UI/input'
 import {
   Table,
   TableBody,
@@ -21,8 +23,7 @@ import {
 } from '@/components/UI/table'
 import { DEFAULTDATA } from '@/lib/utils'
 import { useState } from 'react'
-import { Button } from '@/components/UI/button'
-import { Input } from '@/components/UI/input'
+import { Label } from '../UI/label'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -51,13 +52,19 @@ export function DataTable<TData, TValue>({
   return (
     <div className="rounded-md border bg-slate-950 p-2">
       <div className="flex items-center gap-4 py-4 pl-4">
-        <Input
-          placeholder="Data Publicação"
-          className="w-36"
-          type="date"
-          onBlur={(event) => setDate(event.target.value)}
-          defaultValue={DEFAULTDATA}
-        />
+        <Label
+          className="flex items-center gap-2
+        "
+        >
+          Data da Publicação:
+          <Input
+            placeholder="Data Publicação"
+            className="w-36"
+            type="date"
+            onBlur={(event) => setDate(event.target.value)}
+            defaultValue={DEFAULTDATA}
+          />
+        </Label>
       </div>
       <div className="borde rounded-md">
         <Table>
