@@ -26,8 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        className="dark h-screen w-screen bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900 
-      text-white selection:bg-sky-800 selection:text-white"
+        className="h-screen w-screen dark:text-white dark:selection:bg-sky-800 dark:selection:text-white"
       >
         {children}
         <Toaster />

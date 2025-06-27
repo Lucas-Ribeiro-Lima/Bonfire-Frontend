@@ -1,7 +1,10 @@
 const Footer = () => {
   return (
-    <footer className="align-center flex h-20 items-center justify-end border-t border-white/25  bg-slate-950 pr-4 text-white/70">
-      <div className="flex flex-col items-center text-sm">
+    <footer className="
+        align-center flex h-12 items-center justify-end  pr-4
+        border-t border-zinc-300/60
+        dark:bg-slate-950 dark:text-white/70  dark:border-white/25">
+      <div className="flex flex-col items-center text-[12px]">
         <div>Desenvolvido por</div>
         <div>Guilherme Nogueira e Lucas Ribeiro</div>
       </div>

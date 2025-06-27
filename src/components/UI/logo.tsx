@@ -16,7 +16,7 @@ export default function LogoCompleta() {
       <h1 className="bonfire-color text-3xl font-semibold">
         <Link href="/">Bonfire</Link>
       </h1>
-      <h2 className="text-bold text-zinc-300">Autos de Infração</h2>
+      <h2 className="text-bold dark:text-zinc-300">Autos de Infração</h2>
     </div>
   )
 }

@@ -49,7 +49,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-md border bg-slate-950 p-2">
+    <div className="rounded-md border dark:bg-slate-950 p-2">
       <div className="flex items-center gap-4 py-4 pl-4">
         <Input
           placeholder="Data"

@@ -22,7 +22,7 @@ function ImportFormSecondInstance() {
   const { importing, HandleImportSecond } = useInfractionsSecond()
 
   return (
-    <div className="space-y-4 rounded-md bg-slate-950 p-8">
+    <div className="space-y-4 rounded-md dark:bg-slate-950 p-8">
       <div className="flex items-center justify-center font-semibold">
         Segunda Instância
       </div>

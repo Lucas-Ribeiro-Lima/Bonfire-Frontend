@@ -7,7 +7,7 @@ export function Loading() {
 export default function LoadingPage() {
   return (
     <SecondaryLayout>
-      <div className="flex flex-col justify-center rounded-md bg-slate-900 p-4">
+      <div className="flex flex-col justify-center rounded-md dark:bg-slate-900 p-4">
         <Loading></Loading>
       </div>
     </SecondaryLayout>

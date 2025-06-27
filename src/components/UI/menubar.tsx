@@ -33,7 +33,7 @@ const MenuBar = () => {
         <DropdownMenuTrigger>
           <Link href="/">
             <div className="flex items-center gap-2">
-              <LucideHome />
+              <LucideHome height={16} width={16}/>
               Inicio
             </div>
           </Link>
@@ -42,7 +42,7 @@ const MenuBar = () => {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center gap-2">
-            <AlignJustify />
+            <AlignJustify height={16} width={16}/>
             Cadastros
           </div>
         </DropdownMenuTrigger>
@@ -79,7 +79,7 @@ const MenuBar = () => {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center gap-2">
-            <FileSpreadsheetIcon />
+            <FileSpreadsheetIcon  height={16} width={16}/>
             Infrações
           </div>
         </DropdownMenuTrigger>
@@ -109,7 +109,7 @@ const MenuBar = () => {
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center gap-2">
-            <LucideImport />
+            <LucideImport  height={16} width={16}/>
             Importacao
           </div>
         </DropdownMenuTrigger>
@@ -136,23 +136,11 @@ const MenuBar = () => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          {(session && (
-            <Button variant="secondary" onClick={handleSignOut}>
-              <div className="flex items-center gap-2">
-                <LogIn /> Sair
-              </div>
-            </Button>
-          )) || (
-            <Button variant="secondary" onClick={handleSignIn}>
-              <div className="flex items-center gap-2">
-                <LogIn /> Entrar
-              </div>
-            </Button>
-          )}
-        </DropdownMenuTrigger>
-      </DropdownMenu>
+      <Link role='button' href="#" onClick={session ? handleSignOut : handleSignIn}>
+        <div className="flex items-center gap-2">
+          <LogIn  height={16} width={16}/> {session ? "Log-out" : "Log-in"}
+        </div>
+      </Link>
     </div>
   )
 }

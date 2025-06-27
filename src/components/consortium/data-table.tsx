@@ -32,7 +32,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-md border bg-slate-950 p-2">
+    <div className="rounded-md border dark:bg-slate-950 p-2">
       <div className="rounded-md">
         <Table>
           <TableHeader>

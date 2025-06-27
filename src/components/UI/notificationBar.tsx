@@ -15,18 +15,18 @@ export function NotificationBar() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex">
-        <LucideBell className="scale-90" />
+        <LucideBell width={16} height={16}/>
         {qtdNotifications > 0 && (
           <div className="relative right-2 top-2 z-10 flex h-4 w-4 scale-90 items-center justify-center rounded-full bg-red-800 p-3 text-sm">
             {qtdNotifications}
           </div>
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="relative right-4 top-2 z-20 shadow-md shadow-zinc-700">
-        <ScrollArea className="flex h-96 w-72 flex-col rounded-lg bg-slate-950">
+      <DropdownMenuContent className="relative right-4 top-2 z-20 shadow-sm shadow-neutral-400 ">
+        <ScrollArea className="flex h-96 w-72 flex-col rounded-lg dark:bg-slate-950 bg-white z-1000">
           <div className="fixed flex w-full justify-end p-4">
             <button onClick={handleClear}>
-              <Paintbrush className="scale-90 text-zinc-400"></Paintbrush>
+              <Paintbrush width={16} height={16} className="dark:text-zinc-400"></Paintbrush>
             </button>
           </div>
           {notifications.length > 0 ? (
