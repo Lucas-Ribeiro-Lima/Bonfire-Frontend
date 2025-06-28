@@ -51,8 +51,8 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-md w-fit border dark:bg-slate-950 p-2">
-      <div className="flex items-center justify-between py-4 pl-4">
+    <div className="w-full rounded-md border p-2 dark:bg-slate-950">
+      <div className="flex items-center gap-4 p-4 py-4">
         <Input
           placeholder="Linha"
           value={
@@ -64,8 +64,8 @@ export function DataTable<TData, TValue>({
           className="w-36"
         />
         <Dialog>
-          <DialogTrigger>
-            <Button className="mr-8 self-end">Incluir</Button>
+          <DialogTrigger className="min-w-20 rounded-md bg-black p-2 font-medium text-white">
+            Incluir
           </DialogTrigger>
           <div className="hidden">
             <DialogInsertLine

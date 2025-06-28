@@ -1,3 +1,5 @@
+'use client'
+
 import { VehiclesData } from '@/schemas/VechicleSchema'
 import { GetVehicles } from '@/services/vehicles'
 import { createContext, useMemo } from 'react'

@@ -1,3 +1,5 @@
+'use client'
+
 import { DEFAULTDATA } from '@/lib/utils'
 import { GetAutoSecondInstance } from '@/services/infractions'
 import { useState } from 'react'

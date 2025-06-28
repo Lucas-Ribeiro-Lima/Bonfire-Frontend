@@ -1,14 +1,5 @@
-'use client'
-import LogoCompleta from '@/components/UI/logo'
-import MainApp from '@/components/UI/mainApp'
-import PrimaryLayout from '@/components/UI/primaryLayout'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-  return (
-    <PrimaryLayout>
-      <MainApp>
-        <LogoCompleta></LogoCompleta>
-      </MainApp>
-    </PrimaryLayout>
-  )
+  return redirect('/infractions/firstInstance')
 }

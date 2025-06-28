@@ -1,7 +1,7 @@
 import Logo from '../UI/logo'
 import LoginBtn from './loginBtn'
 
-const LoginMenu = () => {
+export function LoginMenu() {
   return (
     <div className="flex flex-col items-center gap-16">
       <div className="scale-150">
@@ -11,5 +11,3 @@ const LoginMenu = () => {
     </div>
   )
 }
-
-export default LoginMenu

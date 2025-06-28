@@ -1,15 +1,14 @@
-'use client'
+import { InfractionLayout } from '@/components/infractions/infractionLayout'
+import { PrimaryLayout } from '@/components/UI/primaryLayout'
 
-import InfractionLayout from '@/components/infractions/infractionLayout'
-import MainApp from '@/components/UI/mainApp'
-import PrimaryLayout from '@/components/UI/primaryLayout'
+export const metadata = {
+  title: 'Bonfire - Infrações',
+}
 
 export default function Home() {
   return (
     <PrimaryLayout>
-      <MainApp title="Primeira Instância">
-        <InfractionLayout></InfractionLayout>
-      </MainApp>
+      <InfractionLayout></InfractionLayout>
     </PrimaryLayout>
   )
 }

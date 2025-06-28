@@ -1,5 +1,7 @@
+import { SessionWrapper } from '@/components/UI/sessionWrapper'
 import { Toaster } from '@/components/UI/sonner'
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
@@ -24,12 +26,12 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body
-        className="h-screen w-screen dark:text-white dark:selection:bg-sky-800 dark:selection:text-white"
-      >
-        {children}
-        <Toaster />
+    <html lang="en" suppressHydrationWarning>
+      <body className="h-screen w-screen">
+        <ThemeProvider attribute="class">
+          <SessionWrapper>{children}</SessionWrapper>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )

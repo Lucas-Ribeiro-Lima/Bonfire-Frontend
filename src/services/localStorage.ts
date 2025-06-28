@@ -10,13 +10,15 @@ export function SetNotificationLocalStorage(notification: EventT) {
   const previousNotifications = JSON.parse(
     window.localStorage.getItem('notifications') || '[]',
   )
-  const newNotifications = [...previousNotifications]
-  newNotifications.push({
+  previousNotifications.push({
     date: actualDate.toLocaleDateString('pt-BR'),
     document: notification.document,
     message: notification.message,
   })
-  window.localStorage.setItem('notifications', JSON.stringify(newNotifications))
+  window.localStorage.setItem(
+    'notifications',
+    JSON.stringify(previousNotifications),
+  )
 }
 
 export function GetNotificationLocalStorage(): Array<notificationT> {

@@ -1,18 +1,17 @@
-'use client'
-
-import MainApp from '@/components/UI/mainApp'
-import PrimaryLayout from '@/components/UI/primaryLayout'
-import LinesLayout from '@/components/lines/linesLayout'
+import { PrimaryLayout } from '@/components/UI/primaryLayout'
+import { LinesLayout } from '@/components/lines/linesLayout'
 import { LinesProvider } from '@/contexts/lineContext'
 
-export default function Home() {
+export const metadata = {
+  title: 'Bonfire - linhas',
+}
+
+export default function Lines() {
   return (
     <PrimaryLayout>
-      <MainApp title="Linhas">
-        <LinesProvider>
-          <LinesLayout></LinesLayout>
-        </LinesProvider>
-      </MainApp>
+      <LinesProvider>
+        <LinesLayout></LinesLayout>
+      </LinesProvider>
     </PrimaryLayout>
   )
 }

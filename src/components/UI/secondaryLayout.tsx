@@ -1,28 +1,16 @@
 'use client'
-import { Session } from 'next-auth'
-import { SessionProvider } from 'next-auth/react'
-import { FC, ReactNode } from 'react'
-import Footer from './footer'
-import Header from './header'
+import { ReactNode } from 'react'
 
 interface SecondaryLayoutProp {
   children?: ReactNode
-  session?: Session
 }
 
-const SecondaryLayout: FC<SecondaryLayoutProp> = ({
-  children,
-  session,
-}: SecondaryLayoutProp) => {
+export function SecondaryLayout({ children }: SecondaryLayoutProp) {
   return (
-    <SessionProvider session={session}>
-      <div className="flex h-screen flex-col dark:bg-gradient-to-r from-gray-900 via-sky-950 to-slate-900">
-        <div className="relative bottom-10 flex flex-1 items-center justify-center">
-          {children}
-        </div>
+    <div className="flex h-screen flex-col dark:bg-gradient-to-r dark:from-gray-900 dark:via-sky-950 dark:to-slate-900">
+      <div className="relative bottom-10 flex flex-1 items-center justify-center">
+        {children}
       </div>
-    </SessionProvider>
+    </div>
   )
 }
-
-export default SecondaryLayout

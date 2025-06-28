@@ -1,18 +1,17 @@
-'use client'
-
-import MainApp from '@/components/UI/mainApp'
-import PrimaryLayout from '@/components/UI/primaryLayout'
-import VehiclesLayout from '@/components/vehicles/vehiclesLayout'
+import { PrimaryLayout } from '@/components/UI/primaryLayout'
+import { VehiclesLayout } from '@/components/vehicles/vehiclesLayout'
 import { VehiclesProvider } from '@/contexts/vehicleContext'
 
-export default function Home() {
+export const metadata = {
+  title: 'Bonfire - veículos',
+}
+
+export default function Vehicles() {
   return (
     <PrimaryLayout>
-      <MainApp>
-        <VehiclesProvider>
-          <VehiclesLayout></VehiclesLayout>
-        </VehiclesProvider>
-      </MainApp>
+      <VehiclesProvider>
+        <VehiclesLayout></VehiclesLayout>
+      </VehiclesProvider>
     </PrimaryLayout>
   )
 }

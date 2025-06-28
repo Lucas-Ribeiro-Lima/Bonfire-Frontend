@@ -10,7 +10,7 @@ import {
 } from '../../schemas/ImportFormSchema'
 import { Button } from '../UI/button'
 
-function ImportFormSecondInstance() {
+export function ImportFormSecondInstance() {
   const {
     register,
     handleSubmit,
@@ -22,7 +22,7 @@ function ImportFormSecondInstance() {
   const { importing, HandleImportSecond } = useInfractionsSecond()
 
   return (
-    <div className="space-y-4 rounded-md dark:bg-slate-950 p-8">
+    <div className="h-fit space-y-4 rounded-md p-8 dark:bg-slate-950">
       <div className="flex items-center justify-center font-semibold">
         Segunda Instância
       </div>
@@ -53,5 +53,3 @@ function ImportFormSecondInstance() {
     </div>
   )
 }
-
-export default ImportFormSecondInstance

@@ -1,15 +1,14 @@
-'use client'
+import { ConsortiumLayout } from '@/components/consortium/consortiumLayout'
+import { PrimaryLayout } from '@/components/UI/primaryLayout'
 
-import ConsortiumLayout from '@/components/consortium/consortiumLayout'
-import MainApp from '@/components/UI/mainApp'
-import PrimaryLayout from '@/components/UI/primaryLayout'
+export const metadata = {
+  title: 'Bonfire - Consórcios',
+}
 
-export default function Home() {
+export default function Consortium() {
   return (
     <PrimaryLayout>
-      <MainApp title="Consórcios">
-        <ConsortiumLayout></ConsortiumLayout>
-      </MainApp>
+      <ConsortiumLayout></ConsortiumLayout>
     </PrimaryLayout>
   )
 }

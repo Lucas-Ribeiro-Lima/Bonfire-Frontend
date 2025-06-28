@@ -1,9 +1,14 @@
+'use client'
+
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { Button } from '../UI/button'
 
 export function SignInBtn() {
   return (
-    <Button variant="secondary" onClick={() => signIn('keycloak', { redirect: true })}>
+    <Button
+      variant="secondary"
+      onClick={() => signIn('keycloak', { redirect: true })}
+    >
       Entrar
     </Button>
   )

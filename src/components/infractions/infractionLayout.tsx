@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
 
-export default function InfractionLayout() {
+export function InfractionLayout() {
   // Data fetch
   const [date, setDate] = useState(DEFAULTDATA)
   const { data } = GetAutoFirstInstance(date)

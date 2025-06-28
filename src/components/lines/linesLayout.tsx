@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
 
-export default function LinesLayout() {
+export function LinesLayout() {
   const { data } = useContext(linesContext)
 
   return (

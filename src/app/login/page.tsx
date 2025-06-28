@@ -1,8 +1,11 @@
-'use client'
-import SecondaryLayout from '@/components/UI/secondaryLayout'
-import LoginMenu from '@/components/login/loginMenu'
+import { SecondaryLayout } from '@/components/UI/secondaryLayout'
+import { LoginMenu } from '@/components/login/loginMenu'
 
-export default function login() {
+export const metadata = {
+  title: 'Bonfire - Login',
+}
+
+export default async function login() {
   return (
     <SecondaryLayout>
       <LoginMenu></LoginMenu>

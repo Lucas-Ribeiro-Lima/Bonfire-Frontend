@@ -1,10 +1,10 @@
 'use client'
 
 import { GetConsortiums } from '@/services/consortium'
-import { DataTable } from './data-table'
 import { columns } from './columns'
+import { DataTable } from './data-table'
 
-export default function ConsortiumLayout() {
+export function ConsortiumLayout() {
   const { data } = GetConsortiums()
   return <DataTable columns={columns} data={data || []}></DataTable>
 }

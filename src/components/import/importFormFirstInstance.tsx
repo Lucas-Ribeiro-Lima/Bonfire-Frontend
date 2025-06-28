@@ -10,7 +10,7 @@ import {
 } from '../../schemas/ImportFormSchema'
 import { Button } from '../UI/button'
 
-function ImportFormFirstInstance() {
+export function ImportFormFirstInstance() {
   const {
     register,
     handleSubmit,
@@ -21,7 +21,7 @@ function ImportFormFirstInstance() {
   const { importing, HandleImportFirst } = useInfractionsFirst()
 
   return (
-    <div className="space-y-4 rounded-md dark:bg-slate-950 p-8">
+    <div className="h-fit space-y-4 rounded-md p-8 dark:bg-slate-950">
       <div className="flex items-center justify-center font-semibold">
         Primeira Instância
       </div>
@@ -52,5 +52,3 @@ function ImportFormFirstInstance() {
     </div>
   )
 }
-
-export default ImportFormFirstInstance
