@@ -15,11 +15,11 @@ interface ILoadRecurses {
 }
 
 export function GetAutoFirstInstance(date: string) {
-  const { data, error, isLoading } = useSWR<ILoadAutos>(
+  const { data, error, isLoading } = useSWR<autoData[]>(
     `/autoInfracao/primeiraInstancia/${date}`,
     async () => {
-      const response = await api.get(`/autoInfracao/primeiraInstancia/${date}`)
-      return response.data
+      const response = await api.get<ILoadAutos>(`/autoInfracao/primeiraInstancia/${date}`)
+      return response.data.autos
     },
   )
   return { data, error, isLoading }

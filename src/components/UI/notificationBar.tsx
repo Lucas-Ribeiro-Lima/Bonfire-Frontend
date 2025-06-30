@@ -14,12 +14,10 @@ export function NotificationBar() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex">
+      <DropdownMenuTrigger className="flex relative">
         <LucideBell width={16} height={16} />
         {qtdNotifications > 0 && (
-          <div className="relative right-2 top-2 z-10 flex h-4 w-4 scale-90 items-center justify-center rounded-full bg-red-800 p-3 text-sm">
-            {qtdNotifications}
-          </div>
+          <div className="absolute -right-1 -top-1 z-10 h-3 w-3 rounded-full bg-red-800"></div>
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="relative right-4 top-2 z-20 shadow-sm shadow-neutral-400 ">
@@ -34,17 +32,15 @@ export function NotificationBar() {
             </button>
           </div>
           {notifications.length > 0 ? (
-            notifications.map((notification: notificationT) => {
+            notifications.map((notification: notificationT, idx) => {
               return (
-                <>
-                  <DropdownMenuItem className="p-4">
-                    <div>
-                      <div>Data: {notification.date}</div>
-                      <div>Documento: {notification.document}</div>
-                      <div>{notification.message}</div>
-                    </div>
-                  </DropdownMenuItem>
-                </>
+                <DropdownMenuItem key={idx} className="p-4">
+                  <div>
+                    <div>Data: {notification.date}</div>
+                    <div>Documento: {notification.document}</div>
+                    <div>{notification.message}</div>
+                  </div>
+                </DropdownMenuItem>
               )
             })
           ) : (

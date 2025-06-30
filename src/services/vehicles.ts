@@ -30,7 +30,7 @@ export async function UpdateVehicles({
   event.document = NUM_VEIC
   try {
     const response = await api.patch<TApiResponse>('/veiculos', data)
-    if (response.status === 200) {
+    if (response.status === 202) {
       event.message = response.data.message
     }
   } catch (error: unknown) {
@@ -59,7 +59,7 @@ export async function InsertVehicles({
 
   try {
     const response = await api.post<TApiResponse>('/veiculos', data)
-    if (response.status === 200) {
+    if (response.status === 201) {
       event.message = response.data.message
     }
   } catch (error: unknown) {
@@ -77,7 +77,7 @@ export async function DeleteVehicles(NUM_VEIC: string) {
 
   try {
     const response = await api.delete<TApiResponse>(`/veiculos/${NUM_VEIC}`)
-    if (response.status === 200) event.message = response.data.message
+    if (response.status === 202) event.message = response.data.message
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
       event.message = error.response?.data.message

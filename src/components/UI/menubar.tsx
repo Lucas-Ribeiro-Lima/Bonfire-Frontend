@@ -18,11 +18,11 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 function handleSignIn() {
-  signIn('keycloak')
+  signIn('keycloak', { redirect: true, callbackUrl: "/" })
 }
 
 function handleSignOut() {
-  signOut({ redirect: false })
+  signOut({ redirect: true, callbackUrl: "/" })
 }
 
 export function MenuBar() {
