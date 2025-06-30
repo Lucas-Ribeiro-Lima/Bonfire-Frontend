@@ -7,7 +7,7 @@ export function SignInBtn() {
   return (
     <Button
       variant="secondary"
-      onClick={() => signIn('keycloak', { redirect: true, callbackUrl: "/" })}
+      onClick={() => signIn('keycloak', { redirect: true, callbackUrl: '/' })}
     >
       Entrar
     </Button>

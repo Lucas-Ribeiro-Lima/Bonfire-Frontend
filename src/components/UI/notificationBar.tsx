@@ -14,7 +14,7 @@ export function NotificationBar() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex relative">
+      <DropdownMenuTrigger className="relative flex">
         <LucideBell width={16} height={16} />
         {qtdNotifications > 0 && (
           <div className="absolute -right-1 -top-1 z-10 h-3 w-3 rounded-full bg-red-800"></div>
