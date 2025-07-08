@@ -8,9 +8,5 @@ import { DataTable } from './data-table'
 export function LinesLayout() {
   const { data } = useContext(linesContext)
 
-  return (
-    <div className="flex w-full flex-col">
-      <DataTable columns={columns} data={data || []}></DataTable>
-    </div>
-  )
+  return <DataTable columns={columns} data={data || []}></DataTable>
 }
