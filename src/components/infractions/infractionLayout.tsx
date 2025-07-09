@@ -15,7 +15,7 @@ export function InfractionLayout() {
     <div className="flex w-full flex-col">
       <DataTable
         columns={columns}
-        data={data?.autos || []}
+        data={data || []}
         setDate={setDate}
       ></DataTable>
     </div>
