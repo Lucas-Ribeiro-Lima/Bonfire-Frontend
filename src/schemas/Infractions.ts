@@ -26,8 +26,8 @@ const autoSchema = z.object({
 
 const recurseSchema = z.object({
   COD_LINH: z.string(),
-  DAT_PUBL: z.date(),
-  DAT_VENC: z.date(),
+  DAT_PUBL: z.string(),
+  DAT_VENC: z.string(),
   IDN_PLAC_VEIC: z.string(),
   NUM_AI: z.string(),
   NUM_ATA: z.number(),

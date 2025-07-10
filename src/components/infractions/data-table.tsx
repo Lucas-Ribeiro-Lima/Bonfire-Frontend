@@ -2,10 +2,8 @@
 
 import {
   ColumnDef,
-  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
@@ -21,49 +19,39 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/UI/table'
-import { DEFAULTDATA } from '@/lib/utils'
-import { useState } from 'react'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   setDate: (event: string) => void
+  setAi: (event: string) => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   setDate,
+  setAi,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    state: {
-      columnFilters,
-    },
   })
 
   return (
-    <div className=" flex-1 rounded-md border p-2 dark:bg-slate-950">
+    <div className="w-full">
       <div className="flex items-center gap-4 py-4 pl-4">
         <Input
           placeholder="Data"
           className="w-36"
           type="date"
           onBlur={(event) => setDate(event.target.value)}
-          defaultValue={DEFAULTDATA}
         />
         <Input
           placeholder="N° Auto"
-          value={(table.getColumn('NUM_AI')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('NUM_AI')?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => setAi(event.target.value)}
           className="w-36"
         />
       </div>

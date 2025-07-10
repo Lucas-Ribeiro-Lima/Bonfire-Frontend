@@ -11,33 +11,66 @@ interface ILoadAutos {
 }
 
 interface ILoadRecurses {
-  autos: recurseData[]
+  recurses: recurseData[]
 }
 
-export function GetAutoFirstInstance(date: string) {
-  const { data, error, isLoading } = useSWR<autoData[]>(
-    `/autoInfracao/primeiraInstancia/${date}`,
+export function GetAutoFirstInstance(date?: string, ai?: string) {
+  const map = new Map()
+
+  if (date) {
+    map.set('date', date)
+  }
+
+  if (ai) {
+    map.set('ai', ai)
+  }
+
+  const params = Object.fromEntries(map.entries())
+
+  const { data } = useSWR<autoData[]>(
+    '/autoInfracao/primeiraInstancia',
     async () => {
       const response = await api.get<ILoadAutos>(
-        `/autoInfracao/primeiraInstancia/${date}`,
+        '/autoInfracao/primeiraInstancia',
+        {
+          params,
+        },
       )
+
       return response.data.autos
     },
   )
-  return { data, error, isLoading }
+
+  return { data }
 }
 
-export function GetAutoSecondInstance(datePubl: string) {
-  const { data, error, isLoading } = useSWR<recurseData[]>(
-    `/autoInfracao/segundaInstancia/${datePubl}`,
+export function GetAutoSecondInstance(date: string, ata: string) {
+  const map = new Map()
+
+  if (date) {
+    map.set('date', date)
+  }
+
+  if (ata) {
+    map.set('ata', ata)
+  }
+
+  const params = Object.fromEntries(map.entries())
+
+  const { data } = useSWR<recurseData[]>(
+    '/autoInfracao/segundaInstancia',
     async () => {
       const response = await api.get<ILoadRecurses>(
-        `/autoInfracao/segundaInstancia/${datePubl}`,
+        `/autoInfracao/segundaInstancia`,
+        {
+          params,
+        },
       )
-      return response.data.autos
+      return response.data.recurses
     },
   )
-  return { data, error, isLoading }
+
+  return { data }
 }
 
 export async function PostAutoFirstInstance(file: File) {

@@ -2,10 +2,8 @@
 
 import {
   ColumnDef,
-  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
@@ -21,36 +19,30 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/UI/table'
-import { DEFAULTDATA } from '@/lib/utils'
-import { useState } from 'react'
 import { Label } from '../UI/label'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   setDate: (event: string) => void
+  setAta: (event: string) => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   setDate,
+  setAta,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    state: {
-      columnFilters,
-    },
   })
 
   return (
-    <div className="w-full rounded-md border p-2 dark:bg-slate-950">
+    <div className="w-full">
       <div className="flex items-center gap-4 py-4 pl-4">
         <Label
           className="flex items-center gap-2
@@ -61,22 +53,14 @@ export function DataTable<TData, TValue>({
             placeholder="Data Publicação"
             className="w-36"
             type="date"
-            onChange={(event) => {
-              setDate(event.target.value)
-            }}
-            defaultValue={DEFAULTDATA}
+            onChange={(event) => setDate(event.target.value)}
           />
         </Label>
         <Label className="flex items-center gap-2">
-          N° Auto:
+          N° Ata:
           <Input
-            placeholder="N° Auto"
-            value={
-              (table.getColumn('NUM_AI')?.getFilterValue() as string) ?? ''
-            }
-            onChange={(event) =>
-              table.getColumn('NUM_AI')?.setFilterValue(event.target.value)
-            }
+            placeholder="N° Ata"
+            onChange={(event) => setAta(event.target.value)}
             className="w-36"
           />
         </Label>
@@ -124,7 +108,7 @@ export function DataTable<TData, TValue>({
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={7}>
+            <TableCell colSpan={6}>
               {`Total de autos:  ${table.getRowCount()}`}
             </TableCell>
             <TableCell>

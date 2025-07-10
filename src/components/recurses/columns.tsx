@@ -1,7 +1,14 @@
 'use client'
 
 import { recurseData } from '@/schemas/Infractions'
-import { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef, Row } from '@tanstack/react-table'
+
+function formatDateVenc(row: Row<recurseData>) {
+  const publ = new Date(row.getValue('DAT_PUBL'))
+  publ.setDate(publ.getDate() + 30)
+
+  return publ.toLocaleDateString()
+}
 
 export const columns: ColumnDef<recurseData>[] = [
   {
@@ -22,15 +29,15 @@ export const columns: ColumnDef<recurseData>[] = [
     accessorKey: 'DAT_PUBL',
     header: () => <div className=" text-center font-bold">Publicação</div>,
     cell: ({ row }) => (
-      <div className="text-center">{row.getValue('DAT_PUBL')}</div>
+      <div className="text-center">
+        {new Date(row.getValue('DAT_PUBL')).toLocaleDateString()}
+      </div>
     ),
   },
   {
     accessorKey: 'DAT_VENC',
     header: () => <div className=" text-center font-bold">Vencimento</div>,
-    cell: ({ row }) => (
-      <div className="text-center">{row.getValue('DAT_VENC')}</div>
-    ),
+    cell: ({ row }) => <div className="text-center">{formatDateVenc(row)}</div>,
   },
   {
     accessorKey: 'COD_LINH',
