@@ -17,8 +17,6 @@ services:
     - BONFIRE_ID=bonfire
     - BONFIRE_CLIENT_SECRET=Z2wzU2y76hSgOzc4XZG14AUO1kFthn30
     - KEYCLOAK_ISSUER=http://172.22.0.17:5050/realms/anchieta
-    volumes:
-      - ./bonfire:/app
     restart: unless-stopped
     
   bonfire-worker:
@@ -32,7 +30,7 @@ services:
     networks:
     - network
     volumes:
-      - ./backend/data:/app/data
+      - ./backend/Logs:/app/Logs
       
 networks:
   network:
