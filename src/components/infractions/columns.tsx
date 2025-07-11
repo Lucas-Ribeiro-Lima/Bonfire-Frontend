@@ -1,9 +1,9 @@
 'use client'
 
-import { autoData } from '@/schemas/Infractions'
+import { AutoData } from '@/schemas/Infractions'
 import { ColumnDef } from '@tanstack/react-table'
 
-export const columns: ColumnDef<autoData>[] = [
+export const columns: ColumnDef<AutoData>[] = [
   {
     accessorKey: 'NUM_NOTF',
     header: () => <div className=" text-center font-bold">N° Notificação</div>,
