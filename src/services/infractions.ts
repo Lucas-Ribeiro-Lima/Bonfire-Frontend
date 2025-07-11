@@ -1,76 +1,56 @@
 import { TCustomError } from '@/schemas/ErrorsSchema'
 import { TResponseImport } from '@/schemas/ImportFormSchema'
-import { autoData, recurseData } from '@/schemas/Infractions'
+import { AutoData, RecurseData } from '@/schemas/Infractions'
 import { EventT } from '@/schemas/NotificationSchema'
 import { api } from '@/services/apiClient'
 import { AxiosError } from 'axios'
-import useSWR from 'swr'
 
 interface ILoadAutos {
-  autos: autoData[]
+  autos: AutoData[]
 }
 
 interface ILoadRecurses {
-  recurses: recurseData[]
+  recurses: RecurseData[]
 }
 
-export function GetAutoFirstInstance(date?: string, ai?: string) {
+export async function GetAutoFirstInstance(
+  date?: string,
+  ai?: string,
+): Promise<AutoData[]> {
   const map = new Map()
 
-  if (date) {
-    map.set('date', date)
-  }
+  if (date) map.set('date', date)
 
-  if (ai) {
-    map.set('ai', ai)
-  }
+  if (ai) map.set('ai', ai)
 
-  const params = Object.fromEntries(map.entries())
-
-  const { data } = useSWR<autoData[]>(
+  const { data } = await api.get<ILoadAutos>(
     '/autoInfracao/primeiraInstancia',
-    async () => {
-      const response = await api.get<ILoadAutos>(
-        '/autoInfracao/primeiraInstancia',
-        {
-          params,
-        },
-      )
-
-      return response.data.autos
+    {
+      params: Object.fromEntries(map.entries()),
     },
   )
 
-  return { data }
+  return data.autos
 }
 
-export function GetAutoSecondInstance(date: string, ata: string) {
+export async function GetAutoSecondInstance(
+  date: string,
+  ata: string,
+): Promise<RecurseData[]> {
   const map = new Map()
 
-  if (date) {
-    map.set('date', date)
-  }
+  if (date) map.set('date', date)
 
-  if (ata) {
-    map.set('ata', ata)
-  }
+  if (ata) map.set('ata', ata)
 
-  const params = Object.fromEntries(map.entries())
-
-  const { data } = useSWR<recurseData[]>(
-    '/autoInfracao/segundaInstancia',
-    async () => {
-      const response = await api.get<ILoadRecurses>(
-        `/autoInfracao/segundaInstancia`,
-        {
-          params,
-        },
-      )
-      return response.data.recurses
+  const { data } = await api.get<ILoadRecurses>(
+    `/autoInfracao/segundaInstancia`,
+    {
+      params: Object.fromEntries(map.entries()),
     },
   )
 
-  return { data }
+  return data.recurses
 }
 
 export async function PostAutoFirstInstance(file: File) {

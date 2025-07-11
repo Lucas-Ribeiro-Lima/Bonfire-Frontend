@@ -7,6 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 
 export const DEFAULTDATA = new Date().toISOString().split('T')[0]
 
+export const DEFAULTTIMEOUT = 1000 // ms
+
 export function convertToBoolean(value: string | boolean) {
   if (value === '\u0001') {
     return true

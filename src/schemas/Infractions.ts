@@ -34,6 +34,6 @@ const recurseSchema = z.object({
   NUM_VEIC: z.number(),
 })
 
-export type autoData = z.infer<typeof autoSchema>
+export type AutoData = z.infer<typeof autoSchema>
 
-export type recurseData = z.infer<typeof recurseSchema>
+export type RecurseData = z.infer<typeof recurseSchema>

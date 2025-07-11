@@ -1,16 +1,16 @@
 'use client'
 
-import { recurseData } from '@/schemas/Infractions'
+import { RecurseData } from '@/schemas/Infractions'
 import { ColumnDef, Row } from '@tanstack/react-table'
 
-function formatDateVenc(row: Row<recurseData>) {
+function formatDateVenc(row: Row<RecurseData>) {
   const publ = new Date(row.getValue('DAT_PUBL'))
   publ.setDate(publ.getDate() + 30)
 
   return publ.toLocaleDateString()
 }
 
-export const columns: ColumnDef<recurseData>[] = [
+export const columns: ColumnDef<RecurseData>[] = [
   {
     accessorKey: 'NUM_ATA',
     header: () => <div className=" text-center font-bold">Ata</div>,
