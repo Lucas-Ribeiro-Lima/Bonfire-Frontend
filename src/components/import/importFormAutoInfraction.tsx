@@ -1,35 +1,34 @@
 'use client'
 
-import { useInfractionsSecond } from '@/hooks/useInfractions'
+import { useInfractions } from '@/hooks/useInfractions'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import {
   ImportFormData,
-  ImportFormSecondSchema,
+  ImportFormFirstSchema,
 } from '../../schemas/ImportFormSchema'
 import { Button } from '../UI/button'
 
-export function ImportFormSecondInstance() {
+export function ImportFormAutoInfraction() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ImportFormData>({
-    resolver: zodResolver(ImportFormSecondSchema),
+    resolver: zodResolver(ImportFormFirstSchema),
   })
-
-  const { importing, HandleImportSecond } = useInfractionsSecond()
+  const { importing, HandleImportAutoInfractions } = useInfractions()
 
   return (
     <div className="h-fit space-y-4 rounded-md p-8 dark:bg-slate-950">
       <div className="flex items-center justify-center font-semibold">
-        Segunda Instância
+        Auto de Infração
       </div>
       <form className="mt-4 flex flex-col gap-4" encType="multipart/form-data">
         <div className="flex flex-col space-y-2">
           <label htmlFor="file">
-            <input {...register('file')} type="file" accept=".docx"></input>
+            <input {...register('file')} type="file" accept=".csv"></input>
           </label>
           {errors.file && (
             <span className="text-sm text-red-500">{errors.file.message}</span>
@@ -37,7 +36,7 @@ export function ImportFormSecondInstance() {
         </div>
         <Button
           type="submit"
-          onClick={handleSubmit(HandleImportSecond)}
+          onClick={handleSubmit(HandleImportAutoInfractions)}
           variant="secondary"
           disabled={importing}
         >

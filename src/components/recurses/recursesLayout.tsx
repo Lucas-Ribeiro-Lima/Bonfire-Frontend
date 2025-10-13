@@ -2,7 +2,7 @@
 
 import { DEFAULTTIMEOUT } from '@/lib/utils'
 import { RecurseData } from '@/schemas/Infractions'
-import { GetAutoSecondInstance } from '@/services/infractions'
+import { GetRecurseFirstInstance } from '@/services/recurse'
 import { useCallback, useEffect, useState } from 'react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
@@ -14,7 +14,7 @@ export function RecursesLayout() {
   const [scheduleId, setScheduleId] = useState<NodeJS.Timeout | null>(null)
 
   const wrapper = useCallback(() => {
-    GetAutoSecondInstance(date, ata).then((res) => {
+      GetRecurseFirstInstance(date, ata).then((res) => {
       setRecursos(res)
     })
     setScheduleId(null)

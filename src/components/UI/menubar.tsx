@@ -13,6 +13,7 @@ import {
   LogIn,
   LucideHome,
   LucideImport,
+  LucideBookCheck
 } from 'lucide-react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -77,17 +78,21 @@ export function MenuBar() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <Link href="/infractions" className="flex items-center justify-center gap-2">
+        <LucideBookCheck height={16} width={16} />
+        Infrações
+      </Link>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <div className="flex items-center gap-2">
             <FileSpreadsheetIcon height={16} width={16} />
-            Infrações
+            Recursos
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2">
           <DropdownMenuItem>
             <Link
-              href="/infractions/firstInstance"
+              href="/recurses/firstInstance"
               className="flex justify-center p-2"
             >
               <div className="flex flex-row gap-2 self-center justify-self-center">
@@ -97,7 +102,7 @@ export function MenuBar() {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link
-              href="/infractions/secondInstance"
+              href="/recurses/secondInstance"
               className="flex justify-center p-2"
             >
               <div className="flex flex-row gap-2 self-center justify-self-center">

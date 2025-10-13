@@ -2,7 +2,7 @@
 
 import { DEFAULTTIMEOUT } from '@/lib/utils'
 import { AutoData } from '@/schemas/Infractions'
-import { GetAutoFirstInstance } from '@/services/infractions'
+import { GetAutoInfractions } from '@/services/infractions'
 import { useCallback, useEffect, useState } from 'react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
@@ -16,7 +16,7 @@ export function InfractionLayout() {
 
   const wrapper = useCallback(
     async function wrapper() {
-      const res = await GetAutoFirstInstance(date, ai)
+      const res = await GetAutoInfractions(date, ai)
       setInfracoes(res)
       setScheduleId(null)
     },
