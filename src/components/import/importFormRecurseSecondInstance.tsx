@@ -12,44 +12,44 @@ import { Button } from '../UI/button'
 
 export function ImportFormRecurseSecondInstance() {
   const {
-	register,
-	handleSubmit,
-	formState: { errors },
+    register,
+    handleSubmit,
+    formState: { errors },
   } = useForm<ImportFormData>({
-	resolver: zodResolver(ImportFormRecursesSchema),
+    resolver: zodResolver(ImportFormRecursesSchema),
   })
 
   const { importingSecond, HandleImport } = useRecurses()
 
   return (
-	  <div className="h-fit space-y-4 rounded-md p-8 dark:bg-slate-950">
-		<div className="flex items-center justify-center font-semibold">
-		  Recurso - Segunda Instância
-		</div>
-		<form className="mt-4 flex flex-col gap-4" encType="multipart/form-data">
-		  <div className="flex flex-col space-y-2">
-			<label htmlFor="file">
-			  <input {...register('file')} type="file" accept=".docx"></input>
-			</label>
-			{errors.file && (
-				<span className="text-sm text-red-500">{errors.file.message}</span>
-			)}
-		  </div>
-		  <Button
-			  type="submit"
-			  onClick={handleSubmit((e) => HandleImport(e, 2))}
-			  variant="secondary"
-			  disabled={importingSecond}
-		  >
-			{(importingSecond && (
-					<div className="flex gap-2">
-					  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-					  Importando...
-					</div>
-				)) ||
-				'Importar'}
-		  </Button>
-		</form>
-	  </div>
+    <div className="h-fit space-y-4 rounded-md p-8 dark:bg-slate-950">
+      <div className="flex items-center justify-center font-semibold">
+        Recurso - Segunda Instância
+      </div>
+      <form className="mt-4 flex flex-col gap-4" encType="multipart/form-data">
+        <div className="flex flex-col space-y-2">
+          <label htmlFor="file">
+            <input {...register('file')} type="file" accept=".docx"></input>
+          </label>
+          {errors.file && (
+            <span className="text-sm text-red-500">{errors.file.message}</span>
+          )}
+        </div>
+        <Button
+          type="submit"
+          onClick={handleSubmit((e) => HandleImport(e, 2))}
+          variant="secondary"
+          disabled={importingSecond}
+        >
+          {(importingSecond && (
+            <div className="flex gap-2">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Importando...
+            </div>
+          )) ||
+            'Importar'}
+        </Button>
+      </form>
+    </div>
   )
 }

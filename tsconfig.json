@@ -12,7 +12,7 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "NodeNext" ,
+    "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -31,9 +31,9 @@
       "@/components/*": [
         "./src/components/*"
       ],
-      "@/services/*":[
+      "@/services/*": [
         "./src/services/*"
-      ],
+      ]
     }
   },
   "include": [

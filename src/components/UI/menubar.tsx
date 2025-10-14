@@ -11,9 +11,9 @@ import {
   AlignJustify,
   FileSpreadsheetIcon,
   LogIn,
+  LucideBookCheck,
   LucideHome,
   LucideImport,
-  LucideBookCheck
 } from 'lucide-react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -78,7 +78,10 @@ export function MenuBar() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Link href="/infractions" className="flex items-center justify-center gap-2">
+      <Link
+        href="/infractions"
+        className="flex items-center justify-center gap-2"
+      >
         <LucideBookCheck height={16} width={16} />
         Infrações
       </Link>

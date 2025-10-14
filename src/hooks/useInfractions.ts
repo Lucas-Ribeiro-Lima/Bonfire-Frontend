@@ -1,7 +1,5 @@
 import { ImportFormData } from '@/schemas/ImportFormSchema'
-import {
-    PostAutoInfraction,
-} from '@/services/infractions'
+import { PostAutoInfraction } from '@/services/infractions'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { useNotifications } from './useNotifications'

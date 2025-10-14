@@ -2,17 +2,17 @@
 
 import { DEFAULTTIMEOUT } from '@/lib/utils'
 import { RecurseData } from '@/schemas/Infractions'
-import { GetRecurses } from "@/services/recurse";
+import { GetRecurses } from '@/services/recurse'
 import { useCallback, useEffect, useState } from 'react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
 
 enum InstancesE {
-    primeira = 1,
-    segunda = 2
+  primeira = 1,
+  segunda = 2,
 }
 interface RecursesLayoutProps {
-    instance?: InstancesE
+  instance?: InstancesE
 }
 
 export function RecursesLayout({ instance }: RecursesLayoutProps) {
@@ -22,7 +22,7 @@ export function RecursesLayout({ instance }: RecursesLayoutProps) {
   const [scheduleId, setScheduleId] = useState<NodeJS.Timeout | null>(null)
 
   const wrapper = useCallback(() => {
-      GetRecurses(date, ata, instance).then((res) => {
+    GetRecurses(date, ata, instance).then((res) => {
       setRecursos(res)
     })
     setScheduleId(null)

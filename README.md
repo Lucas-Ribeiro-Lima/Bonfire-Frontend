@@ -1,6 +1,8 @@
 # **Bonfire: Projeto em Next.Js**
 
-Apresento o Bonfire, um projeto de frontend desenvolvido exclusivamente por mim, Lucas Ribeiro Lima. Este aplicativo, construído em Next.js, reflete meu comprometimento com o desenvolvimento de software eficiente e aprimorado. Aqui estão as principais tecnologias e habilidades demonstradas:
+Apresento o Bonfire, um projeto de frontend desenvolvido exclusivamente por mim, Lucas Ribeiro Lima. Este aplicativo,
+construído em Next.js, reflete meu comprometimento com o desenvolvimento de software eficiente e aprimorado. Aqui estão
+as principais tecnologias e habilidades demonstradas:
 
 - **Next.js** 🔗: Estrutura React poderosa para uma experiência de usuário rápida e eficiente.
 - **Tailwind CSS** 🎨: Framework CSS utilitário para estilos modernos e responsivos.
@@ -26,9 +28,11 @@ Apresento o Bonfire, um projeto de frontend desenvolvido exclusivamente por mim,
 # **🎨 Illustration**
 
 ### Home Page
+
 ![Home page](./public/home-page.png)
 
 ### Tables
+
 ![React tables](./public/CRUD-vehicles.png)
 
 ![CRUD edit modal](./public/delete-modal.png)
@@ -43,4 +47,5 @@ Apresento o Bonfire, um projeto de frontend desenvolvido exclusivamente por mim,
 
 ![Keycloack login page](./public/next-auth-keycloak-integration.png)
 
-Agradeço a todos que contribuíram, especialmente a você, por explorar o Bonfire e testemunhar meu compromisso com a excelência no desenvolvimento de software. 🔥✨
+Agradeço a todos que contribuíram, especialmente a você, por explorar o Bonfire e testemunhar meu compromisso com a
+excelência no desenvolvimento de software. 🔥✨

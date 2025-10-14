@@ -1,6 +1,6 @@
 import { ImportFormAutoInfraction } from '@/components/import/importFormAutoInfraction'
 import { ImportFormRecurseFirstInstance } from '@/components/import/importFormRecurseFirstInstance'
-import { ImportFormRecurseSecondInstance } from "@/components/import/importFormRecurseSecondInstance";
+import { ImportFormRecurseSecondInstance } from '@/components/import/importFormRecurseSecondInstance'
 import { PrimaryLayout } from '@/components/UI/primaryLayout'
 
 export const metadata = {
@@ -13,7 +13,7 @@ export default function Home() {
       <div className="flex items-center justify-evenly gap-20 max-sm:flex-col">
         <ImportFormAutoInfraction></ImportFormAutoInfraction>
         <ImportFormRecurseFirstInstance></ImportFormRecurseFirstInstance>
-		<ImportFormRecurseSecondInstance></ImportFormRecurseSecondInstance>
+        <ImportFormRecurseSecondInstance></ImportFormRecurseSecondInstance>
       </div>
     </PrimaryLayout>
   )

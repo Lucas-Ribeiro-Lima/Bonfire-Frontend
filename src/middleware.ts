@@ -8,5 +8,10 @@ export default withAuth({
 })
 
 export const config = {
-  matcher: ['/infractions/:path*', '/registers/:path*', '/import/:path*', '/recurses/:path'],
+  matcher: [
+    '/infractions/:path*',
+    '/registers/:path*',
+    '/import/:path*',
+    '/recurses/:path',
+  ],
 }
