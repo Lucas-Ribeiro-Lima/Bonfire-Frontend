@@ -30,7 +30,7 @@ export async function GetRecurses(
     return data.recurses
 }
 
-export async function PostRecursesFirstInstance(file: File) {
+export async function PostRecurse(file: File, instance = 1) {
     if (!file) throw new Error('Auto vazio')
 
     const event: EventT = {}
@@ -41,7 +41,7 @@ export async function PostRecursesFirstInstance(file: File) {
 
     try {
         const response = await api.post<TResponseImport>(
-            'recurso/primeiraInstancia/resultado',
+            `recurso/${instance === 1 ? "primeiraInstancia" : "segundaInstancia"}/resultado`,
             body,
             {timeout: 320000},
         )

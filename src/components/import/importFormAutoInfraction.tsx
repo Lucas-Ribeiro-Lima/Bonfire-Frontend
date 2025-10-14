@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import {
   ImportFormData,
-  ImportFormFirstSchema,
+  ImportFormInfractionSchema,
 } from '../../schemas/ImportFormSchema'
 import { Button } from '../UI/button'
 
@@ -16,7 +16,7 @@ export function ImportFormAutoInfraction() {
     handleSubmit,
     formState: { errors },
   } = useForm<ImportFormData>({
-    resolver: zodResolver(ImportFormFirstSchema),
+    resolver: zodResolver(ImportFormInfractionSchema),
   })
   const { importing, HandleImportAutoInfractions } = useInfractions()
 

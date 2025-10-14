@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import {
   ImportFormData,
-  ImportFormSecondSchema,
+  ImportFormRecursesSchema,
 } from '../../schemas/ImportFormSchema'
 import { Button } from '../UI/button'
 
@@ -16,10 +16,10 @@ export function ImportFormRecurseFirstInstance() {
     handleSubmit,
     formState: { errors },
   } = useForm<ImportFormData>({
-    resolver: zodResolver(ImportFormSecondSchema),
+    resolver: zodResolver(ImportFormRecursesSchema),
   })
 
-  const { importing, HandleImportFirstInstance } = useRecurses()
+  const { importingFirst, HandleImport } = useRecurses()
 
   return (
     <div className="h-fit space-y-4 rounded-md p-8 dark:bg-slate-950">
@@ -37,11 +37,11 @@ export function ImportFormRecurseFirstInstance() {
         </div>
         <Button
           type="submit"
-          onClick={handleSubmit(HandleImportFirstInstance)}
+          onClick={handleSubmit((e) => HandleImport(e, 1))}
           variant="secondary"
-          disabled={importing}
+          disabled={importingFirst}
         >
-          {(importing && (
+          {(importingFirst && (
             <div className="flex gap-2">
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Importando...

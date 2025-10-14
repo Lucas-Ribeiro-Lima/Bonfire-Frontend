@@ -1,26 +1,26 @@
-
 // Função de handling do import
 import {useState} from "react";
 import {useNotifications} from "@/hooks/useNotifications";
 import {ImportFormData} from "@/schemas/ImportFormSchema";
-import {PostRecursesFirstInstance} from "@/services/recurse";
+import {PostRecurse} from "@/services/recurse";
 import {toast} from "sonner";
 
 export function useRecurses() {
-    const [importing, setImporting] = useState(false)
-    const { handleInsert: handleInsertNotification } = useNotifications()
+  const [importingFirst, setImportingFirst] = useState(false)
+  const [importingSecond, setImportingSecond] = useState(false)
+  const {handleInsert: handleInsertNotification} = useNotifications()
 
-    async function HandleImportFirstInstance(data: ImportFormData) {
-        if (!data.file) return
-        try {
-            setImporting(true)
-            const { event } = await PostRecursesFirstInstance(data.file)
-            toast(event.message)
-            handleInsertNotification(event)
-        } finally {
-            setImporting(false)
-        }
-    }
+  async function HandleImport(data: ImportFormData, instance?: number) {
+	if (!data.file) return
+	try {
+	  instance === 1 ? setImportingFirst(true) : setImportingSecond(true)
+	  const {event} = await PostRecurse(data.file, instance)
+	  toast(event.message)
+	  handleInsertNotification(event)
+	} finally {
+	  instance === 1 ? setImportingFirst(false) : setImportingSecond(false)
+	}
+  }
 
-    return { importing, HandleImportFirstInstance }
+  return {importingFirst, importingSecond, HandleImport}
 }

@@ -1,6 +1,6 @@
 import z from 'zod'
 
-export const ImportFormFirstSchema = z.object({
+export const ImportFormInfractionSchema = z.object({
   file:
     typeof window === 'undefined'
       ? z.null()
@@ -23,7 +23,7 @@ export const ImportFormFirstSchema = z.object({
           }),
 })
 
-export const ImportFormSecondSchema = z.object({
+export const ImportFormRecursesSchema = z.object({
   file:
     typeof window === 'undefined'
       ? z.null()
@@ -49,11 +49,11 @@ export const ImportFormSecondSchema = z.object({
           }),
 })
 
-export const responseImportSecondSchema = z.object({
+export const responseImportRecurses = z.object({
   message: z.string(),
   counter: z.number().optional(),
 })
 
-export type TResponseImport = z.infer<typeof responseImportSecondSchema>
+export type TResponseImport = z.infer<typeof responseImportRecurses>
 
-export type ImportFormData = z.infer<typeof ImportFormFirstSchema>
+export type ImportFormData = z.infer<typeof ImportFormInfractionSchema>
