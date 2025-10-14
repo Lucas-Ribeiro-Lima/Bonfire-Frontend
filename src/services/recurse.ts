@@ -8,9 +8,11 @@ interface ILoadRecurses {
     recurses: RecurseData[]
 }
 
-export async function GetRecurseFirstInstance(
+
+export async function GetRecurses(
     date: string,
     ata: string,
+    instance = 1
 ): Promise<RecurseData[]> {
     const map = new Map()
 
@@ -18,8 +20,8 @@ export async function GetRecurseFirstInstance(
 
     if (ata) map.set('ata', ata)
 
-    const { data } = await api.get<ILoadRecurses>(
-        `/recurso/primeiraInstancia`,
+    const {data} = await api.get<ILoadRecurses>(
+        `/recurso/${instance === 1 ? "primeiraInstancia" : "segundaInstancia"}`,
         {
             params: Object.fromEntries(map.entries()),
         }
@@ -28,7 +30,7 @@ export async function GetRecurseFirstInstance(
     return data.recurses
 }
 
-export async function PostRecurseFirstInstance(file: File) {
+export async function PostRecursesFirstInstance(file: File) {
     if (!file) throw new Error('Auto vazio')
 
     const event: EventT = {}
@@ -41,7 +43,7 @@ export async function PostRecurseFirstInstance(file: File) {
         const response = await api.post<TResponseImport>(
             'recurso/primeiraInstancia/resultado',
             body,
-            { timeout: 320000 },
+            {timeout: 320000},
         )
         if (response.status === 200) {
             event.message = `${response.data.message} Quantidade: ${response.data.counter}`
@@ -52,5 +54,5 @@ export async function PostRecurseFirstInstance(file: File) {
         }
     }
 
-    return { event }
+    return {event}
 }

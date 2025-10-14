@@ -3,7 +3,7 @@
 import {useState} from "react";
 import {useNotifications} from "@/hooks/useNotifications";
 import {ImportFormData} from "@/schemas/ImportFormSchema";
-import {PostRecurseFirstInstance} from "@/services/recurse";
+import {PostRecursesFirstInstance} from "@/services/recurse";
 import {toast} from "sonner";
 
 export function useRecurses() {
@@ -14,7 +14,7 @@ export function useRecurses() {
         if (!data.file) return
         try {
             setImporting(true)
-            const { event } = await PostRecurseFirstInstance(data.file)
+            const { event } = await PostRecursesFirstInstance(data.file)
             toast(event.message)
             handleInsertNotification(event)
         } finally {
