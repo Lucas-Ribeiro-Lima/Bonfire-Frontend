@@ -2,13 +2,13 @@ import { PrimaryLayout } from '@/components/UI/primaryLayout'
 import { RecursesLayout } from '@/components/recurses/recursesLayout'
 
 export const metadata = {
-  title: 'Bonfire - Recursos',
+  title: 'Bonfire - Recursos - Primeira Instância',
 }
 
 export default function Home() {
   return (
     <PrimaryLayout>
-      <RecursesLayout></RecursesLayout>
+      <RecursesLayout instance={1}></RecursesLayout>
     </PrimaryLayout>
   )
 }

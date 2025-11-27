@@ -2,8 +2,8 @@ import { EventT } from '@/schemas/NotificationSchema'
 import {
   ClearNotificationLocalStorage,
   GetNotificationLocalStorage,
-  SetNotificationLocalStorage,
   notificationT,
+  SetNotificationLocalStorage,
 } from '@/services/localStorage'
 import { useEffect, useState } from 'react'
 

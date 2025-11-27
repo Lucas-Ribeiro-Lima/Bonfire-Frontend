@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
 
 export default function Home() {
-  return redirect('/infractions/firstInstance')
+  return redirect('/infractions')
 }

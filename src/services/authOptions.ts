@@ -16,6 +16,15 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ token, account }) {
+      if (account) {
+        token.accessToken = account.access_token
+      }
+
+      return token
+    },
+  },
   pages: {
     signIn: '/login',
     signOut: '/login',
