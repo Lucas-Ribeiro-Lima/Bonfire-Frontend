@@ -3,9 +3,22 @@ import {
   NextApiRequest,
   NextApiResponse,
 } from 'next'
-import { getServerSession, type NextAuthOptions } from 'next-auth'
 import Keycloak from 'next-auth/providers/keycloak'
+
+import { getServerSession, type NextAuthOptions } from 'next-auth'
 import { env } from './env'
+
+declare module "next-auth" {
+  interface Session {
+    accessToken?: string
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    accessToken?: string
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -21,8 +34,11 @@ export const authOptions: NextAuthOptions = {
       if (account) {
         token.accessToken = account.access_token
       }
-
       return token
+    },
+    async session({ session, token }) {
+      session.accessToken = token.accessToken
+      return session
     },
   },
   pages: {
