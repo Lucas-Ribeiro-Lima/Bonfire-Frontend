@@ -31,13 +31,11 @@ export function InfractionLayout() {
   }, [date, ai])
 
   return (
-    <div className="w-full">
-      <DataTable
-        columns={columns}
-        data={infracoes}
-        setDate={setDate}
-        setAi={setAi}
-      ></DataTable>
-    </div>
+    <DataTable
+      columns={columns}
+      data={infracoes}
+      setDate={setDate}
+      setAi={setAi}
+    ></DataTable>
   )
 }

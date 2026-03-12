@@ -42,7 +42,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="w-full">
+    <div className="flex flex-col w-full">
       <div className="flex items-center gap-4 py-4 pl-4">
         <Label
           className="flex items-center gap-2
@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
           />
         </Label>
       </div>
-      <Table>
+      <Table className='h-full'>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

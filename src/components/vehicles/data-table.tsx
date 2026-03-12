@@ -51,7 +51,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="w-full rounded-md border p-2 dark:bg-slate-950">
+    <div className="flex flex-col w-full rounded-md border p-2 dark:bg-slate-950">
       <div className="flex items-center gap-4 py-4 pl-4">
         <Input
           placeholder="Veiculo"
@@ -89,7 +89,7 @@ export function DataTable<TData, TValue>({
           </div>
         </Dialog>
       </div>
-      <Table>
+      <Table className='h-full'>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

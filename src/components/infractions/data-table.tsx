@@ -41,7 +41,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="w-full">
+    <div className="flex flex-col w-full"> 
       <div className="flex items-center gap-4 py-4 pl-4">
         <Input
           placeholder="Data"
@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({
           className="w-36"
         />
       </div>
-      <Table>
+      <Table className='h-full'>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
