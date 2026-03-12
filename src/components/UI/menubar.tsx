@@ -30,11 +30,11 @@ export function MenuBar() {
   const session = useSession()
 
   return (
-    <div className="mt-8 flex flex-col items-start gap-8 max-sm:w-full max-sm:items-center">
+    <div className="mt-8 flex flex-col items-start gap-8 max-sm:w-full max-sm:items-center select-none caret-transparent">
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Link href="/">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 cursor-pointer">
               <LucideHome height={16} width={16} />
               Inicio
             </div>
@@ -43,18 +43,18 @@ export function MenuBar() {
       </DropdownMenu>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2"> 
             <AlignJustify height={16} width={16} />
             Cadastros
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2">
+        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2 select-none caret-transparent">
           <DropdownMenuItem>
             <Link
               href="/registers/vehicles"
               className="flex justify-center p-2"
             >
-              <div className="flex flex-row gap-2 self-center justify-self-center">
+              <div className="flex flex-row gap-2 self-center justify-self-center select-none cursor-pointer">
                 Veiculos
               </div>
             </Link>
@@ -92,7 +92,7 @@ export function MenuBar() {
             Recursos
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2">
+        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2 select-none caret-transparent">
           <DropdownMenuItem>
             <Link
               href="/recurses/firstInstance"
