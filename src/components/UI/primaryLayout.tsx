@@ -1,6 +1,5 @@
 'use client'
 import { ReactNode, useState } from 'react'
-import { Footer } from './footer'
 import { Header } from './header'
 import { SideBar } from './sidebar'
 
@@ -12,7 +11,7 @@ export function PrimaryLayout({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const toggleSideBar = () => setSidebarOpen((prev) => !prev)
 
-  return (
+    return (
     <div className="flex h-full flex-col">
       <Header toggleSideBar={toggleSideBar}></Header>
       <SideBar
@@ -26,7 +25,6 @@ export function PrimaryLayout({ children }: Props) {
       >
         {children}
       </main>
-      <Footer></Footer>
     </div>
   )
 }
