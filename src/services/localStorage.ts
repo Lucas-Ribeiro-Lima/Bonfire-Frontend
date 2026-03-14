@@ -1,37 +1,48 @@
 import { EventT } from '@/schemas/NotificationSchema'
 
-export type notificationT = EventT & {
+export type NotificationT = EventT & {
+  id: string
   date: string
 }
 
-export function SetNotificationLocalStorage(notification: EventT) {
-  if (typeof window === 'undefined') return []
-  const actualDate = new Date()
-  const previousNotifications = JSON.parse(
-    window.localStorage.getItem('notifications') || '[]',
-  )
-  previousNotifications.push({
-    date: actualDate.toLocaleDateString('pt-BR'),
-    document: notification.document,
-    message: notification.message,
-  })
-  window.localStorage.setItem(
-    'notifications',
-    JSON.stringify(previousNotifications),
-  )
+const STORAGE_KEY = 'notifications'
+
+function safeParse<T>(value: string | null, fallback: T): T {
+  try {
+    return value ? JSON.parse(value) : fallback
+  } catch {
+    return fallback
+  }
 }
 
-export function GetNotificationLocalStorage(): Array<notificationT> {
+export function getNotifications(): NotificationT[] {
   if (typeof window === 'undefined') return []
 
-  const notifications = JSON.parse(
-    window.localStorage.getItem('notifications') || '[]',
-  )
-  return notifications
+  const data = window.localStorage.getItem(STORAGE_KEY)
+
+  return safeParse<NotificationT[]>(data, [])
 }
 
-export function ClearNotificationLocalStorage() {
+export function addNotification(notification: EventT): NotificationT[] {
+  if (typeof window === 'undefined') return []
+
+  const notifications = getNotifications()
+
+  const newNotification: NotificationT = {
+    ...notification,
+    id: crypto.randomUUID(),
+    date: new Date().toLocaleDateString('pt-BR'),
+  }
+
+  const updated = [newNotification, ...notifications]
+
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
+
+  return updated
+}
+
+export function clearNotifications() {
   if (typeof window === 'undefined') return
 
-  window.localStorage.clear()
+  window.localStorage.removeItem(STORAGE_KEY)
 }

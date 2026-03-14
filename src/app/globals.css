@@ -68,7 +68,7 @@
 
 @layer base {
   * {
-      @apply border-border dark:text-zinc-300;
+      @apply border-border dark:text-zinc-300 max-sm:text-sm;
   }
 
   body {

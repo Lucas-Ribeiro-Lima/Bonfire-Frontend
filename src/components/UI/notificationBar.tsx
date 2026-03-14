@@ -1,55 +1,72 @@
+'use client'
+
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { ScrollArea } from '@/components/UI/scroll-area'
 import { useNotifications } from '@/hooks/useNotifications'
 import { notificationT } from '@/services/localStorage'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu'
-import { LucideBell, Paintbrush } from 'lucide-react'
+
+import { Bell, Paintbrush } from 'lucide-react'
 
 export function NotificationBar() {
   const { notifications, qtdNotifications, handleClear } = useNotifications()
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="relative flex">
-        <LucideBell width={16} height={16} />
-        {qtdNotifications > 0 && (
-          <div className="absolute -right-1 -top-1 z-10 h-3 w-3 rounded-full bg-red-800"></div>
-        )}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="relative right-4 top-2 z-20 bg-white shadow-sm shadow-slate-200 dark:shadow-slate-900 dark:bg-main-dark">
-        <ScrollArea className="z-1000 flex h-96 w-72 flex-col rounded-lg">
-          <div className="fixed flex w-full justify-end p-4">
-            <button onClick={handleClear}>
-              <Paintbrush
-                width={16}
-                height={16}
-                className="dark:text-zinc-400"
-              ></Paintbrush>
-            </button>
-          </div>
+    <Popover>
+      <PopoverTrigger asChild>
+        <button className="relative flex items-center justify-center">
+          <Bell size={16} />
+
+          {qtdNotifications > 0 && (
+            <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-600" />
+          )}
+        </button>
+      </PopoverTrigger>
+
+      <PopoverContent
+        align="end"
+        className="w-80 p-0 rounded-lg border shadow-lg bg-white dark:bg-main-dark"
+      >
+        {/* HEADER */}
+        <div className="flex items-center justify-between border-b px-4 py-3">
+          <span className="text-sm font-medium">Notificações</span>
+
+          <button
+            onClick={handleClear}
+            className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400"
+          >
+            <Paintbrush size={16} />
+          </button>
+        </div>
+
+        {/* LIST */}
+        <ScrollArea className="h-80">
           {notifications.length > 0 ? (
-            notifications.map((notification: notificationT, idx) => {
-              return (
-                <DropdownMenuItem key={idx} className="p-4">
-                  <div>
-                    <div>Data: {notification.date}</div>
-                    <div>Documento: {notification.document}</div>
-                    <div>{notification.message}</div>
-                  </div>
-                </DropdownMenuItem>
-              )
-            })
+            notifications.map((notification: notificationT, idx: number) => (
+              <div
+                key={idx}
+                className="flex flex-col gap-1 border-b px-4 py-3 last:border-none"
+              >
+                <span className="text-xs text-zinc-500">
+                  {notification.date}
+                </span>
+
+                <span className="text-sm font-medium">
+                  {notification.document}
+                </span>
+
+                <span className="text-sm text-zinc-600 dark:text-zinc-400">
+                  {notification.message}
+                </span>
+              </div>
+            ))
           ) : (
-            <DropdownMenuItem className="p-4">
+            <div className="flex h-40 items-center justify-center text-sm text-zinc-500">
               Sem notificações
-            </DropdownMenuItem>
+            </div>
           )}
         </ScrollArea>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </PopoverContent>
+    </Popover>
   )
 }
+
