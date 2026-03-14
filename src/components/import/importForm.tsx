@@ -9,14 +9,10 @@ import { Button } from '../UI/button'
 import { FileUpload } from '../ui/file-upload'
 
 import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu'
-
-import {
-  DropdownMenuContentWrapper,
-  DropDownMenuItemWrapper
-} from '@/components/UI/dropdownWrapper'
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@radix-ui/react-popover';
 
 import { formatFileSize } from '@/lib/utils'
 
@@ -69,33 +65,39 @@ export function ImportForm() {
     <div className="space-y-6 rounded-md p-8 min-w-28">
       <h2 className="text-center font-semibold">Importação de arquivos</h2>
 
-      {/* Dropdown */}
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline"
+      {/* Popover */}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
             className="flex w-full items-center justify-between group">
             {current.title}
-
             <ChevronDown
               size={16}
-              className="opacity-70 transition-transform group-data-[state=open]:rotate-180"
-            />
+              className="opacity-70 transition-transform group-data-[state=open]:rotate-180"/>
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContentWrapper>
-          <DropDownMenuItemWrapper onClick={() => setType('infraction')}>
+        </PopoverTrigger>
+        <PopoverContent
+          className="w-72 z-50 rounded-xl border p-2 shadow-lg bg-popover text-popover-foreground animate-in fade-in zoom-in-95">
+          <div
+            className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium popover-option"
+            onClick={() => setType('infraction')}>
             Auto de Infração
-          </DropDownMenuItemWrapper>
+          </div>
 
-          <DropDownMenuItemWrapper onClick={() => setType('recurse-first')}>
+          <div
+            className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium popover-option"
+            onClick={() => setType('recurse-first')}>
             Recurso — Primeira Instância
-          </DropDownMenuItemWrapper>
+          </div>
 
-          <DropDownMenuItemWrapper onClick={() => setType('recurse-second')}>
+          <div
+            className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium popover-option"
+            onClick={() => setType('recurse-second')}>
             Recurso — Segunda Instância
-          </DropDownMenuItemWrapper>
-        </DropdownMenuContentWrapper>
-      </DropdownMenu>
+          </div>
+        </PopoverContent>
+      </Popover>
 
       {/* Upload */}
       {file ? (

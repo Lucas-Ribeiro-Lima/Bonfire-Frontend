@@ -86,4 +86,8 @@
   .sidebar-active {
     @apply bg-zinc-800 text-zinc-100 font-medium;
   }
+
+  .popover-option {
+    @apply transition-colors hover:text-zinc-100 hover:bg-zinc-800;
+  }
 }
