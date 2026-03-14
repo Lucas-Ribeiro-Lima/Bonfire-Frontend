@@ -10,12 +10,15 @@ import { FileUpload } from '../ui/file-upload'
 
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu'
 
-import { formatFileSize } from '@/lib/utils'  
+import {
+  DropdownMenuContentWrapper,
+  DropDownMenuItemWrapper
+} from '@/components/UI/dropdownWrapper'
+
+import { formatFileSize } from '@/lib/utils'
 
 type ImportType = 'infraction' | 'recurse-first' | 'recurse-second'
 
@@ -33,6 +36,7 @@ const importOptions = {
     accept: '.docx',
   },
 }
+
 
 export function ImportForm() {
   const [type, setType] = useState<ImportType>('infraction')
@@ -68,10 +72,8 @@ export function ImportForm() {
       {/* Dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant="outline"
-            className="flex w-full items-center justify-between"
-          >
+          <Button variant="outline"
+            className="flex w-full items-center justify-between group">
             {current.title}
 
             <ChevronDown
@@ -80,29 +82,19 @@ export function ImportForm() {
             />
           </Button>
         </DropdownMenuTrigger>
-
-        <DropdownMenuContent
-          align="start"
-          className="w-[260px] dark:bg-main-dark p-4"
-        >
-          <DropdownMenuItem
-            onClick={() => setType('infraction')}
-          >
+        <DropdownMenuContentWrapper>
+          <DropDownMenuItemWrapper onClick={() => setType('infraction')}>
             Auto de Infração
-          </DropdownMenuItem>
+          </DropDownMenuItemWrapper>
 
-          <DropdownMenuItem
-            onClick={() => setType('recurse-first')}
-          >
+          <DropDownMenuItemWrapper onClick={() => setType('recurse-first')}>
             Recurso — Primeira Instância
-          </DropdownMenuItem>
+          </DropDownMenuItemWrapper>
 
-          <DropdownMenuItem
-            onClick={() => setType('recurse-second')}
-          >
+          <DropDownMenuItemWrapper onClick={() => setType('recurse-second')}>
             Recurso — Segunda Instância
-          </DropdownMenuItem>
-        </DropdownMenuContent>
+          </DropDownMenuItemWrapper>
+        </DropdownMenuContentWrapper>
       </DropdownMenu>
 
       {/* Upload */}
