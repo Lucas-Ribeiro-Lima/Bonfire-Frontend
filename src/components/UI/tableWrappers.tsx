@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export function TableWrapper({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col w-full rounded-md border p-2 ">
+    <div className="flex flex-col w-full rounded-md border p-2 caret-sky-500 select-text">
       {children}
     </div>
   )
@@ -19,7 +19,7 @@ export function TableWrapperFilters({ children }: { children: ReactNode }) {
 
 export function TableWrapperBody({ children }: { children: ReactNode }) {
   return (
-    <div className='flex-1 overflow-auto'>
+    <div className='flex-1 overflow-auto select-text'>
       {children}
     </div>
   )
