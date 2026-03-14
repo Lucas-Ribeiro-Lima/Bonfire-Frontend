@@ -51,7 +51,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="flex flex-col w-full rounded-md border p-2 dark:bg-slate-950">
+    <div className="flex flex-col w-full rounded-md border p-2 ">
       <div className="flex items-center gap-4 p-4 py-4">
         <Input
           placeholder="Linha"

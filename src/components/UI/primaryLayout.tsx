@@ -21,7 +21,7 @@ export function PrimaryLayout({ children }: Props) {
       <main
         className="
           align-center flex flex-1 justify-center overflow-x-hidden
-          dark:bg-gradient-to-r dark:from-gray-900 dark:via-sky-950 dark:to-slate-900"
+          dark:bg-main-dark"
       >
         {children}
       </main>

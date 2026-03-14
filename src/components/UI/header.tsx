@@ -15,7 +15,7 @@ export const Header = ({ toggleSideBar }: headerProp) => {
   return (
     <>
       <div className="h-12"></div>
-      <header className="fixed left-0 top-0 z-10 flex h-12 w-full flex-row justify-between border-b border-zinc-300/60 bg-white pl-4 dark:bg-slate-950">
+      <header className="fixed left-0 top-0 z-10 flex h-12 w-full flex-row justify-between border-b border-zinc-300/60 bg-white pl-4 dark:bg-zinc-950 dark:border-zinc-800">
         <button className="dark:text-white" onClick={toggleSideBar}>
           <AlignJustify></AlignJustify>
         </button>

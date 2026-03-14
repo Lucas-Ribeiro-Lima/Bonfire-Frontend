@@ -16,7 +16,7 @@ export function SideBar({ sidebarOpen, toggleSideBar }: SideBarProps) {
         items-center border-r
         bg-white p-4 max-sm:w-full
         ${sidebarOpen ? 'max-sm:translate-y-0 sm:translate-x-0' : 'max-sm:-translate-y-full sm:-translate-x-full'} duration-1000 ease-in-out
-        dark:border-white/25 dark:bg-slate-950
+        dark:bg-zinc-950
         `}
       >
         <div className="self-end">

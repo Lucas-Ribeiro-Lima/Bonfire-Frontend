@@ -20,7 +20,7 @@ export function NotificationBar() {
           <div className="absolute -right-1 -top-1 z-10 h-3 w-3 rounded-full bg-red-800"></div>
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="relative right-4 top-2 z-20 shadow-sm shadow-neutral-400 ">
+      <DropdownMenuContent className="relative right-4 top-2 z-20 shadow-sm shadow-slate-400 dark:shadow-slate-700 ">
         <ScrollArea className="z-1000 flex h-96 w-72 flex-col rounded-lg bg-white dark:bg-slate-950">
           <div className="fixed flex w-full justify-end p-4">
             <button onClick={handleClear}>

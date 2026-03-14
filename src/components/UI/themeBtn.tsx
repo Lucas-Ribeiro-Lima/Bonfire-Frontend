@@ -29,7 +29,7 @@ export function ThemeBtn() {
           />
         ) : (
           <Moon
-            className="cursor-pointer fill-cyan-800 text-cyan-400"
+            className="cursor-pointer fill-cyan-900 text-cyan-950"
             width={16}
             height={16}
             onClick={() => setTheme('light')}

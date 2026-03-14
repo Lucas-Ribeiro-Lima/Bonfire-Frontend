@@ -96,7 +96,7 @@ export function DataTable<TData, TValue>({
             </TableRow>
           )}
         </TableBody>
-        <TableFooter>
+        <TableFooter className='bg-transparent'>
           <TableRow>
             <TableCell colSpan={7}>
               {`Total de autos:  ${table.getRowCount()}`}
