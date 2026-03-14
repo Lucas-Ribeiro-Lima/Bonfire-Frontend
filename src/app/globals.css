@@ -68,7 +68,7 @@
 
 @layer base {
   * {
-      @apply border-border dark:text-zinc-300 max-sm:text-sm;
+    @apply border-border dark:text-zinc-300 max-sm:text-sm;
   }
 
   body {
@@ -80,6 +80,10 @@
   }
 
   .sidebar-link {
-    @apply flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-zinc-400 transition-colors hover:text-zinc-100 hover:bg-zinc-800;
+    @apply flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:text-zinc-100 hover:bg-zinc-800;
+  }
+
+  .sidebar-active {
+    @apply bg-zinc-800 text-zinc-100 font-medium;
   }
 }
