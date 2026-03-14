@@ -3,7 +3,7 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { ScrollArea } from '@/components/UI/scroll-area'
 import { useNotifications } from '@/hooks/useNotifications'
-import { notificationT } from '@/services/localStorage'
+import { NotificationT } from '@/services/localStorage'
 
 import { Bell, Paintbrush } from 'lucide-react'
 
@@ -13,11 +13,11 @@ export function NotificationBar() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="relative flex items-center justify-center">
-          <Bell size={16} />
+        <button className="relative flex h-8 w-8 items-center justify-center rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800">
+          <Bell size={18} />
 
           {qtdNotifications > 0 && (
-            <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-600" />
+            <span className="absolute right-0 top-0 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white dark:ring-zinc-950" />
           )}
         </button>
       </PopoverTrigger>
@@ -41,7 +41,7 @@ export function NotificationBar() {
         {/* LIST */}
         <ScrollArea className="h-80">
           {notifications.length > 0 ? (
-            notifications.map((notification: notificationT, idx: number) => (
+            notifications.map((notification: NotificationT, idx: number) => (
               <div
                 key={idx}
                 className="flex flex-col gap-1 border-b px-4 py-3 last:border-none"

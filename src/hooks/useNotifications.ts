@@ -5,35 +5,29 @@ import {
   addNotification,
   NotificationT,
 } from '@/services/localStorage'
+
 import { useEffect, useState } from 'react'
 
 export function useNotifications() {
   const [notifications, setNotifications] = useState<NotificationT[]>([])
-  const [qtdNotifications, setQtdNotifications] = useState<number>(0)
 
   function handleInsert(notification: EventT) {
-    addNotification(notification)
-    updateNotifications()
+    const updated = addNotification(notification)
+    setNotifications(updated)
   }
 
   function handleClear() {
     clearNotifications()
-    updateNotifications()
-  }
-
-  function updateNotifications() {
-    const storedNotifications = getNotifications()
-    setNotifications(storedNotifications)
-    setQtdNotifications(storedNotifications.length)
+    setNotifications([])
   }
 
   useEffect(() => {
-    updateNotifications()
+    setNotifications(getNotifications())
   }, [])
 
   return {
     notifications,
-    qtdNotifications,
+    qtdNotifications: notifications.length,
     handleInsert,
     handleClear,
   }

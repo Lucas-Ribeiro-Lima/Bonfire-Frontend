@@ -1,6 +1,5 @@
 'use client'
 
-import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
@@ -10,32 +9,21 @@ export function ThemeBtn() {
 
   useEffect(() => setMounted(true), [])
 
-  if (!mounted) return <></>
+  if (!mounted) return null
+
+  const isDark = theme === 'dark'
 
   return (
-    <div className="relative flex h-4 w-12 rounded-xl border border-neutral-800/10">
-      <div
-        className={`absolute h-full w-full rounded-xl ${theme === 'light' ? 'bg-zinc-100' : 'bg-zinc-800'} `}
-      ></div>
-      <div
-        className={`z-10 flex items-center transition-transform ${theme === 'light' && 'translate-x-8'}`}
-      >
-        {theme === 'light' ? (
-          <Sun
-            className="cursor-pointer fill-amber-400 text-amber-600"
-            width={16}
-            height={16}
-            onClick={() => setTheme('dark')}
-          />
-        ) : (
-          <Moon
-            className="cursor-pointer fill-cyan-900 text-cyan-950"
-            width={16}
-            height={16}
-            onClick={() => setTheme('light')}
-          />
-        )}
-      </div>
-    </div>
+    <button
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="relative flex h-4 w-9 items-center rounded-full bg-zinc-200 transition dark:bg-zinc-700"
+    >
+      <span
+        className={`absolute h-2 w-2 rounded-full bg-white shadow transition-transform dark:bg-zinc-900 ${
+          isDark ? 'translate-x-6' : 'translate-x-1'
+        }`}
+      />
+    </button>
   )
 }
+
