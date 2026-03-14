@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
+import { toast } from 'sonner'
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -22,4 +24,23 @@ export function formatFileSize(bytes: number) {
   if (bytes < 1024) return bytes + ' B'
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'
   return (bytes / 1024 / 1024).toFixed(1) + ' MB'
+}
+
+function normalize(msg?: string, fallback = "Erro inesperado") {
+  if (!msg || !msg.trim()) return fallback
+  return msg
+}
+
+export const notify = {
+  success(msg?: string) {
+    toast.success(normalize(msg, "Operação realizada com sucesso"))
+  },
+
+  error(msg?: string) {
+    toast.error(normalize(msg, "Ocorreu um erro inesperado"))
+  },
+
+  info(msg?: string) {
+    toast(normalize(msg, "Informação"))
+  }
 }

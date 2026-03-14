@@ -6,8 +6,8 @@ import {
   UpdateVehicles,
 } from '@/services/vehicles'
 import { useContext } from 'react'
-import { toast } from 'sonner'
 import { useNotifications } from './useNotifications'
+import { notify } from '@/lib/utils'
 
 export function useVehicles() {
   const { data, mutate } = useContext(VehicleContext)
@@ -16,7 +16,7 @@ export function useVehicles() {
   async function handleUpdate(vehicle: VehiclesData) {
     const { vehicle: updatedVehicle, event } = await UpdateVehicles(vehicle)
     handleInsertNotification(event)
-    toast(event.message)
+    notify.success(event.message)
 
     if (data) {
       const updatedData = [...data, updatedVehicle]
@@ -27,7 +27,7 @@ export function useVehicles() {
   async function handleInsert(vehicle: VehiclesData) {
     const { vehicle: insertedVehicle, event } = await InsertVehicles(vehicle)
     handleInsertNotification(event)
-    toast(event.message)
+    notify.success(event.message)
 
     if (data) {
       const updatedData = [...data, insertedVehicle]
@@ -37,7 +37,7 @@ export function useVehicles() {
 
   async function handleDelete(NUM_VEIC: string) {
     const { NUM_VEIC: deletedVehicle, event } = await DeleteVehicles(NUM_VEIC)
-    toast(event.message)
+      notify.success(event.message)
 
     if (data) {
       const updatedData = data.filter(

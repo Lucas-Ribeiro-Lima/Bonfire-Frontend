@@ -3,8 +3,8 @@ import { linesContext } from '@/contexts/lineContext'
 import { LinesFrameData } from '@/schemas/LinesFrameDataSchema'
 import { DeleteLine, IncludeLine, UpdateLine } from '@/services/lines'
 import { useContext } from 'react'
-import { toast } from 'sonner'
 import { useNotifications } from './useNotifications'
+import { notify } from '@/lib/utils'
 
 export function useLines() {
   const { data, mutate } = useContext(linesContext)
@@ -13,7 +13,7 @@ export function useLines() {
   async function handleUpdate(line: LinesFrameData) {
     const { linha: updatedLine, event } = await UpdateLine(line)
     handleInsertNotification(event)
-    toast(event.message)
+    notify.success(event.message)
 
     if (data) {
       const updatedData = [...data, updatedLine]
@@ -24,7 +24,7 @@ export function useLines() {
   async function handleInsert(line: LinesFrameData) {
     const { linha, event } = await IncludeLine(line)
     handleInsertNotification(event)
-    toast(event.message)
+    notify.success(event.message)
 
     if (data) {
       const updatedData = [...data, linha]
@@ -34,7 +34,7 @@ export function useLines() {
 
   async function handleDelete(COD_LINH: string) {
     const { COD_LINH: deletedLine, event } = await DeleteLine(COD_LINH)
-    toast(event.message)
+    notify.success(event.message)
 
     if (data) {
       const updatedData = data.filter((line) => line.COD_LINH !== deletedLine)
