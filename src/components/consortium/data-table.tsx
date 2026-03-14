@@ -16,6 +16,13 @@ import {
   TableRow,
 } from '@/components/UI/table'
 
+import {
+  TableWrapper,
+  TableWrapperFilters,
+  TableWrapperBody,
+  TableWrapperFooter
+} from '@/components/UI/tableWrappers'
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -32,7 +39,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="w-full rounded-md border p-2 ">
+    <TableWrapper>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -75,6 +82,6 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-    </div>
+    </TableWrapper>
   )
 }
