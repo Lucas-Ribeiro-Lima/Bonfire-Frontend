@@ -1,21 +1,24 @@
 'use client'
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from './dropdown-menu'
-
-import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu'
-import {
   AlignJustify,
   FileSpreadsheetIcon,
   LogIn,
   LucideBookCheck,
   LucideHome,
   LucideImport,
+  ChevronRight,
 } from 'lucide-react'
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "@/components/ui/collapsible"
+
+import { usePathname } from "next/navigation"
 import { signIn, signOut, useSession } from 'next-auth/react'
+
 import Link from 'next/link'
 
 function handleSignIn() {
@@ -27,107 +30,118 @@ function handleSignOut() {
 }
 
 export function MenuBar() {
-  const session = useSession()
+  const pathname = usePathname()
+  const { data: session } = useSession()
+
+  const isActive = (path: string) => pathname.startsWith(path)
 
   return (
-    <div className="mt-8 flex flex-col items-start gap-8 max-sm:w-full max-sm:items-center select-none caret-transparent">
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Link href="/">
-            <div className="flex items-center gap-2 cursor-pointer">
-              <LucideHome height={16} width={16} />
-              Inicio
-            </div>
-          </Link>
-        </DropdownMenuTrigger>
-      </DropdownMenu>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <div className="flex items-center gap-2"> 
-            <AlignJustify height={16} width={16} />
-            Cadastros
-          </div>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2 select-none caret-transparent">
-          <DropdownMenuItem>
-            <Link
-              href="/registers/vehicles"
-              className="flex justify-center p-2"
-            >
-              <div className="flex flex-row gap-2 self-center justify-self-center select-none cursor-pointer">
-                Veiculos
-              </div>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href="/registers/lines" className="flex justify-center p-2">
-              <div className="flex flex-row gap-2 self-center justify-self-center">
-                Linhas
-              </div>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link
-              href="/registers/consortium"
-              className="flex justify-center p-2"
-            >
-              <div className="flex flex-row gap-2 self-center justify-self-center">
-                Consorcio
-              </div>
-            </Link>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+    <div className="mt-8 flex flex-col gap-1 max-sm:w-full">
+
+      {/* Inicio */}
+      <Link
+        href="/"
+        className={`sidebar-link flex items-center gap-2 ${pathname === "/" ? "sidebar-active" : ""
+          }`}
+      >
+        <LucideHome size={16} />
+        Inicio
+      </Link>
+
+      {/* Infrações */}
       <Link
         href="/infractions"
-        className="flex items-center justify-center gap-2"
+        className={`sidebar-link flex items-center gap-2 ${pathname.startsWith("/infractions") ? "sidebar-active" : ""
+          }`}
       >
-        <LucideBookCheck height={16} width={16} />
+        <LucideBookCheck size={16} />
         Infrações
       </Link>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <div className="flex items-center gap-2">
-            <FileSpreadsheetIcon height={16} width={16} />
-            Recursos
-          </div>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="ml-8 mt-2 flex flex-col gap-4 p-2 select-none caret-transparent">
-          <DropdownMenuItem>
-            <Link
-              href="/recurses/firstInstance"
-              className="flex justify-center p-2"
-            >
-              <div className="flex flex-row gap-2 self-center justify-self-center">
-                Primeira Instância
-              </div>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link
-              href="/recurses/secondInstance"
-              className="flex justify-center p-2"
-            >
-              <div className="flex flex-row gap-2 self-center justify-self-center">
-                Segunda Instância
-              </div>
-            </Link>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-      <Link href="/import" className="flex items-center justify-center gap-2">
-        <LucideImport height={16} width={16} />
+
+      {/* Recursos */}
+      <Collapsible defaultOpen={isActive("/recurses")}>
+        <CollapsibleTrigger asChild>
+          <button className="sidebar-link group flex w-full items-center gap-2">
+            <AlignJustify size={16} className="shrink-0" />
+            <span className="flex-1 text-left">
+              Recursos
+            </span>
+            <ChevronRight size={16} className="text-zinc-500 transition-transform group-data-[state=open]:rotate-90 shrink-0" />
+          </button>
+        </CollapsibleTrigger>
+
+        <CollapsibleContent className="ml-6 flex flex-col gap-1">
+          <Link
+            href="/recurses/firstInstance"
+            className={`sidebar-link ${pathname === "/recurses/firstInstance" ? "sidebar-active" : ""}`}
+          >
+            1° Instância
+          </Link>
+
+          <Link
+            href="/recurses/secondInstance"
+            className={`sidebar-link ${pathname === "/recurses/secondInstance" ? "sidebar-active" : ""}`}
+          >
+            2° Instância
+          </Link>
+        </CollapsibleContent>
+      </Collapsible>
+
+      {/* Cadastros */}
+      <Collapsible defaultOpen={isActive("/registers")}>
+        <CollapsibleTrigger asChild>
+          <button className="sidebar-link group flex w-full items-center gap-2">
+            <AlignJustify size={16} className="shrink-0" />
+            <span className="flex-1 text-left">
+              Cadastros
+            </span>
+            <ChevronRight size={16} className="text-zinc-500 transition-transform group-data-[state=open]:rotate-90 shrink-0" />
+          </button>
+        </CollapsibleTrigger>
+
+        <CollapsibleContent className="ml-6 flex flex-col gap-1">
+          <Link
+            href="/registers/vehicles"
+            className={`sidebar-link ${pathname === "/registers/vehicles" ? "sidebar-active" : ""}`}
+          >
+            Veículos
+          </Link>
+
+          <Link
+            href="/registers/lines"
+            className={`sidebar-link ${pathname === "/registers/lines" ? "sidebar-active" : ""}`}
+          >
+            Linhas
+          </Link>
+
+          <Link
+            href="/registers/consortium"
+            className={`sidebar-link ${pathname === "/registers/consortium" ? "sidebar-active" : ""}`}
+          >
+            Consórcio
+          </Link>
+        </CollapsibleContent>
+      </Collapsible>
+
+      {/* Importação */}
+      <Link
+        href="/import"
+        className={`sidebar-link flex items-center gap-2 ${pathname.startsWith("/import") ? "sidebar-active" : ""
+          }`}
+      >
+        <LucideImport size={16} />
         Importação
       </Link>
-      <Link
-        role="button"
-        href="#"
+
+      {/* Login / Logout */}
+      <button
         onClick={session ? handleSignOut : handleSignIn}
+        className="sidebar-link flex items-center gap-2"
       >
-        <div className="flex items-center gap-2">
-          <LogIn height={16} width={16} /> {session ? 'Log-out' : 'Log-in'}
-        </div>
-      </Link>
+        <LogIn size={16} />
+        {session ? "Log-out" : "Log-in"}
+      </button>
+
     </div>
   )
 }
