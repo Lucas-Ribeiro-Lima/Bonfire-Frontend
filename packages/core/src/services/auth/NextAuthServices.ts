@@ -115,6 +115,7 @@ const configs: NextAuthConfig = {
     signIn: '/login',
     signOut: '/login',
   },
+  trustHost: true
 }
 
 const { auth, handlers } = NextAuth(configs)
