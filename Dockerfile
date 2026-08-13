@@ -30,6 +30,12 @@ COPY . .
 # APP_NAME is the package name (e.g. bonfire, admin), APP_DIR is the folder (e.g. main, admin)
 ARG APP_NAME=bonfire
 ARG APP_DIR=main
+
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_API_PORT
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_PORT=$NEXT_PUBLIC_API_PORT 
+
 RUN npx turbo run build --filter=${APP_NAME}
 
 # Guarantee public folder exists so COPY won't fail

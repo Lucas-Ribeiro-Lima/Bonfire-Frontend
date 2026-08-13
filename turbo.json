@@ -1,5 +1,9 @@
 {
   "$schema": "https://v2-9-16.turborepo.dev/schema.json",
+  "globalEnv": [
+    "NEXT_PUBLIC_API_URL",
+    "NEXT_PUBLIC_API_PORT"
+  ],
   "tasks": {
     "build": {
       "dependsOn": [
