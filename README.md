@@ -35,10 +35,10 @@ The project is structured as a modular, highly optimized monorepo using **Turbor
 
 ```mermaid
 graph TD
-    A[apps/main - Next.js 16 Portal] --> B[@bonfire/core - Services & Auth]
-    A --> C[@bonfire/ui - Shared Visual Components]
-    B --> D[Axios / SWR / NextAuth v5]
-    C --> E[Design Tokens / Radix Components]
+    A["apps/main - Next.js 16 Portal"] --> B["@bonfire/core - Services & Auth"]
+    A --> C["@bonfire/ui - Shared Visual Components"]
+    B --> D["Axios / SWR / NextAuth v5"]
+    C --> E["Design Tokens / Radix Components"]
 ```
 
 ### 📁 Directory Layout
