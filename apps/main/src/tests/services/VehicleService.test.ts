@@ -18,13 +18,13 @@ describe('VehicleService & VehicleSchema (Unit Tests)', () => {
   describe('VehicleSchema', () => {
     it('deve validar veículo com DAT_BAIX nulo (veículo ativo)', () => {
       const payload = {
-        NUM_VEIC: '10022',
+        NUM_VEIC: 10022,
         IDN_PLAC_VEIC: 'ABC-1234',
         VEIC_ATIV_EMPR: true,
         DAT_BAIX: null,
       }
       const parsed = VehicleSchema.parse(payload)
-      expect(parsed.NUM_VEIC).toBe('10022')
+      expect(parsed.NUM_VEIC).toBe(10022)
       expect(parsed.IDN_PLAC_VEIC).toBe('ABC-1234')
       expect(parsed.VEIC_ATIV_EMPR).toBe(true)
       expect(parsed.DAT_BAIX).toBeNull()
@@ -32,13 +32,13 @@ describe('VehicleService & VehicleSchema (Unit Tests)', () => {
 
     it('deve validar veículo com DAT_BAIX preenchido (veículo baixado/inativo)', () => {
       const payload = {
-        NUM_VEIC: '20044',
+        NUM_VEIC: 20044,
         IDN_PLAC_VEIC: 'KGE-9876',
         VEIC_ATIV_EMPR: false,
         DAT_BAIX: '2026-08-28T10:00:00',
       }
       const parsed = VehicleSchema.parse(payload)
-      expect(parsed.NUM_VEIC).toBe('20044')
+      expect(parsed.NUM_VEIC).toBe(20044)
       expect(parsed.IDN_PLAC_VEIC).toBe('KGE-9876')
       expect(parsed.VEIC_ATIV_EMPR).toBe(false)
       expect(parsed.DAT_BAIX).toBe('2026-08-28T10:00:00')
@@ -46,12 +46,12 @@ describe('VehicleService & VehicleSchema (Unit Tests)', () => {
 
     it('deve validar veículo sem DAT_BAIX (opcional para compatibilidade)', () => {
       const payload = {
-        NUM_VEIC: '30055',
+        NUM_VEIC: 30055,
         IDN_PLAC_VEIC: 'XYZ-1111',
         VEIC_ATIV_EMPR: true,
       }
       const parsed = VehicleSchema.parse(payload)
-      expect(parsed.NUM_VEIC).toBe('30055')
+      expect(parsed.NUM_VEIC).toBe(30055)
       expect(parsed.DAT_BAIX).toBeUndefined()
     })
   })
@@ -60,13 +60,13 @@ describe('VehicleService & VehicleSchema (Unit Tests)', () => {
     it('deve recuperar veículos da API preservando DAT_BAIX', async () => {
       const mockVehiclesList = [
         {
-          NUM_VEIC: '10022',
+          NUM_VEIC: 10022,
           IDN_PLAC_VEIC: 'ABC-1234',
           VEIC_ATIV_EMPR: true,
           DAT_BAIX: null,
         },
         {
-          NUM_VEIC: '20044',
+          NUM_VEIC: 20044,
           IDN_PLAC_VEIC: 'KGE-9876',
           VEIC_ATIV_EMPR: false,
           DAT_BAIX: '2026-08-28T10:00:00',
@@ -95,7 +95,7 @@ describe('VehicleService & VehicleSchema (Unit Tests)', () => {
 
       const service = new VehicleService(mockClient)
       const payload = {
-        NUM_VEIC: '20044',
+        NUM_VEIC: 20044,
         IDN_PLAC_VEIC: 'KGE-9876',
         VEIC_ATIV_EMPR: false,
         DAT_BAIX: '2026-08-28T10:00:00',
@@ -116,7 +116,7 @@ describe('VehicleService & VehicleSchema (Unit Tests)', () => {
 
       const service = new VehicleService(mockClient)
       const payload = {
-        NUM_VEIC: '30055',
+        NUM_VEIC: 30055,
         IDN_PLAC_VEIC: 'XYZ-1111',
         VEIC_ATIV_EMPR: true,
         DAT_BAIX: null,
@@ -136,10 +136,10 @@ describe('VehicleService & VehicleSchema (Unit Tests)', () => {
       })
 
       const service = new VehicleService(mockClient)
-      const { NUM_VEIC, event } = await service.deleteVehicles('10022')
+      const { NUM_VEIC, event } = await service.deleteVehicles(10022)
 
       expect(mockClient.delete).toHaveBeenCalledWith('/veiculos/10022')
-      expect(NUM_VEIC).toBe('10022')
+      expect(NUM_VEIC).toBe(10022)
       expect(event.message).toBe('Veículos deletados com sucesso')
     })
   })

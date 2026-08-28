@@ -1,14 +1,14 @@
 'use client'
 
-import { VehicleContext } from '@/contexts/vehicleContext'
-import { useContext } from 'react'
 import { Car } from 'lucide-react'
 import { columns } from './columns'
 import { DataTable } from './data-table'
 import { PageHeader } from '@bonfire/ui'
+import { useVehicles } from '@/hooks/useVehicles'
 
 export function VehiclesLayout() {
-  const { data } = useContext(VehicleContext)
+  const { handleGet } = useVehicles()
+  const { data } = handleGet();
 
   return (
     <div className="w-full flex flex-col animate-in fade-in duration-300 gap-6">

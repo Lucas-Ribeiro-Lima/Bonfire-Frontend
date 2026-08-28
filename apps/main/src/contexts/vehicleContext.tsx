@@ -1,7 +1,7 @@
 'use client'
 
 import { VehiclesData } from '@/schemas/VechicleSchema'
-import { GetVehicles } from '@/services/vehicles'
+import { useVehicles } from '@/hooks/useVehicles'
 import { createContext, useMemo } from 'react'
 import { KeyedMutator } from 'swr'
 
@@ -19,7 +19,8 @@ export const VehicleContext = createContext({} as VehiclesContextProps)
 export function VehiclesProvider({
   children,
 }: Readonly<VehiclesProviderProps>) {
-  const { data, mutate } = GetVehicles()
+  const { handleGet } = useVehicles()
+  const { data, mutate } = handleGet()
 
   const valueMemo = useMemo(() => ({ data, mutate }), [data, mutate])
 

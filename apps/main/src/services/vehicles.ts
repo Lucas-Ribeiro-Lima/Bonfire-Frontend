@@ -2,7 +2,6 @@ import { convertToBoolean } from '@/lib/utils'
 import { EventT } from '@/schemas/NotificationSchema'
 import { TApiResponse } from '@/schemas/ResponseSchema'
 import { LoadVehicles, VehiclesData } from '@/schemas/VechicleSchema'
-import useSWR from 'swr'
 import { BaseService } from './BaseService'
 import { HttpError } from '@bonfire/core'
 
@@ -11,6 +10,7 @@ export class VehicleService extends BaseService {
     const response = await this.client.get<LoadVehicles>('/veiculos')
     const vehicles = response.data.veiculos
     vehicles?.forEach((vehicle) => {
+      vehicle.NUM_VEIC = String(vehicle.NUM_VEIC)
       vehicle.VEIC_ATIV_EMPR = convertToBoolean(vehicle.VEIC_ATIV_EMPR)
     })
     return vehicles
@@ -88,24 +88,3 @@ export class VehicleService extends BaseService {
 }
 
 export const vehicleService = new VehicleService()
-
-// Backward compatibility exports
-export function GetVehicles() {
-  const { data, mutate } = useSWR<VehiclesData[]>('/veiculos', async () => {
-    return vehicleService.getVehicles()
-  })
-
-  return { data, mutate }
-}
-
-export async function UpdateVehicles(data: VehiclesData) {
-  return vehicleService.updateVehicles(data)
-}
-
-export async function InsertVehicles(data: VehiclesData) {
-  return vehicleService.insertVehicles(data)
-}
-
-export async function DeleteVehicles(NUM_VEIC: string) {
-  return vehicleService.deleteVehicles(NUM_VEIC)
-}

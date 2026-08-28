@@ -1,20 +1,25 @@
+import useSWR from 'swr'
 import { VehicleContext } from '@/contexts/vehicleContext'
 import { VehiclesData } from '@/schemas/VechicleSchema'
-import {
-  DeleteVehicles,
-  InsertVehicles,
-  UpdateVehicles,
-} from '@/services/vehicles'
+import { VehicleService } from '@/services/vehicles'
 import { useContext } from 'react'
 import { useNotifications } from './useNotifications'
 import { notify } from '@/lib/utils'
 
 export function useVehicles() {
+  const service = new VehicleService();
   const { data, mutate } = useContext(VehicleContext)
   const { handleInsert: handleInsertNotification } = useNotifications()
 
+  function handleGet() {
+    const { data, mutate } = useSWR<VehiclesData[]>('/veiculos', async () => {
+      return service.getVehicles()
+    })
+    return { data, mutate }
+  }
+
   async function handleUpdate(vehicle: VehiclesData) {
-    const { vehicle: updatedVehicle, event } = await UpdateVehicles(vehicle)
+    const { vehicle: updatedVehicle, event } = await service.updateVehicles(vehicle)
     handleInsertNotification(event)
     notify.success(event.message)
 
@@ -25,7 +30,7 @@ export function useVehicles() {
   }
 
   async function handleInsert(vehicle: VehiclesData) {
-    const { vehicle: insertedVehicle, event } = await InsertVehicles(vehicle)
+    const { vehicle: insertedVehicle, event } = await service.insertVehicles(vehicle)
     handleInsertNotification(event)
     notify.success(event.message)
 
@@ -36,8 +41,8 @@ export function useVehicles() {
   }
 
   async function handleDelete(NUM_VEIC: string) {
-    const { NUM_VEIC: deletedVehicle, event } = await DeleteVehicles(NUM_VEIC)
-      notify.success(event.message)
+    const { NUM_VEIC: deletedVehicle, event } = await service.deleteVehicles(NUM_VEIC)
+    notify.success(event.message)
 
     if (data) {
       const updatedData = data.filter(
@@ -47,5 +52,5 @@ export function useVehicles() {
     }
   }
 
-  return { handleInsert, handleUpdate, handleDelete }
+  return { handleGet, handleInsert, handleUpdate, handleDelete }
 }
