@@ -6,6 +6,7 @@ export const VehicleSchema = z.object({
   NUM_VEIC: z.string().min(1),
   IDN_PLAC_VEIC: z.string().min(1).optional(),
   VEIC_ATIV_EMPR: z.boolean().transform(bool_converter_helper),
+  DAT_BAIX: z.string().nullable().optional(),
 })
 
 export type VehiclesData = z.infer<typeof VehicleSchema>

@@ -20,8 +20,9 @@ export class VehicleService extends BaseService {
     IDN_PLAC_VEIC,
     NUM_VEIC,
     VEIC_ATIV_EMPR,
+    DAT_BAIX,
   }: VehiclesData) {
-    const data = [{ IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR }]
+    const data = [{ IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR, ...(DAT_BAIX !== undefined ? { DAT_BAIX } : {}) }]
     const event: EventT = {}
     event.document = NUM_VEIC
 
@@ -44,8 +45,9 @@ export class VehicleService extends BaseService {
     IDN_PLAC_VEIC,
     NUM_VEIC,
     VEIC_ATIV_EMPR,
+    DAT_BAIX,
   }: VehiclesData) {
-    const data = [{ IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR }]
+    const data = [{ IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR, ...(DAT_BAIX !== undefined ? { DAT_BAIX } : {}) }]
     const event: EventT = {}
     event.document = NUM_VEIC
 

@@ -22,9 +22,10 @@ export class LineService extends BaseService {
     COD_LINH,
     LINH_ATIV_EMPR,
     ID_OPERADORA,
+    DAT_BAIX,
   }: LinesFrameData) {
     const event: EventT = {}
-    const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR }]
+    const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR, ...(DAT_BAIX !== undefined ? { DAT_BAIX } : {}) }]
     event.document = COD_LINH
 
     try {
@@ -45,8 +46,9 @@ export class LineService extends BaseService {
     COD_LINH,
     LINH_ATIV_EMPR,
     ID_OPERADORA,
+    DAT_BAIX,
   }: LinesFrameData) {
-    const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR }]
+    const linha = [{ COD_LINH, ID_OPERADORA, COMPARTILHADA, LINH_ATIV_EMPR, ...(DAT_BAIX !== undefined ? { DAT_BAIX } : {}) }]
     const event: EventT = {}
     event.document = COD_LINH
 

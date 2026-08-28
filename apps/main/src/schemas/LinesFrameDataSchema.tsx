@@ -7,6 +7,7 @@ export const LinesFrameDataSchema = z.object({
   COMPARTILHADA: z.boolean().transform(bool_converter_helper),
   ID_OPERADORA: z.number(),
   LINH_ATIV_EMPR: z.boolean().transform(bool_converter_helper),
+  DAT_BAIX: z.string().nullable().optional(),
 })
 
 export type LinesFrameData = z.infer<typeof LinesFrameDataSchema>

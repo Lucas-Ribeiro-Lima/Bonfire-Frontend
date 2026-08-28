@@ -31,4 +31,6 @@ export * from './components/ui/page-header'
 export * from './components/ui/form-controls'
 export * from './components/ui/file-upload'
 export * from './components/ui/notification-bar'
+export * from './components/ui/date-picker'
+export * from './components/ui/calendar'
 

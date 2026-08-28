@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  DatePicker,
   DialogClose,
   Form,
   FormControl,
@@ -21,7 +22,7 @@ type DialogContentVehicleProp = {
 }
 
 export function DialogEditVehicle({
-  vehicle: { IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR },
+  vehicle: { IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR, DAT_BAIX },
 }: DialogContentVehicleProp) {
   const form = useForm<VehiclesData>({
     resolver: zodResolver(VehicleSchema),
@@ -29,6 +30,7 @@ export function DialogEditVehicle({
       IDN_PLAC_VEIC,
       NUM_VEIC,
       VEIC_ATIV_EMPR,
+      DAT_BAIX,
     },
   })
 
@@ -101,7 +103,17 @@ export function DialogEditVehicle({
               render={({ field }) => (
                 <FormItem>
                   <div
-                    onClick={() => field.onChange(!field.value)}
+                    onClick={() => {
+                      const nextVal = !field.value
+                      field.onChange(nextVal)
+                      if (!nextVal) {
+                        if (!form.getValues('DAT_BAIX')) {
+                          form.setValue('DAT_BAIX', new Date().toISOString())
+                        }
+                      } else {
+                        form.setValue('DAT_BAIX', null)
+                      }
+                    }}
                     className="flex items-center justify-between p-3.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 cursor-pointer transition-colors select-none"
                   >
                     <div className="space-y-0.5 text-left">
@@ -111,7 +123,17 @@ export function DialogEditVehicle({
                     <FormControl>
                       <Checkbox
                         checked={field.value}
-                        onCheckedChange={field.onChange}
+                        onCheckedChange={(checked) => {
+                          const nextVal = Boolean(checked)
+                          field.onChange(nextVal)
+                          if (!nextVal) {
+                            if (!form.getValues('DAT_BAIX')) {
+                              form.setValue('DAT_BAIX', new Date().toISOString())
+                            }
+                          } else {
+                            form.setValue('DAT_BAIX', null)
+                          }
+                        }}
                         onClick={(e) => e.stopPropagation()}
                       />
                     </FormControl>
@@ -119,6 +141,28 @@ export function DialogEditVehicle({
                 </FormItem>
               )}
             />
+
+            {!form.watch('VEIC_ATIV_EMPR') && (
+              <FormField
+                control={form.control}
+                name="DAT_BAIX"
+                render={({ field }) => (
+                  <FormItem className="space-y-1.5 text-left animate-in fade-in slide-in-from-top-2 duration-200">
+                    <FormLabel className="text-xs font-bold text-zinc-600 dark:text-zinc-400">
+                      Data da Baixa / Desativação
+                    </FormLabel>
+                    <FormControl>
+                      <DatePicker
+                        side="top"
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Selecione a data de baixa"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
         </ReusableDialog>
       </form>
@@ -166,7 +210,7 @@ export function DialogDeleteVehicle({
 }
 
 export function DialogIncludeVehicle({
-  vehicle: { IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR },
+  vehicle: { IDN_PLAC_VEIC, NUM_VEIC, VEIC_ATIV_EMPR, DAT_BAIX },
   onSuccess,
 }: DialogContentVehicleProp & { onSuccess?: () => void }) {
   const { handleInsert } = useVehicles()
@@ -176,6 +220,7 @@ export function DialogIncludeVehicle({
       IDN_PLAC_VEIC,
       NUM_VEIC,
       VEIC_ATIV_EMPR,
+      DAT_BAIX,
     },
   })
 
@@ -253,7 +298,17 @@ export function DialogIncludeVehicle({
               render={({ field }) => (
                 <FormItem>
                   <div
-                    onClick={() => field.onChange(!field.value)}
+                    onClick={() => {
+                      const nextVal = !field.value
+                      field.onChange(nextVal)
+                      if (!nextVal) {
+                        if (!form.getValues('DAT_BAIX')) {
+                          form.setValue('DAT_BAIX', new Date().toISOString())
+                        }
+                      } else {
+                        form.setValue('DAT_BAIX', null)
+                      }
+                    }}
                     className="flex items-center justify-between p-3.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 cursor-pointer transition-colors select-none"
                   >
                     <div className="space-y-0.5 text-left">
@@ -263,7 +318,17 @@ export function DialogIncludeVehicle({
                     <FormControl>
                       <Checkbox
                         checked={field.value}
-                        onCheckedChange={field.onChange}
+                        onCheckedChange={(checked) => {
+                          const nextVal = Boolean(checked)
+                          field.onChange(nextVal)
+                          if (!nextVal) {
+                            if (!form.getValues('DAT_BAIX')) {
+                              form.setValue('DAT_BAIX', new Date().toISOString())
+                            }
+                          } else {
+                            form.setValue('DAT_BAIX', null)
+                          }
+                        }}
                         onClick={(e) => e.stopPropagation()}
                       />
                     </FormControl>
@@ -271,6 +336,28 @@ export function DialogIncludeVehicle({
                 </FormItem>
               )}
             />
+
+            {!form.watch('VEIC_ATIV_EMPR') && (
+              <FormField
+                control={form.control}
+                name="DAT_BAIX"
+                render={({ field }) => (
+                  <FormItem className="space-y-1.5 text-left animate-in fade-in slide-in-from-top-2 duration-200">
+                    <FormLabel className="text-xs font-bold text-zinc-600 dark:text-zinc-400">
+                      Data da Baixa / Desativação
+                    </FormLabel>
+                    <FormControl>
+                      <DatePicker
+                        side="top"
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Selecione a data de baixa"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
         </ReusableDialog>
       </form>

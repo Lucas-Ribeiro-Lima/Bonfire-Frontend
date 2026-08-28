@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  DatePicker,
   DialogClose,
   Form,
   FormControl,
@@ -24,7 +25,7 @@ interface DialogContentLineProp {
 }
 
 export function DialogEditLine({
-  line: { COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR },
+  line: { COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR, DAT_BAIX },
 }: Readonly<DialogContentLineProp>) {
   const form = useForm<LinesFrameData>({
     resolver: zodResolver(LinesFrameDataSchema),
@@ -33,6 +34,7 @@ export function DialogEditLine({
       ID_OPERADORA,
       COMPARTILHADA,
       LINH_ATIV_EMPR,
+      DAT_BAIX,
     },
   })
   const { handleUpdate } = useLines()
@@ -89,9 +91,11 @@ export function DialogEditLine({
                   <FormLabel className="text-xs font-bold text-zinc-600 dark:text-zinc-400">Operadora (ID)</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Ex: OP-01"
+                      type="number"
+                      placeholder="Ex: 1"
                       className="rounded-xl border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus-visible:ring-orange-500/20 focus-visible:border-orange-500"
-                      {...field}
+                      value={field.value ?? ''}
+                      onChange={(e) => field.onChange(e.target.value === '' ? 0 : Number(e.target.value))}
                     />
                   </FormControl>
                 </FormItem>
@@ -129,7 +133,17 @@ export function DialogEditLine({
                 render={({ field }) => (
                   <FormItem>
                     <div 
-                      onClick={() => field.onChange(!field.value)}
+                      onClick={() => {
+                        const nextVal = !field.value
+                        field.onChange(nextVal)
+                        if (!nextVal) {
+                          if (!form.getValues('DAT_BAIX')) {
+                            form.setValue('DAT_BAIX', new Date().toISOString())
+                          }
+                        } else {
+                          form.setValue('DAT_BAIX', null)
+                        }
+                      }}
                       className="flex items-center justify-between p-3.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 cursor-pointer transition-colors select-none"
                     >
                       <div className="space-y-0.5 text-left">
@@ -139,7 +153,17 @@ export function DialogEditLine({
                       <FormControl>
                         <Checkbox
                           checked={field.value}
-                          onCheckedChange={field.onChange}
+                          onCheckedChange={(checked) => {
+                            const nextVal = Boolean(checked)
+                            field.onChange(nextVal)
+                            if (!nextVal) {
+                              if (!form.getValues('DAT_BAIX')) {
+                                form.setValue('DAT_BAIX', new Date().toISOString())
+                              }
+                            } else {
+                              form.setValue('DAT_BAIX', null)
+                            }
+                          }}
                           onClick={(e) => e.stopPropagation()}
                         />
                       </FormControl>
@@ -148,6 +172,27 @@ export function DialogEditLine({
                 )}
               />
             </div>
+
+            {!form.watch('LINH_ATIV_EMPR') && (
+              <FormField
+                control={form.control}
+                name="DAT_BAIX"
+                render={({ field }) => (
+                  <FormItem className="space-y-1.5 text-left animate-in fade-in slide-in-from-top-2 duration-200">
+                    <FormLabel className="text-xs font-bold text-zinc-600 dark:text-zinc-400">
+                      Data da Baixa / Desativação
+                    </FormLabel>
+                    <FormControl>
+                      <DatePicker
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Selecione a data de baixa"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
         </ReusableDialog>
       </form>
@@ -156,7 +201,7 @@ export function DialogEditLine({
 }
 
 export function DialogInsertLine({
-  line: { COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR },
+  line: { COD_LINH, COMPARTILHADA, ID_OPERADORA, LINH_ATIV_EMPR, DAT_BAIX },
   onSuccess,
 }: Readonly<DialogContentLineProp & { onSuccess?: () => void }>) {
   const form = useForm<LinesFrameData>({
@@ -166,6 +211,7 @@ export function DialogInsertLine({
       ID_OPERADORA,
       COMPARTILHADA,
       LINH_ATIV_EMPR,
+      DAT_BAIX,
     },
   })
   const { handleInsert } = useLines()
@@ -229,9 +275,11 @@ export function DialogInsertLine({
                   <FormLabel className="text-xs font-bold text-zinc-600 dark:text-zinc-400">Operadora (ID)</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Ex: OP-01"
+                      type="number"
+                      placeholder="Ex: 1"
                       className="rounded-xl border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 focus-visible:ring-orange-500/20 focus-visible:border-orange-500"
-                      {...field}
+                      value={field.value ?? ''}
+                      onChange={(e) => field.onChange(e.target.value === '' ? 0 : Number(e.target.value))}
                     />
                   </FormControl>
                 </FormItem>
@@ -269,7 +317,17 @@ export function DialogInsertLine({
                 render={({ field }) => (
                   <FormItem>
                     <div 
-                      onClick={() => field.onChange(!field.value)}
+                      onClick={() => {
+                        const nextVal = !field.value
+                        field.onChange(nextVal)
+                        if (!nextVal) {
+                          if (!form.getValues('DAT_BAIX')) {
+                            form.setValue('DAT_BAIX', new Date().toISOString())
+                          }
+                        } else {
+                          form.setValue('DAT_BAIX', null)
+                        }
+                      }}
                       className="flex items-center justify-between p-3.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 cursor-pointer transition-colors select-none"
                     >
                       <div className="space-y-0.5 text-left">
@@ -279,7 +337,17 @@ export function DialogInsertLine({
                       <FormControl>
                         <Checkbox
                           checked={field.value}
-                          onCheckedChange={field.onChange}
+                          onCheckedChange={(checked) => {
+                            const nextVal = Boolean(checked)
+                            field.onChange(nextVal)
+                            if (!nextVal) {
+                              if (!form.getValues('DAT_BAIX')) {
+                                form.setValue('DAT_BAIX', new Date().toISOString())
+                              }
+                            } else {
+                              form.setValue('DAT_BAIX', null)
+                            }
+                          }}
                           onClick={(e) => e.stopPropagation()}
                         />
                       </FormControl>
@@ -288,6 +356,27 @@ export function DialogInsertLine({
                 )}
               />
             </div>
+
+            {!form.watch('LINH_ATIV_EMPR') && (
+              <FormField
+                control={form.control}
+                name="DAT_BAIX"
+                render={({ field }) => (
+                  <FormItem className="space-y-1.5 text-left animate-in fade-in slide-in-from-top-2 duration-200">
+                    <FormLabel className="text-xs font-bold text-zinc-600 dark:text-zinc-400">
+                      Data da Baixa / Desativação
+                    </FormLabel>
+                    <FormControl>
+                      <DatePicker
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Selecione a data de baixa"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
           </div>
         </ReusableDialog>
       </form>

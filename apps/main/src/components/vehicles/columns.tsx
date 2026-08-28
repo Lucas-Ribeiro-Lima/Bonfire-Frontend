@@ -32,6 +32,21 @@ export const columns: ColumnDef<VehiclesData>[] = [
     },
   },
   {
+    accessorKey: 'DAT_BAIX',
+    header: () => <div className="text-center font-bold">Data de Baixa</div>,
+    cell: ({ row }) => {
+      const val = row.getValue('DAT_BAIX') as string | null | undefined
+      if (!val) {
+        return <div className="text-center">-</div>
+      }
+      const date = new Date(val)
+      const formatted = isNaN(date.getTime())
+        ? val
+        : date.toLocaleDateString('pt-BR')
+      return <div className="text-center">{formatted}</div>
+    },
+  },
+  {
     id: 'actions',
     header: () => <div className="text-center font-bold">Ações</div>,
     cell: ({ row }) => (
