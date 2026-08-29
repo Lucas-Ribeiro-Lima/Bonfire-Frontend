@@ -16,11 +16,8 @@ export function useRecursesViewModel(instance: number = 1) {
       const res = await recurseService.getRecurses(date, ata, instance)
       setRecursos(res)
     } catch (error: any) {
-      if (error instanceof HttpError) {
+      if (error instanceof HttpError)
         notify.error(error.data?.message || error.message)
-      } else {
-        notify.error('Erro ao carregar os recursos. Por favor, tente novamente.')
-      }
     } finally {
       setIsLoading(false)
       setScheduleId(null)

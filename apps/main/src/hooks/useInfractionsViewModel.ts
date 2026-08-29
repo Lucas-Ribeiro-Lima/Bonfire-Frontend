@@ -19,8 +19,6 @@ export function useInfractionsViewModel() {
       } catch (error: any) {
         if (error instanceof HttpError) {
           notify.error(error.data?.message || error.message)
-        } else {
-          notify.error('Erro ao carregar as infrações. Por favor, tente novamente.')
         }
       } finally {
         setIsLoading(false)

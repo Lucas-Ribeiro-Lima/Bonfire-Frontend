@@ -13,6 +13,7 @@ export interface HttpClientConfig {
   baseURL?: string
   headers?: Record<string, string>
   onUnauthorized?: () => void | Promise<void>
+  onError?: () => void | Promise<void>
 }
 
 export interface IHttpClient {

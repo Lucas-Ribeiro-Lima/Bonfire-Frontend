@@ -30,13 +30,15 @@ export class AxiosHttpClient implements IHttpClient {
         if (error.response?.status === 401) {
           // Prevent multiple concurrent signouts / toasts by checking if already redirecting
           if (typeof window !== 'undefined' && !window.location.search.includes('expired=true')) {
-            if (config?.onUnauthorized) {
+            if (config?.onUnauthorized)
               await config.onUnauthorized()
-            }
 
             // Clean local session (cookies/tokens) and redirect graciosamente
             await AuthClientService.logout({ redirect: true, callbackUrl: '/login?expired=true' })
           }
+        } else {
+          if (config?.onError)
+            await config.onError()
         }
         return Promise.reject(error)
       }
@@ -44,7 +46,7 @@ export class AxiosHttpClient implements IHttpClient {
   }
 
   private handleError(error: any): never {
-    if (axios.isAxiosError(error)) {
+    if (axios.isAxiosError(error) && (error.response?.status ?? 500) < 500) {
       throw new HttpError(
         error.response?.data?.message || error.message,
         error.response?.status,

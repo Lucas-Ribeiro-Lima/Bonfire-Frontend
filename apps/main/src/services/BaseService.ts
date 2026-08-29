@@ -3,8 +3,8 @@ import { notify } from '@bonfire/ui'
 
 const httpClient = new HttpClient({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}`,
-  onUnauthorized: () => {
-    notify.error('Sessão expirada. Redirecionando...')
+  onError: async () => {
+    notify.error("Sistema temporariamente indisponível. Tente novamente mais tarde.")
   }
 })
 
