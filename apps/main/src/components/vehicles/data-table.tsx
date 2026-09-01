@@ -66,7 +66,7 @@ export function DataTable<TData, TValue>({
             <DialogIncludeVehicle
               vehicle={{
                 IDN_PLAC_VEIC: '',
-                NUM_VEIC: 0,
+                NUM_VEIC: '',
                 VEIC_ATIV_EMPR: false,
               }}
               onSuccess={() => setOpen(false)}
